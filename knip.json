@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     "apps/devlog": {
       "entry": ["src/app/**/{page,layout,loading,error,not-found,route,template,default}.tsx"],
