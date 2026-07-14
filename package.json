@@ -12,7 +12,10 @@
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "fsd:check": "steiger ./apps/devlog/src",
+    "deadcode": "knip",
+    "fsd:graph": "fsd-cruise apps/devlog/src apps/devlog/tsconfig.json"
   },
   "devDependencies": {
     "prettier": "^3.4.2",
