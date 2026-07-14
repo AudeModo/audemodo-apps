@@ -18,7 +18,11 @@
     "fsd:graph": "fsd-cruise apps/devlog/src apps/devlog/tsconfig.json"
   },
   "devDependencies": {
+    "@feature-sliced/steiger-plugin": "^0.6.0",
+    "fsd-cruise": "1.0.5-beta.10",
+    "knip": "^6.26.0",
     "prettier": "^3.4.2",
+    "steiger": "^0.5.13",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"
   }
