@@ -1,5 +1,5 @@
-import fsd from '@feature-sliced/steiger-plugin'
-import { defineConfig } from 'steiger'
+import fsd from '@feature-sliced/steiger-plugin';
+import { defineConfig } from 'steiger';
 
 /**
  * Steiger 설정 — FSD 아키텍처 경계를 CI에서 강제한다.
@@ -67,4 +67,4 @@ export default defineConfig([
       'fsd/no-reserved-folder-names': 'error',
     },
   },
-])
+]);

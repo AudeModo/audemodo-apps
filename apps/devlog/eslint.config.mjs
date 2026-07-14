@@ -1,14 +1,14 @@
-import next from '@next/eslint-plugin-next'
-import stylex from '@stylexjs/eslint-plugin'
-import stylistic from '@stylistic/eslint-plugin'
-import prettier from 'eslint-config-prettier/flat'
-import importX from 'eslint-plugin-import-x'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import perfectionist from 'eslint-plugin-perfectionist'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import tseslint from 'typescript-eslint'
+import next from '@next/eslint-plugin-next';
+import stylex from '@stylexjs/eslint-plugin';
+import stylistic from '@stylistic/eslint-plugin';
+import prettier from 'eslint-config-prettier/flat';
+import importX from 'eslint-plugin-import-x';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import perfectionist from 'eslint-plugin-perfectionist';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import tseslint from 'typescript-eslint';
 
 /**
  * ESLint 설정 — 코드 품질·타입 안전성·import 정렬·React 규칙·접근성·Next·빈 줄 정책·StyleX를 강제한다.
@@ -204,4 +204,4 @@ export default defineConfig([
   prettier,
 
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
-])
+]);
