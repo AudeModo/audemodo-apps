@@ -1,13 +1,13 @@
-import type { Metadata, Viewport } from "next";
-import type { ReactNode } from "react";
+import type { Metadata, Viewport } from 'next';
+import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: "Audemodo devlog",
-  description: "개발 블로그 — Audemodo 진화 궤적의 1단계",
+  title: 'Audemodo devlog',
+  description: '개발 블로그 — Audemodo 진화 궤적의 1단계',
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
 };
 
