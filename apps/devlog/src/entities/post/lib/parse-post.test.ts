@@ -1,12 +1,9 @@
+import type { PostFrontmatter } from '../model/types';
+
 import { describe, expect, it } from 'vitest';
 
 import { parsePost } from './parse-post';
 
-/**
- * parsePost는 MDX 원문에서 frontmatter와 본문을 분리한다.
- * 이 테스트는 getFrontmatter(next-mdx-remote-client)와의 통합 동작을 박제한다 —
- * 실제 라이브러리를 그대로 쓰며(순수 함수라 모킹 불필요), 앱이 의존하는 동작을 고정한다.
- */
 describe('parsePost', () => {
   // ── 정상 분리 ──
   it('frontmatter와 본문을 각각 메타와 content로 나눈다', () => {
@@ -55,9 +52,10 @@ describe('parsePost', () => {
     const raw = '---\ntitle: T\ntags: [a, b]\ndraft: true\n---\nx';
 
     const { frontmatter } = parsePost(raw);
+    const extra = frontmatter as PostFrontmatter & Record<string, unknown>;
 
-    expect(frontmatter.tags).toEqual(['a', 'b']);
-    expect(frontmatter.draft).toBe(true);
+    expect(extra.tags).toEqual(['a', 'b']);
+    expect(extra.draft).toBe(true);
   });
 
   // ── 본문 처리 ──
