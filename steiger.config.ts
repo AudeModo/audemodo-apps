@@ -4,8 +4,12 @@ import { defineConfig } from 'steiger';
 /**
  * Steiger 설정 — FSD 아키텍처 경계를 CI에서 강제한다.
  *
- * 실행: `npx steiger ./src` (Next.js 라우팅 폴더인 루트 app/ 은 스캔 대상에서 제외된다.
- * FSD 코드는 전부 src/ 안에 있고, app/pages 레이어는 _app/_pages 접두사로 둔다 — 공식 해법.)
+ * 실행: `npx steiger ./apps/devlog/src`. Next 라우팅은 루트 app/ 에 두어 스캔 대상에서 제외된다.
+ *
+ * pages 레이어는 _pages 접두사로 둔다. Next 16은 src/pages를 루트 app/과 무관하게
+ * Pages Router로 인식해 빌드가 실패하므로(pages/app 폴더 충돌), _pages로 이를 회피한다.
+ * Steiger는 커스텀 레이어명을 지원하지 않아 _pages를 typo로 잡으므로, 아래에서
+ * typo-in-layer-name 규칙만 _pages에 한정해 끈다. 나머지 FSD 검사는 _pages에도 그대로 적용된다.
  *
  * 심각도 원칙: 아키텍처 경계를 깨는 위반은 error(빌드 차단), 개발 흐름을 막으면 안 되는
  * 구조적 신호는 warn. 죽은 코드 자체는 knip이 error로 따로 잡는다.
@@ -53,7 +57,7 @@ export default defineConfig([
       'fsd/inconsistent-naming': 'error',
       // 반복적 네이밍 패턴 방지.
       'fsd/repetitive-naming': 'error',
-      // 레이어 이름 오타 방지. _app/_pages 접두사는 공식이 정상 인식(호환 보장).
+      // 레이어 이름 오타 방지. _pages는 아래에서 files-scoped로 예외 처리한다.
       'fsd/typo-in-layer-name': 'error',
       // 세그먼트를 본질이 아니라 목적으로 묶도록.
       'fsd/segments-by-purpose': 'error',
@@ -65,6 +69,16 @@ export default defineConfig([
       'fsd/no-processes': 'error',
       // 세그먼트 하위에 예약 이름 폴더 금지.
       'fsd/no-reserved-folder-names': 'error',
+    },
+  },
+  {
+    // _pages 접두사 레이어만 typo 검사에서 제외한다. Next의 src/pages 라우터 충돌을
+    // 피하려면 접두사가 필요하고, Steiger는 커스텀 레이어명을 지원하지 않으므로
+    // 이 규칙만 끈다. Steiger는 _pages를 여전히 pages 레이어로 인식해 나머지 검사는 적용된다.
+    // 패턴은 모노레포 경로(apps/devlog/src/_pages)에도 맞도록 **/_pages/** 로 둔다.
+    files: ['**/_pages/**'],
+    rules: {
+      'fsd/typo-in-layer-name': 'off',
     },
   },
 ]);
