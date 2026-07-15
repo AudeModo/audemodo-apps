@@ -24,3 +24,8 @@ export const getPostSummaries = async (): Promise<PostSummary[]> => {
     }),
   );
 };
+
+/** 모든 게시글의 식별자(slug) 목록을 반환한다. */
+export const getPostSlugs = async (): Promise<string[]> => {
+  return readPostSlugs();
+};
