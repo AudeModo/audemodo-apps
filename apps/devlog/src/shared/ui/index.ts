@@ -1,1 +1,1 @@
-export { MdxContent } from './mdx-content';
+export { MdxContent } from './mdx-content/mdx-content';
