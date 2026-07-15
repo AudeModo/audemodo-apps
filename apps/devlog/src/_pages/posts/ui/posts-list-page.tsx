@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { getPostSummaries } from '@/entities/post';
 
-/** 게시글 목록 페이지 — 모든 글의 요약을 불러와 제목 목록으로 보여준다. */
+/** 게시글 목록 페이지 */
 export const PostsListPage = async () => {
   const summaries = await getPostSummaries();
 
