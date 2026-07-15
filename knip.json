@@ -5,8 +5,8 @@
       "entry": ["steiger.config.ts"]
     },
     "apps/devlog": {
-      "entry": ["src/app/**/{page,layout,loading,error,not-found,route,template,default}.tsx"],
-      "project": ["src/**/*.{ts,tsx}"],
+      "entry": ["app/**/{page,layout,loading,error,not-found,route,template,default}.tsx"],
+      "project": ["{app,src}/**/*.{ts,tsx}"],
       "ignore": ["src/**/*.mdx"]
     }
   },
