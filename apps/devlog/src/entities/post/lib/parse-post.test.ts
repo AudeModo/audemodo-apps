@@ -1,3 +1,5 @@
+import type { PostFrontmatter } from '../model/types';
+
 import { describe, expect, it } from 'vitest';
 
 import { parsePost } from './parse-post';
@@ -75,9 +77,10 @@ describe('parsePost', () => {
     const raw = '---\ntitle: T\ntags: [a, b]\ndraft: true\n---\nx';
 
     const { frontmatter } = parsePost(raw);
+    const extra = frontmatter as PostFrontmatter & Record<string, unknown>;
 
-    expect(frontmatter.tags).toEqual(['a', 'b']);
-    expect(frontmatter.draft).toBe(true);
+    expect(extra.tags).toEqual(['a', 'b']);
+    expect(extra.draft).toBe(true);
   });
 
   it('잘못된 YAML은 에러를 던진다', () => {
