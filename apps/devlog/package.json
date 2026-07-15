@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "next": "^16.2.7",
+    "next-mdx-remote-client": "^2.1.11",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
