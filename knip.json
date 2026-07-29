@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["steiger.config.ts"]
+    },
+    "apps/devlog": {
+      "entry": ["src/app/**/{page,layout,loading,error,not-found,route,template,default}.tsx"],
+      "project": ["src/**/*.{ts,tsx}"],
+      "ignore": ["src/**/*.mdx"]
+    }
+  },
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  }
+}

@@ -29,3 +29,7 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# fsd-cruise (dependency graph 시각화 생성물)
+dependency-graph.html
+*.fsd-cruise.html
