@@ -1,3 +1,5 @@
+import { Divider, Heading, Text, VStack } from '@audemodo/design-system';
+
 import { getPostDetail } from '@/entities/post';
 
 import { MdxContent } from '@/shared/ui';
@@ -9,10 +11,25 @@ export const PostDetailPage = async ({ slug }: { slug: string }) => {
   return (
     <main>
       <article>
-        <h1>{post.title}</h1>
-        <p>{post.summary}</p>
-        <time dateTime={post.createdAt}>{post.createdAt}</time>
-        <MdxContent source={post.content} />
+        <VStack gap={6}>
+          <VStack gap={2}>
+            <Heading level={1}>{post.title}</Heading>
+
+            <Text as="p" color="secondary">
+              {post.summary}
+            </Text>
+
+            <time dateTime={post.createdAt}>
+              <Text color="secondary" size="sm">
+                {post.createdAt}
+              </Text>
+            </time>
+          </VStack>
+
+          <Divider />
+
+          <MdxContent source={post.content} />
+        </VStack>
       </article>
     </main>
   );

@@ -1,0 +1,35 @@
+{
+  "name": "@audemodo/design-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "astryx": "astryx"
+  },
+  "dependencies": {
+    "@astryxdesign/core": "^0.1.9",
+    "@astryxdesign/theme-neutral": "^0.1.9",
+    "@stylexjs/stylex": "^0.19.0"
+  },
+  "devDependencies": {
+    "@astryxdesign/cli": "^0.1.9",
+    "@audemodo/eslint-config": "workspace:*",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.1.8",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  }
+}
