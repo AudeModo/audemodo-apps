@@ -2,6 +2,8 @@ import { PostDetailPage } from '@/_pages/posts';
 
 import { getPostSlugs } from '@/entities/post';
 
+export const dynamicParams = false;
+
 /**
  * 빌드 시점에 모든 게시글 slug를 미리 생성한다.
  *
