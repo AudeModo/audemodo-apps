@@ -6,8 +6,7 @@
     },
     "apps/devlog": {
       "entry": ["app/**/{page,layout,loading,error,not-found,route,template,default}.tsx"],
-      "project": ["{app,src}/**/*.{ts,tsx}"],
-      "ignore": ["src/**/*.mdx"]
+      "project": ["{app,src}/**/*.{ts,tsx}"]
     },
     "packages/design-system": {
       "entry": ["src/index.ts"],
