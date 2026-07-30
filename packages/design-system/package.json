@@ -10,6 +10,7 @@
     "./styles.css": "./src/styles.css"
   },
   "scripts": {
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "astryx": "astryx"
   },
@@ -20,8 +21,11 @@
   },
   "devDependencies": {
     "@astryxdesign/cli": "^0.1.9",
+    "@audemodo/eslint-config": "workspace:*",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.1.8",
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
