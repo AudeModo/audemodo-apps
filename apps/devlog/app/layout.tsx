@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: 'Audemodo devlog',
     template: '%s · Audemodo devlog',
   },
-  description: '개발 블로그 — Audemodo 진화 굤적의 1단계',
+  description: '개발 블로그 — Audemodo 진화 궤적의 1단계',
 };
 
 export const viewport: Viewport = {
