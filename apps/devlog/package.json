@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@audemodo/design-system": "workspace:*",
     "next": "^16.2.7",
     "next-mdx-remote-client": "^2.1.11",
     "react": "^19.2.0",
@@ -20,7 +21,6 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.2.10",
     "@stylexjs/eslint-plugin": "^0.19.0",
-    "@stylexjs/stylex": "^0.19.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",

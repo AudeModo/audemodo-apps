@@ -1,0 +1,7 @@
+/*
+ * 앱의 전역 스타일 진입점.
+ *
+ * 디자인 시스템 CSS는 래퍼 패키지가 소유한다 — 앱은 벤더(@astryxdesign/*)를
+ * CSS로도 직접 참조하지 않는다.
+ */
+@import '@audemodo/design-system/styles.css';
