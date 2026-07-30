@@ -175,9 +175,6 @@ export function createBaseConfig({
           { blankLine: 'always', prev: '*', next: 'function' },
           { blankLine: 'always', prev: '*', next: 'export' },
           { blankLine: 'always', prev: 'block-like', next: '*' },
-          // 배럴 파일처럼 export만 줄줄이 나열되는 경우까지 한 줄씩 벌어지는 것을 막는다.
-          // 다른 문장 뒤에 오는 export는 위 규칙대로 여전히 빈 줄을 요구한다.
-          { blankLine: 'any', prev: 'export', next: 'export' },
         ],
 
         // ── 그룹 8: StyleX ──
