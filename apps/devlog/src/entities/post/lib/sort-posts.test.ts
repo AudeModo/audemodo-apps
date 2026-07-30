@@ -29,6 +29,14 @@ describe('sortPosts', () => {
     expect(posts.map((p) => p.slug)).toEqual(before);
   });
 
+  it('생성일이 같으면 slug 오름차순으로 순서를 고정한다', () => {
+    const posts = [post('c', '2026-01-01'), post('a', '2026-01-01'), post('b', '2026-01-01')];
+
+    const sorted = sortPosts(posts);
+
+    expect(sorted.map((p) => p.slug)).toEqual(['a', 'b', 'c']);
+  });
+
   it('빈 배열은 빈 배열을 반환한다', () => {
     expect(sortPosts([])).toEqual([]);
   });

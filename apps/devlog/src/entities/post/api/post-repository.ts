@@ -12,7 +12,7 @@ export const getPostDetail = async (slug: string): Promise<PostDetail> => {
   return { slug, ...frontmatter, content };
 };
 
-/** 모든 게시글의 식별자(slug)와 메타데이터 배열을 반환한다. */
+/** 모든 게시글의 식별자(slug)와 메타데이터 배열을 **최신순으로** 반환한다. */
 export const getPostSummaries = async (): Promise<PostSummary[]> => {
   const slugs = await readPostSlugs();
 
