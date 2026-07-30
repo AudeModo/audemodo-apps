@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Heading, Link, List, ListItem, VStack } from '@audemodo/design-system';
 
 import { getPostSummaries } from '@/entities/post';
 
@@ -8,14 +8,19 @@ export const PostsListPage = async () => {
 
   return (
     <main>
-      <h1>글 목록</h1>
-      <ul>
-        {summaries.map((post) => (
-          <li key={post.slug}>
-            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <VStack gap={6}>
+        <Heading level={1}>글 목록</Heading>
+
+        <List hasDividers>
+          {summaries.map((post) => (
+            <ListItem
+              key={post.slug}
+              description={post.summary}
+              label={<Link href={`/posts/${post.slug}`}>{post.title}</Link>}
+            />
+          ))}
+        </List>
+      </VStack>
     </main>
   );
 };
