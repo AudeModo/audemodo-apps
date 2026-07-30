@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# 같은 브랜치에 새 커밋이 오면 진행 중이던 실행을 취소한다. 마지막 상태만 검증하면 충분하다.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# 검증만 하므로 읽기 권한만 준다.
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: 검증
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v7
+
+      # packageManager 필드(pnpm@9.15.0)를 읽어 로컬과 같은 버전을 쓴다.
+      - name: pnpm 설치
+        uses: pnpm/action-setup@v6
+
+      # .nvmrc를 단일 출처로 삼아 로컬·CI가 같은 Node 버전을 쓴다.
+      - name: Node 설치
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      # --frozen-lockfile: 락파일과 package.json이 어긋나면 설치 단계에서 즉시 실패한다.
+      - name: 의존성 설치
+        run: pnpm install --frozen-lockfile
+
+      # 아래 순서는 "빠르고 흔히 깨지는 것부터". 빌드가 가장 느리므로 마지막이다.
+      - name: 포맷 검사
+        run: pnpm format:check
+
+      - name: 린트
+        run: pnpm lint
+
+      - name: 타입 검사
+        run: pnpm typecheck
+
+      - name: 테스트
+        run: pnpm test
+
+      - name: FSD 경계 검사
+        run: pnpm fsd:check
+
+      - name: 죽은 코드 검사
+        run: pnpm deadcode
+
+      # next build는 타입 검사가 못 잡는 프리렌더 시점 오류를 잡는다
+      # (예: 서버 컴포넌트에서 함수를 prop으로 넘길 때의 RSC 직렬화 오류).
+      - name: 빌드
+        run: pnpm build
