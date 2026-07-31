@@ -1,10 +1,10 @@
 import { Divider, Heading, Text, VStack } from '@audemodo/design-system';
 
-import { getPostDetail } from '@/entities/post';
+import { formatPostDate, getPostDetail } from '@/entities/post';
 
 import { MdxContent } from '@/shared/ui';
 
-/** 게시글 상세 페이지 — slug로 글 하나를 불러와 메타와 본문(MDX)을 렌더한다. */
+/** 게시글 상세 페이지 */
 export const PostDetailPage = async ({ slug }: { slug: string }) => {
   const post = await getPostDetail(slug);
 
@@ -21,7 +21,7 @@ export const PostDetailPage = async ({ slug }: { slug: string }) => {
 
             <time dateTime={post.createdAt}>
               <Text color="secondary" size="sm">
-                {post.createdAt}
+                {formatPostDate(post.createdAt)}
               </Text>
             </time>
           </VStack>
