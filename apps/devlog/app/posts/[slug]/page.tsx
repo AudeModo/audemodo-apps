@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
+
 import { PostDetailPage } from '@/_pages/posts';
 
-import { getPostSlugs } from '@/entities/post';
+import { getPostDetail, getPostSlugs } from '@/entities/post';
 
 export const dynamicParams = false;
 
@@ -15,6 +17,33 @@ export async function generateStaticParams() {
   const slugs = await getPostSlugs();
 
   return slugs.map((slug) => ({ slug }));
+}
+
+/**
+ * 글마다 제목과 요약을 메타데이터로 노출한다.
+ *
+ * 없으면 모든 글이 루트 레이아웃의 타이틀을 공유해, 공유 링크와 검색 결과에서
+ * 서로 구분되지 않는다. 제목은 루트에 정의한 template을 통해 사이트명과 합쳐진다.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostDetail(slug);
+
+  return {
+    title: post.title,
+    description: post.summary,
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description: post.summary,
+      publishedTime: post.createdAt,
+      modifiedTime: post.updatedAt,
+    },
+  };
 }
 
 /** 게시글 상세 페이지 */
