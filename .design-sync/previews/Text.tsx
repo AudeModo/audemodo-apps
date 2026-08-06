@@ -4,8 +4,8 @@ import { Text, VStack } from '@audemodo/design-system';
 export const Paragraph = () => (
   <VStack gap={2} maxWidth={520}>
     <Text as="p">
-      디자인 시스템은 앱이 벤더를 직접 참조하지 않도록 경계를 소유한다. 벤더가 바뀌어도 앱은
-      그대로 둘 수 있다.
+      디자인 시스템은 앱이 벤더를 직접 참조하지 않도록 경계를 소유한다. 벤더가 바뀌어도 앱은 그대로
+      둘 수 있다.
     </Text>
 
     <Text as="p" color="secondary">
@@ -68,8 +68,8 @@ export const Weights = () => (
 export const Truncation = () => (
   <VStack gap={3} maxWidth={320}>
     <Text as="p" maxLines={2}>
-      maxLines가 2이면 두 줄을 넘어가는 순간 말줄임표로 잘린다. 이 문단은 그 동작을 보여주기
-      위해 일부러 길게 썼고, 잘린 뒤에는 hover 시 툴팁으로 전체 내용을 보여준다.
+      maxLines가 2이면 두 줄을 넘어가는 순간 말줄임표로 잘린다. 이 문단은 그 동작을 보여주기 위해
+      일부러 길게 썼고, 잘린 뒤에는 hover 시 툴팁으로 전체 내용을 보여준다.
     </Text>
 
     <Text hasStrikethrough>취소선이 적용된 텍스트</Text>

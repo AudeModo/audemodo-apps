@@ -39,7 +39,7 @@ props, and every one is a closed enum — values outside it silently do nothing.
   `blue | cyan | gray | green | orange | pink | purple | red | teal | yellow`),
   `elevation` (`none | low | med | high`) and `padding`.
 
-For your *own* layout glue outside these components, use the CSS custom properties the
+For your _own_ layout glue outside these components, use the CSS custom properties the
 theme defines rather than literals — `--color-text-primary`, `--color-text-secondary`,
 `--color-background-body`, `--color-background-card`, `--color-background-muted`,
 `--color-border`, `--color-border-emphasized`, `--color-accent`, `--radius-element`,

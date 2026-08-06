@@ -24,7 +24,5 @@
     }
   },
   "readmeHeader": ".design-sync/conventions.md",
-  "extraFonts": [
-    "src/fonts/fonts.css"
-  ]
+  "extraFonts": ["src/fonts/fonts.css"]
 }

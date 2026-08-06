@@ -14,7 +14,7 @@ Repo-specific gotchas for future syncs. Read this before re-running.
   of its own (`[DTS] parsed 0 .d.ts files from .../src` in the build log is expected, not
   a failure — the 10/10 line further down is the real result).
 - Run the converter **from the repo root** with `--node-modules
-  packages/design-system/node_modules`. That node_modules has its own `react`/`react-dom`,
+packages/design-system/node_modules`. That node_modules has its own `react`/`react-dom`,
   so it is the correct one. Running with cwd inside `ds-bundle/` has intermittently hit
   `EBUSY: resource busy or locked, rmdir ds-bundle` on Windows — rerun from the repo root.
 
@@ -32,14 +32,30 @@ Fix: `node .design-sync/resolve-css.mjs` concatenates the three vendor files int
 `src/styles.css` declares as non-negotiable: reset → astryx.css → theme.css.
 `cfg.cssEntry` points there.
 
-**Run `node .design-sync/resolve-css.mjs` before `package-build.mjs` on every sync.** If
-`@astryxdesign/*` is upgraded, re-run it and keep `PARTS` in that script in sync with
-`src/styles.css`.
+**Use `pnpm ds:build` — it chains resolve-css → build → validate → verify.** Don't invoke
+`package-build.mjs` directly; skipping resolve-css is the failure this whole section is
+about, and the converter exits 0 when it happens.
+
+`resolve-css.mjs` stamps a hash of its inputs (including `src/styles.css`) into the output,
+so `pnpm ds:css:check` fails when they drift — that also covers the case where someone adds
+an `@import` to `src/styles.css` and forgets `PARTS`.
+
+| script                        | does                                                                        |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| `pnpm ds:build`               | the whole pipeline; use this                                                |
+| `pnpm ds:build --skip-verify` | build + validate only, for a faster inner loop — never upload on this basis |
+| `pnpm ds:css`                 | regenerate the resolved CSS                                                 |
+| `pnpm ds:css:check`           | fail if it is missing or stale                                              |
+| `pnpm ds:verify`              | post-build assertions against an existing `ds-bundle/`                      |
+
+`verify-bundle.mjs` needs playwright, which lives in the gitignored `.ds-sync/node_modules`.
+On a fresh clone: `ln -sfn ../.ds-sync/node_modules .design-sync/node_modules`. Without it
+the font check reports that it did NOT run rather than passing silently.
 
 ## Known render warns (checked and benign — a warn NOT listed here is new)
 
 - `[TOKENS_MISSING]` — ~24 `--x-*` custom properties (`--x-gap`, `--x-borderWidth`,
-  `--x-animationDelay`, `--x---_tab-indicator-bottom`, …). These are StyleX's *dynamic*
+  `--x-animationDelay`, `--x---_tab-indicator-bottom`, …). These are StyleX's _dynamic_
   style variables, set inline by components at runtime. They are correctly absent from
   static CSS. Do not chase; do not add a tokens package for them.
 - `[RENDER_THIN] … rendered height is 0px` on every authored preview (Card, List, Text so
@@ -88,32 +104,37 @@ Both are `@import`ed from `src/styles.css`, so the app gets them too — not jus
 
 **The trap: `:root` is the wrong selector, and it fails silently.** The vendor theme declares
 its tokens inside `@scope ([data-astryx-theme="neutral"])`, and Astryx's `<Theme>` renders a
-`data-astryx-theme` div *per subtree* — six of them in a single preview card. The scope rule
+`data-astryx-theme` div _per subtree_ — six of them in a single preview card. The scope rule
 re-declares Figtree on every one. Custom properties inherit, so the nearest ancestor wins:
 a `:root` override changes `<html>` and nothing else, while every actual component keeps
-rendering Figtree. Nothing warns — `[FONT_MISSING]` clears (the faces *are* shipped), the
+rendering Figtree. Nothing warns — `[FONT_MISSING]` clears (the faces _are_ shipped), the
 render check passes, and the screenshots look plausible unless you know the brand shapes.
 
 The override therefore targets `:root, [data-astryx-theme]` and sits **outside any
 `@layer`** so it beats the layered declaration on the same element.
 
-**How to verify after any font/theme change** (don't trust the screenshot):
+**This is now enforced.** `pnpm ds:verify` (part of `ds:build`) renders every card in headless
+chromium over http and asserts the computed `font-family` of the mounted elements matches the
+families declared in `font-tokens.css`. Reverting the selector to `:root` fails the build with
+`<p> renders "Figtree", expected "SUIT Variable"` — verified by actually doing it.
 
-```js
-// over http, not file:// — then check document.fonts and the computed family
-[...document.fonts].map(f => `${f.family}:${f.status}`)   // want "loaded", not "unloaded"
-getComputedStyle(document.querySelector('p')).fontFamily  // want 'SUIT Variable', not Figtree
-```
+Two things the checker gets right that a naive version would not, so don't "simplify" them:
 
-`unloaded` faces mean nothing on the page actually uses the family — i.e. the token override
-did not reach the elements. `--font-family-code` is deliberately left on the vendor's
-monospace stack.
+- It samples **only inside the mount roots** (`#r0`, `#r1`, …). The preview card's own
+  scaffolding (grid, story labels) is deliberately unthemed and renders in `system-ui` —
+  sampling the whole document fails every card for the wrong reason.
+- It renders over **http, not `file://`**. Chromium restricts font loading on `file://`, which
+  would report every face as `unloaded` and produce a false failure.
+
+Expected families are parsed from `src/fonts/font-tokens.css` rather than hardcoded, so the
+check keeps working when the brand fonts change. `--font-family-code` is deliberately left on
+the vendor's monospace stack and is not asserted.
 
 ## Re-sync risks
 
 - **`resolve-css.mjs` drift.** If `src/styles.css` gains or reorders an `@import` and
   nobody updates `PARTS` in `resolve-css.mjs`, the sync ships stale or mis-ordered CSS and
-  *nothing warns* — the build still reports a healthy 157 KB `_ds_bundle.css`. Diff the two
+  _nothing warns_ — the build still reports a healthy 157 KB `_ds_bundle.css`. Diff the two
   files whenever the DS's CSS entry changes.
 - **Vendor-version coupling.** Everything visual comes from `@astryxdesign/core` and
   `@astryxdesign/theme-neutral` (both `0.2.0` at sync time). An Astryx major bump can change
@@ -136,5 +157,5 @@ monospace stack.
   Re-run the validation pass (grep each named token against the fresh `tokens/theme.css`)
   on every re-sync; the driver prompts for this automatically.
 - **Astryx exposes ~100 components; this DS re-exports 10.** If someone adds a re-export to
-  `src/index.ts`, the next sync picks it up automatically and it will ship with a *floor
-  card* until a preview is authored for it. That is the expected flow, not a failure.
+  `src/index.ts`, the next sync picks it up automatically and it will ship with a _floor
+  card_ until a preview is authored for it. That is the expected flow, not a failure.

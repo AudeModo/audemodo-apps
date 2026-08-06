@@ -24,7 +24,12 @@ export const PostList = () => (
 export const Density = () => (
   <>
     {(['compact', 'balanced', 'spacious'] as const).map((density) => (
-      <List key={density} density={density} hasDividers header={<Text type="label">{density}</Text>}>
+      <List
+        key={density}
+        density={density}
+        hasDividers
+        header={<Text type="label">{density}</Text>}
+      >
         <ListItem label="첫 번째 항목" />
         <ListItem label="두 번째 항목" />
         <ListItem label="세 번째 항목" />
@@ -71,6 +76,10 @@ export const ItemStates = () => (
 
     <ListItem isDisabled description="isDisabled가 켜진 항목" label="비활성 항목" />
 
-    <ListItem description="href가 있으면 hover·press 스타일이 켜진다" href="/posts" label="링크 항목" />
+    <ListItem
+      description="href가 있으면 hover·press 스타일이 켜진다"
+      href="/posts"
+      label="링크 항목"
+    />
   </List>
 );

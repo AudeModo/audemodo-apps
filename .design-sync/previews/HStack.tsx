@@ -59,8 +59,7 @@ export const VerticalAlign = () => (
           <Card padding={3} variant="blue">
             <Text type="label">
               두 줄이라
-              <br />
-              더 높은 항목
+              <br />더 높은 항목
             </Text>
           </Card>
         </HStack>

@@ -7,8 +7,8 @@ export const PostSummary = () => (
       <Heading level={3}>createdAt을 시각 단위로 바꾸고 비교·표시를 맞춘다</Heading>
 
       <Text as="p" color="secondary">
-        날짜만 저장하던 필드를 시각까지 담도록 바꾸면서, 정렬 비교와 화면 표시가 같은 기준을
-        쓰도록 정리했다.
+        날짜만 저장하던 필드를 시각까지 담도록 바꾸면서, 정렬 비교와 화면 표시가 같은 기준을 쓰도록
+        정리했다.
       </Text>
 
       <Divider />
@@ -21,13 +21,13 @@ export const PostSummary = () => (
 /** The primary variant axis — background colour. */
 export const Variants = () => (
   <>
-    {(
-      ['default', 'muted', 'transparent', 'blue', 'green', 'orange', 'red', 'purple'] as const
-    ).map((variant) => (
-      <Card key={variant} variant={variant} padding={3} width={160}>
-        <Text type="label">{variant}</Text>
-      </Card>
-    ))}
+    {(['default', 'muted', 'transparent', 'blue', 'green', 'orange', 'red', 'purple'] as const).map(
+      (variant) => (
+        <Card key={variant} variant={variant} padding={3} width={160}>
+          <Text type="label">{variant}</Text>
+        </Card>
+      ),
+    )}
   </>
 );
 
