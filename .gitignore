@@ -33,3 +33,9 @@ next-env.d.ts
 # fsd-cruise (dependency graph 시각화 생성물)
 dependency-graph.html
 *.fsd-cruise.html
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+packages/design-system/.ds-css/

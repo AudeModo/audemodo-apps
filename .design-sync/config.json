@@ -1,0 +1,30 @@
+{
+  "projectId": "a76c1e41-f0eb-4fb2-b695-15d642ca89f5",
+  "shape": "package",
+  "pkg": "@audemodo/design-system",
+  "globalName": "AudemodoDS",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": ".ds-css/resolved.css",
+  "tokensPkg": "@astryxdesign/theme-neutral",
+  "provider": {
+    "component": "DesignSystemProvider"
+  },
+  "overrides": {
+    "List": {
+      "cardMode": "column"
+    },
+    "ListItem": {
+      "cardMode": "column"
+    },
+    "HStack": {
+      "cardMode": "column"
+    },
+    "Card": {
+      "cardMode": "column"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md",
+  "extraFonts": [
+    "src/fonts/fonts.css"
+  ]
+}
