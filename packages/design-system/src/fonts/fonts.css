@@ -1,0 +1,25 @@
+/*
+ * 브랜드 폰트의 @font-face 선언.
+ *
+ * 둘 다 가변 폰트라 굵기별 파일을 따로 두지 않고 100~900 범위를 한 파일이 덮는다.
+ * font-display: swap — 폰트가 늦게 와도 텍스트를 먼저 보여준다.
+ *
+ * 토큰 연결(--font-family-*)은 font-tokens.css가 담당한다. 선언과 매핑을 나눠 둔 이유는
+ * design-sync가 이 파일에서 @font-face만 뽑아 번들로 옮기기 때문이다.
+ */
+
+@font-face {
+  font-family: 'SUIT Variable';
+  src: url('./SUIT-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE Variable';
+  src: url('./SUITE-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

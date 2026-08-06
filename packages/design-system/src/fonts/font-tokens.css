@@ -1,0 +1,28 @@
+/*
+ * 브랜드 폰트를 테마 토큰에 연결한다.
+ *
+ * 벤더(neutral) 테마는 --font-family-body/heading을 Figtree로 두는데, Figtree는 어느
+ * Astryx 패키지도 싣지 않아 실제로는 시스템 폴백으로 렌더된다. 그 값을 브랜드 폰트로
+ * 덮는다.
+ *
+ * 선택자가 :root가 아니라 [data-astryx-theme]인 이유:
+ *
+ * 벤더 테마는 토큰을 @scope ([data-astryx-theme="neutral"]) 안에서 선언한다. 그런데
+ * <Theme>는 자기가 감싸는 subtree마다 data-astryx-theme div를 새로 만들고, 그 div마다
+ * 스코프 규칙이 다시 걸려 Figtree가 재선언된다. 커스텀 프로퍼티는 상속되므로 더 가까운
+ * 조상의 선언이 이긴다 — :root에만 덮으면 <html>만 바뀌고 정작 컴포넌트가 들어있는
+ * div 안에서는 그대로 Figtree가 나온다. (실제로 그렇게 당했다.)
+ *
+ * 그래서 같은 요소(data-astryx-theme를 가진 모든 요소)를 직접 겨냥한다. @layer 밖에
+ * 있으므로 레이어 안(astryx-theme)의 선언을 특정도와 무관하게 이긴다.
+ */
+
+:root,
+[data-astryx-theme] {
+  --font-family-body:
+    'SUIT Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --font-family-heading:
+    'SUITE Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}

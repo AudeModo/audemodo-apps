@@ -10,3 +10,11 @@
 @import '@astryxdesign/core/reset.css';
 @import '@astryxdesign/core/astryx.css';
 @import '@astryxdesign/theme-neutral/theme.css';
+
+/*
+ * 브랜드 폰트. 벤더 테마 뒤에 와야 --font-family-* 오버라이드가 의도대로 걸린다.
+ * (font-tokens.css는 @layer 밖이라 순서와 무관하게 이기지만, 읽는 사람에게는
+ * 순서가 곧 의도이므로 뒤에 둔다.)
+ */
+@import './fonts/fonts.css';
+@import './fonts/font-tokens.css';
