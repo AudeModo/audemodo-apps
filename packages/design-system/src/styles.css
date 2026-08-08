@@ -4,9 +4,15 @@
  * 앱은 이 파일 하나만 import하고 벤더(@astryxdesign/*)를 직접 참조하지 않는다.
  * 벤더가 바뀌어도 고칠 곳은 이 파일 하나다.
  *
- * import 순서가 곳 레이어 캐스케이드이므로 바꿀 수 없다:
- *   reset(@layer reset) → 컴포넌트 스타일(@layer astryx-base) → 토큰 오버라이드(@layer astryx-theme)
+ * import 순서가 곧 레이어 캐스케이드이므로 바꿀 수 없다:
+ *   reset(@layer reset) → 컴포넌트 스타일(@layer astryx-base)
+ *   → 벤더 토큰(@layer astryx-theme) → 서체 → 브랜드 토큰(레이어 밖)
+ *
+ * 브랜드 층이 맨 뒤이자 레이어 밖인 이유: 레이어 밖 선언이 레이어 안 선언을 이기므로,
+ * 벤더 기본값을 덮는 데 특이도 싸움이 필요 없다.
  */
 @import '@astryxdesign/core/reset.css';
 @import '@astryxdesign/core/astryx.css';
 @import '@astryxdesign/theme-neutral/theme.css';
+@import './theme/fonts.css';
+@import './theme/devlog.css';
