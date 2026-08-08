@@ -11,8 +11,15 @@ interface ReadableParams {
  *
  * 어휘에 없는 값은 버린다. 남기면 낡은 링크나 손으로 고친 URL이 아무 글도 만나지 못하는
  * 칩을 만들어, 지울 수는 있지만 무엇이었는지는 알 수 없는 상태가 된다.
+ *
+ * 어휘를 인자로 받는 이유: 이 함수가 지키는 것은 「선언된 값만 통과시킨다」는 규칙이지
+ * 지금 선언된 값들이 아니다. 어휘를 밖에서 넣을 수 있어야 그 규칙을 실제 어휘와 무관하게
+ * 확인할 수 있고, 어휘가 바뀔 때마다 검증이 따라 흔들리지 않는다.
  */
-export const parseAxisSelection = (params: ReadableParams): AxisSelection => {
+export const parseAxisSelection = (
+  params: ReadableParams,
+  vocabulary: Record<AxisKey, readonly string[]> = AXIS_VALUES,
+): AxisSelection => {
   const selection: Partial<Record<AxisKey, string[]>> = {};
 
   for (const key of AXIS_KEYS) {
@@ -22,7 +29,7 @@ export const parseAxisSelection = (params: ReadableParams): AxisSelection => {
       continue;
     }
 
-    const allowed = AXIS_VALUES[key];
+    const allowed = vocabulary[key];
     const values = [...new Set(text.split(','))].filter((value) => allowed.includes(value));
 
     if (values.length > 0) {
