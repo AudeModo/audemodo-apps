@@ -1,0 +1,332 @@
+/*
+ * 축 필터 — 버튼 · 팝오버 · 옵션 행. 래퍼에 없는 것이라 앱 안에 짠다.
+ *
+ * 팝오버는 position:absolute다. 열어도 아래 목록이 밀리지 않아야 한다 —
+ * 목록이 움직이면 「무엇을 고르는 중인가」와 「무엇이 남았는가」를 동시에 볼 수 없다.
+ */
+
+.desktop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.axis {
+  position: relative;
+}
+
+/* ── 축 버튼 ── */
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: inherit;
+  font-size: var(--devlog-font-size-control);
+  line-height: 1.4;
+  white-space: nowrap;
+  padding: 8px 12px 8px 14px;
+  border-radius: var(--radius-element);
+  border: 1px solid var(--color-border);
+  background: var(--color-background-card);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--devlog-ease);
+}
+
+.trigger:hover {
+  border-color: var(--color-text-primary);
+}
+
+/* 고른 것이 있는 축은 테두리가 진해진다. 배지를 읽기 전에 먼저 눈에 들어온다 */
+.trigger[aria-pressed='true'] {
+  border-color: var(--color-text-primary);
+}
+
+.trigger:focus-visible,
+.trigger[aria-expanded='true'] {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.chevron {
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-fast) var(--devlog-ease);
+}
+
+.trigger[aria-expanded='true'] .chevron {
+  transform: rotate(180deg);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-primary);
+  color: var(--devlog-on-fill);
+  font-size: var(--font-size-4xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 팝오버 ── */
+
+.popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  min-width: 236px;
+  max-height: 328px;
+  overflow: auto;
+  padding: 6px;
+  background: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-med);
+}
+
+/* ── 옵션 행 ── */
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--radius-element);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--devlog-font-size-control);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--duration-fast) var(--devlog-ease);
+}
+
+.option:hover:not(:disabled) {
+  background: var(--color-background-muted);
+}
+
+.option:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/*
+ * 결과 0인 값은 지우지 않고 흐리게 둔다. 감추면 「그건 안 한다」로 읽히고
+ * 흐리게 두면 「아직 안 썼다」로 읽힌다. 비활성은 대비 요구에서 면제된다.
+ */
+.option:disabled {
+  cursor: not-allowed;
+  color: var(--devlog-disabled);
+}
+
+.checkbox {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-none);
+  border: 1px solid var(--color-border-emphasized);
+  background: var(--color-background-card);
+  color: var(--devlog-on-fill);
+}
+
+.option[aria-checked='true'] .checkbox {
+  border-color: var(--color-text-primary);
+  background: var(--color-text-primary);
+}
+
+.option:disabled .checkbox {
+  background: var(--color-background-muted);
+}
+
+.count {
+  margin-left: auto;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.option:disabled .count {
+  color: var(--devlog-disabled);
+}
+
+/* ── 팝오버 하단 ── */
+
+.axisClear {
+  width: 100%;
+  margin-top: 6px;
+  padding: 7px 10px;
+  border: none;
+  border-top: 1px solid var(--devlog-line-soft);
+  border-radius: var(--radius-element);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-3xs);
+  color: var(--color-accent);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--duration-fast) var(--devlog-ease);
+}
+
+.axisClear:hover {
+  background: var(--color-background-muted);
+}
+
+.axisClear:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/* ── 좁은 화면 ── 전체 화면 패널로 바꾼다 */
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+  }
+}
+
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-card);
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.panelBody {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 8px 12px 16px;
+}
+
+.panelSection {
+  padding: 14px 8px 10px;
+  border-bottom: 1px solid var(--devlog-line-soft);
+}
+
+.panelFoot {
+  flex: none;
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+/*
+ * 파랑 채움의 두 예외 중 하나. 패널을 닫는 것이 이 화면의 유일한 다음 행동이라
+ * 검정 채움(화면당 하나)과 부딪히지 않는다.
+ */
+.apply {
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: var(--radius-element);
+  background: var(--color-accent);
+  color: var(--devlog-on-fill);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--duration-fast) var(--devlog-ease);
+}
+
+.apply:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-text-primary);
+}
+
+/* 좁은 화면의 히트 영역은 최소 44 */
+.panel .option {
+  min-height: 44px;
+  padding: 4px;
+  font-size: var(--font-size-xs);
+}
+
+.panel .checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  border: none;
+  border-radius: var(--radius-element);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+}
+
+.iconButton:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.textButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-3xs);
+  color: var(--color-accent);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+}
+
+.textButton:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .chevron,
+  .option,
+  .axisClear,
+  .apply {
+    transition-duration: 0s;
+  }
+}

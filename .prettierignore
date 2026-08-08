@@ -3,3 +3,13 @@ node_modules
 dist
 .turbo
 pnpm-lock.yaml
+
+# 디자인 시스템 동기화 도구가 만드는 산출물 — 사람이 고치는 파일이 아니다
+.ds-sync
+.design-sync
+ds-bundle
+**/.ds-css
+
+# 도구가 관리하는 블록(<!-- ASTRYX:START -->)이 들어 있다.
+# Prettier가 표 정렬을 무너뜨리고 `var(--color-*|...)`의 `*`를 강조 문법으로 먹는다.
+packages/design-system/AGENTS.md

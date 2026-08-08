@@ -1,0 +1,30 @@
+/*
+ * kind → 색 매핑을 이 파일 안에 가둔다. 색 값을 데이터로 들고 다니지 않는다.
+ *
+ * 라벨은 **텍스트 단계**를 쓴다. 계속 읽히는 정보라 대비 요구가 높다.
+ * 같은 kind가 목록 제목 호버에서는 기본색을 갖는 것은 의도한 것이다 —
+ * 호버는 스쳐 가는 상태이고 라벨은 계속 읽히는 정보라 요구 수준이 다르다.
+ */
+
+.kind {
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  letter-spacing: var(--devlog-tracking-label);
+  white-space: nowrap;
+}
+
+.kind[data-kind='회고'] {
+  color: var(--devlog-blue-strong);
+}
+
+.kind[data-kind='트러블슈팅'] {
+  color: var(--devlog-coral-strong);
+}
+
+.kind[data-kind='학습'] {
+  color: var(--devlog-green-strong);
+}
+
+.kind[data-kind='예비'] {
+  color: var(--color-text-secondary);
+}

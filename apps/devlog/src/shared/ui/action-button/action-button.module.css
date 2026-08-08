@@ -1,0 +1,66 @@
+/*
+ * 래퍼에 버튼이 없어 앱 안에 짠다. 색·라운드·모션은 전부 토큰이다.
+ *
+ * 강조는 화면당 하나, 검정 채움이다. 파랑 채움은 이 컴포넌트가 만들지 않는다 —
+ * 시안에서 파랑 채움이 허용된 자리는 두 곳뿐이라 그때 그 자리에서 따로 짠다.
+ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: var(--devlog-font-size-control);
+  line-height: 1.4;
+  white-space: nowrap;
+  padding: 8px 16px;
+  border-radius: var(--radius-element);
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color var(--duration-fast) var(--devlog-ease),
+    border-color var(--duration-fast) var(--devlog-ease),
+    transform var(--duration-fast-min) var(--devlog-ease);
+}
+
+.solid {
+  border: none;
+  background: var(--color-text-primary);
+  color: var(--devlog-on-fill);
+}
+
+.solid:hover {
+  background: var(--devlog-press);
+}
+
+.outline {
+  border: 1px solid var(--color-border);
+  background: var(--color-background-card);
+  color: var(--color-text-primary);
+}
+
+.outline:hover {
+  border-color: var(--color-text-primary);
+}
+
+/* 호버와 포커스는 다른 표현이어야 한다 — 키보드는 「지금 여기」를 묻는다 */
+.button:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition-duration: 0s;
+  }
+
+  .button:active {
+    transform: none;
+  }
+}
