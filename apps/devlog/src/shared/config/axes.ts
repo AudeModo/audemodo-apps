@@ -8,23 +8,48 @@
  * 새 값이 필요하면 글보다 이 파일을 먼저 고친다.
  */
 
-/** 글의 성격 */
-export const KIND_VALUES = ['회고', '트러블슈팅', '학습', '예비'] as const;
-
-/** 글이 다루는 직무 */
-export const TRACK_VALUES = ['FE', 'BE', '인프라'] as const;
-
-/*
- * 아래 세 축은 아직 비어 있다. 시안이 들고 있던 값은 목업 픽스처였고, 실제 어휘는
- * 손으로 정한다. 어휘가 비면 그 축은 화면에 나오지 않는다 — 고를 값이 없는 축은
- * 아무것도 좁히지 못하고, 빈 팝오버는 「값이 0편이다」와 다른 말이라 섞이면 안 된다.
+/**
+ * 글의 성격. 하나만 고른다.
+ *
+ * 회고는 한 일과 그 판단을 돌아보는 것, 트러블슈팅은 막혔던 것,
+ * 학습은 새로 배운 것을 정리하는 것이다.
  */
+export const KIND_VALUES = ['회고', '트러블슈팅', '학습'] as const;
 
-const PROJECT_VALUES: string[] = [];
+/** 글이 다루는 직무. 여러 개 고를 수 있다. */
+export const TRACK_VALUES = ['FE', 'BE', 'Infra', 'Design'] as const;
 
-const STACK_VALUES: string[] = [];
+/**
+ * 글이 속한 프로젝트. 하나만 고른다.
+ *
+ * 레포 이름이 아니라 프로젝트 이름이다 — `audemodo-apps`는 모노레포이고
+ * 그 안의 `devlog`가 프로젝트다.
+ */
+const PROJECT_VALUES = ['Audemodo', 'devlog', 'design-system', 'eslint-config'] as const;
 
-const TAG_VALUES: string[] = [];
+/**
+ * 글이 다루는 기술. 통제 어휘라 새 값은 여기 먼저 추가한다.
+ *
+ * 표기는 공식 표기를 따른다 — `Next.js`이지 `NextJS`가 아니다.
+ * 표기가 흔들리면 같은 기술이 두 값으로 갈려 필터가 쪼개진다.
+ */
+const STACK_VALUES = [
+  'TypeScript',
+  'React',
+  'Next.js',
+  'StyleX',
+  'MDX',
+  'pnpm',
+  'GitHub Actions',
+] as const;
+
+/**
+ * 보조 축. 개방 어휘이지만 여기 선언한 것만 필터에 나온다.
+ *
+ * 글에서 추출하지 않는 이유는 위와 같다 — 0편인 값을 흐리게 보여주려면
+ * 목록이 글보다 먼저 있어야 한다.
+ */
+const TAG_VALUES = ['FSD', 'CI', '아키텍처', '접근성', '성능', '테스트'] as const;
 
 /** 축의 순서. 화면의 버튼 순서가 이 순서다. */
 export const AXIS_KEYS = ['kind', 'project', 'track', 'stack', 'tag'] as const;
