@@ -9,6 +9,11 @@ const post = (slug: string, createdAt: string): PostSummary => ({
   createdAt,
   title: `${slug} 제목`,
   summary: `${slug} 요약`,
+  kind: '회고',
+  project: 'devlog',
+  track: 'FE',
+  stack: ['TypeScript'],
+  tag: ['FSD'],
 });
 
 describe('sortPosts', () => {

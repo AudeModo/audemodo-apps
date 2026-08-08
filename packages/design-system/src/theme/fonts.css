@@ -1,0 +1,24 @@
+/*
+ * 브랜드 서체 — 헤드라인 SUITE, 본문·UI SUIT.
+ *
+ * 둘 다 가변 폰트이고 굵기 축만 쓴다. 축을 하나로 잠그면 화면마다 다시 정할 일이 없어진다.
+ *
+ * 자체 호스팅하는 이유: 서체는 디자인 시스템의 자산이고, 외부 CDN에 매달면 이 패키지를
+ * 쓰는 앱이 우리가 통제하지 않는 가용성에 묶인다. 파일은 이 패키지 안에 둔다.
+ */
+
+@font-face {
+  font-family: 'SUIT Variable';
+  src: url('./fonts/SUIT-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SUITE Variable';
+  src: url('./fonts/SUITE-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

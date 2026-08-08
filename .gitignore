@@ -33,3 +33,10 @@ next-env.d.ts
 # fsd-cruise (dependency graph 시각화 생성물)
 dependency-graph.html
 *.fsd-cruise.html
+
+# 디자인 시스템 동기화 산출물 — /design-sync 경로에서만 쓰고 앱 빌드에는 들어가지 않는다.
+# .prettierignore에만 있으면 포맷 검사만 비껴갈 뿐 실수로 커밋된다.
+.ds-sync/
+.design-sync/
+ds-bundle/
+.ds-css/

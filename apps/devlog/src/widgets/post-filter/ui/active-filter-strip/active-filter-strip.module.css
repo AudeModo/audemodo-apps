@@ -1,0 +1,103 @@
+/*
+ * 활성 필터 스트립.
+ *
+ * min-height를 고정하는 이유: 칩이 없을 때와 있을 때 높이가 달라지면 아래 목록이
+ * 필터를 만질 때마다 위아래로 뛴다.
+ *
+ * 칩에 색을 쓰지 않는다. 색은 kind 인코딩 전용이고, 여기에 색이 끼면 「이 칩이 무슨
+ * 분류인가」라는 없는 질문이 생긴다.
+ */
+
+.strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 53px;
+  padding: 12px 0;
+  border-top: 1px solid var(--devlog-line-soft);
+  border-bottom: 1px solid var(--devlog-line-soft);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-element);
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  transition: border-color var(--duration-fast) var(--devlog-ease);
+}
+
+/*
+ * 「N만 빼기」가 가리키는 칩만 테두리를 진하게 둔다.
+ * 어느 축이 문제인지 버튼을 읽기 전에 화면이 먼저 말한다.
+ */
+.chip[data-culprit='true'] {
+  border-color: var(--color-text-primary);
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.remove:hover {
+  color: var(--devlog-coral);
+}
+
+.remove:focus-visible {
+  border-radius: var(--radius-none);
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.clearAll {
+  padding: 5px 8px;
+  border: none;
+  border-radius: var(--radius-element);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-3xs);
+  color: var(--color-accent);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.clearAll:hover {
+  color: var(--devlog-blue-strong);
+}
+
+.clearAll:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/* 결과 수는 언제나 오른쪽 끝에 있다. 칩이 늘어도 자리가 바뀌지 않는다 */
+.result {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip,
+  .remove,
+  .clearAll {
+    transition-duration: 0s;
+  }
+}

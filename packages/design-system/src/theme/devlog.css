@@ -1,0 +1,213 @@
+/*
+ * devlog 브랜드 층 — 이 패키지 안에만 둔다. 앱은 이 값을 재정의하지 않는다.
+ *
+ * 두 갈래를 섞지 않는다:
+ *   - 벤더에 대응이 있는 것은 벤더 이름을 그대로 쓰고 값만 브랜드 값으로 덮는다
+ *     (--color-*, --font-*, --radius-*, --shadow-*, --duration-*).
+ *   - 대응이 없는 브랜드 고유값만 --devlog-* 로 새로 만든다.
+ * 앱은 이 이름들만 보고, 벤더 이름 체계를 따로 배울 필요가 없다.
+ *
+ * 선택자가 `:root` 하나가 아닌 이유:
+ * 벤더 테마는 토큰을 @layer 안에서 테마 래퍼 엘리먼트(`[data-astryx-theme]`)에 선언한다.
+ * 커스텀 프로퍼티는 "선언된 가장 가까운 조상"에서 상속되므로, `:root`에만 얹으면 래퍼
+ * 안쪽 엘리먼트는 여전히 벤더 값을 물려받는다. 그래서 같은 엘리먼트에 함께 선언한다.
+ * 레이어 밖(unlayered)이라 레이어 안의 벤더 선언보다 우선한다.
+ */
+
+:root,
+[data-astryx-theme] {
+  /* ── 면 · 글자 · 선 ── */
+  --color-background-body: #ffffff;
+  --color-background-muted: #f1f4f7;
+  --color-background-card: #ffffff;
+  --color-text-primary: #0a1317;
+  --color-text-secondary: #4e606f;
+  --color-border: #05365919;
+  --color-border-emphasized: #ccd3db;
+  --color-accent: #3655ff;
+
+  /* ── 분류 4색 · 기본 단계 ── 글자가 없는 면에 쓴다 */
+  --devlog-blue: #3655ff;
+  --devlog-coral: #f65660;
+  --devlog-yellow: #ffc940;
+  --devlog-green: #37a878;
+
+  /* ── 텍스트 단계 ── 계속 읽히는 글자·글리프에 쓴다 (대비 7:1 이상) */
+  --devlog-blue-strong: #1b2e99;
+  --devlog-coral-strong: #a3282f;
+  --devlog-yellow-strong: #6b4e00;
+  --devlog-green-strong: #1b5e42;
+
+  /* ── 옅은 면 ── */
+  --devlog-blue-pale: #e6eaff;
+  --devlog-coral-pale: #ffe6e8;
+  --devlog-yellow-pale: #fff4d6;
+  --devlog-green-pale: #e3f5ec;
+
+  --devlog-on-fill: #ffffff;
+  --devlog-disabled: #a4b0bc;
+  --devlog-line-soft: #05365910;
+  --devlog-track: #edf0f3;
+  --devlog-solid: #0a1317;
+  --devlog-on-solid: #ffffff;
+
+  --devlog-hl-main: #c9d3ff;
+  --devlog-hl-alt: #ffe3ac;
+  --devlog-hl-ink: #0a1317;
+
+  --devlog-shadow-a: rgba(5, 54, 89, 0.05);
+  --devlog-shadow-b: rgba(5, 54, 89, 0.1);
+
+  /* 채운 버튼의 호버. 검정 채움이 한 단계 더 눌린 것으로 읽혀야 한다 */
+  --devlog-press: #000000;
+
+  /*
+   * 서체. 헤드라인 SUITE, 본문·UI SUIT.
+   * 한글이 없는 글리프는 시스템 서체로 떨어지므로 폴백을 끝까지 적는다.
+   */
+  --font-family-body: 'SUIT Variable', -apple-system, 'Apple SD Gothic Neo', system-ui, sans-serif;
+  --font-family-heading: 'SUITE Variable', 'SUIT Variable', -apple-system, system-ui, sans-serif;
+
+  /*
+   * 타이포 사다리. 시안이 확정한 값이라 벤더 기본 사다리를 통째로 덮는다.
+   * 한 칸이라도 남겨두면 그 칸을 쓰는 컴포넌트만 다른 리듬으로 튄다.
+   */
+  --font-size-4xs: 0.6875rem; /* 11 — kind 라벨 */
+  --font-size-3xs: 0.75rem; /* 12 — 메타 · 날짜 */
+  --font-size-2xs: 0.78125rem; /* 12.5 — 카드 설명 */
+  --font-size-xs: 0.875rem; /* 14 — UI 본문 · 요약 */
+  --font-size-sm: 0.9375rem; /* 15 — 위젯 제목 · 카운트 */
+  --font-size-base: 1.0625rem; /* 17 — 읽기 본문 */
+  --font-size-lg: 1.1875rem; /* 19 — 인용 */
+  --font-size-xl: 1.3125rem; /* 21 — 본문 소제목 */
+  --font-size-2xl: 1.4375rem; /* 23 — 글 제목(목록) */
+  --font-size-3xl: 1.625rem; /* 26 — 섹션 제목 */
+  --font-size-4xl: 2rem; /* 32 — 화면 제목 */
+  --font-size-5xl: 2.75rem; /* 44 — 홈 히어로 */
+
+  /*
+   * 의미 단계. 굵기는 제목 계열 전부 500이다 —
+   * 가변 폰트에서 굵기 축만 쓰기로 했고, 한글 제목은 600부터 뭉개진다.
+   */
+  --text-heading-1-size: var(--font-size-4xl);
+  --text-heading-1-weight: var(--font-weight-medium);
+  --text-heading-1-leading: 1.25;
+  --text-heading-2-size: var(--font-size-3xl);
+  --text-heading-2-weight: var(--font-weight-medium);
+  --text-heading-2-leading: 1.35;
+  --text-heading-3-size: var(--font-size-xl);
+  --text-heading-3-weight: var(--font-weight-medium);
+  --text-heading-3-leading: 1.45;
+  --text-heading-4-size: var(--font-size-lg);
+  --text-heading-4-weight: var(--font-weight-medium);
+  --text-heading-4-leading: 1.45;
+  --text-heading-5-size: var(--font-size-sm);
+  --text-heading-5-weight: var(--font-weight-medium);
+  --text-heading-5-leading: 1.5;
+  --text-heading-6-size: var(--font-size-xs);
+  --text-heading-6-weight: var(--font-weight-medium);
+  --text-heading-6-leading: 1.5;
+
+  /* UI 본문 14/1.6 과 읽기 본문 17/1.75 는 다른 단계다. 줄이는 것은 제목 계열뿐이다 */
+  --text-body-size: var(--font-size-xs);
+  --text-body-weight: var(--font-weight-normal);
+  --text-body-leading: 1.6;
+  --text-large-size: var(--font-size-base);
+  --text-large-weight: var(--font-weight-normal);
+  --text-large-leading: 1.75;
+  --text-label-size: var(--font-size-sm);
+  --text-label-weight: var(--font-weight-normal);
+  --text-label-leading: 1.4;
+  --text-supporting-size: var(--font-size-3xs);
+  --text-supporting-weight: var(--font-weight-normal);
+  --text-supporting-leading: 1.5;
+
+  /*
+   * 조작부 글자 크기. 읽기 사다리와 별개다 — 버튼·칩·옵션 행은 본문이 아니라
+   * 손잡이라서 본문 단계에 얹으면 목록 안에서 문장처럼 읽힌다.
+   */
+  --devlog-font-size-control: 0.8125rem; /* 13 */
+
+  /*
+   * 자간은 벤더가 토큰으로 노출하지 않는다. 값이 흩어지지 않도록 여기서 이름을 준다.
+   * 한글 제목은 자간을 좁혀야 덩어리로 읽힌다.
+   */
+  --devlog-tracking-hero: -0.035em;
+  --devlog-tracking-title: -0.03em;
+  --devlog-tracking-heading: -0.025em;
+  --devlog-tracking-label: 0.1em;
+
+  /* 라운드 — 카드·팝오버 12 / 버튼·칩·썸네일 8 / 배지 6 / 체크 상자 4 */
+  --radius-none: 0.25rem;
+  --radius-inner: 0.375rem;
+  --radius-element: 0.5rem;
+  --radius-container: 0.75rem;
+
+  /* 그림자 2단 — 선을 지우고 공간으로 바꾸는 교환에 쓴다 */
+  --shadow-med: 0 2px 4px var(--devlog-shadow-a), 0 12px 28px var(--devlog-shadow-b);
+
+  /* 모션 — 색 140 · 밑줄 280 · 누름 100 · 카드 호버 180 */
+  --duration-fast-min: 100ms;
+  --duration-fast: 140ms;
+  --duration-fast-max: 180ms;
+  --duration-medium-min: 280ms;
+  --duration-medium: 380ms;
+  --duration-medium-max: 480ms;
+
+  --devlog-ease: cubic-bezier(0.24, 1, 0.4, 1);
+}
+
+/*
+ * 다크 — 구조가 뒤집힌다.
+ *   라이트: 옅은 면(밝음) → 기본색 → 텍스트 단계(어두움)
+ *   다크:   옅은 면(어두움) → 기본색 → 텍스트 단계(밝음)
+ *
+ * 면 규칙 자체는 안 바뀐다. "글자·글리프가 올라가는 면"이라는 조건이 그대로이고
+ * 그 답이 다크에서는 밝은 쪽일 뿐이다. 노랑만 예외인 규칙은 없다.
+ *
+ * 다크는 `data-theme="dark"`가 켠다. 시안이 정한 유일한 경로이므로
+ * prefers-color-scheme 으로 자동 전환하지 않는다.
+ */
+:root[data-theme='dark'],
+[data-theme='dark'] [data-astryx-theme] {
+  --color-background-body: #111112;
+  --color-background-muted: #1a1a1d;
+  --color-background-card: #1f1f22;
+  --color-text-primary: #f1f4f7;
+  --color-text-secondary: #a4b0bc;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-emphasized: #3a3b40;
+  --color-accent: #5c77ff;
+
+  --devlog-blue: #5c77ff;
+  --devlog-coral: #ff7a83;
+  --devlog-yellow: #ffd470;
+  --devlog-green: #4fcf9b;
+
+  --devlog-blue-strong: #a8b8ff;
+  --devlog-coral-strong: #ffb0b6;
+  --devlog-yellow-strong: #ffe3a3;
+  --devlog-green-strong: #8adfbb;
+
+  --devlog-blue-pale: #1a2140;
+  --devlog-coral-pale: #3a1d22;
+  --devlog-yellow-pale: #33290f;
+  --devlog-green-pale: #153328;
+
+  --devlog-on-fill: #111112;
+  --devlog-disabled: #4a5560; /* 2.5:1 — 비활성은 대비 요구에서 면제된다 */
+  --devlog-line-soft: rgba(255, 255, 255, 0.05);
+  --devlog-track: #2a2a2e;
+  --devlog-solid: #26262a;
+  --devlog-on-solid: #f1f4f7;
+
+  --devlog-hl-main: #2c3a7a;
+  --devlog-hl-alt: #4a3a16;
+  --devlog-hl-ink: #ffffff;
+
+  /* 다크에서는 그림자가 거의 안 보인다. 깊이는 테두리와 면 밝기 단계가 만든다 */
+  --devlog-shadow-a: rgba(0, 0, 0, 0.4);
+  --devlog-shadow-b: rgba(0, 0, 0, 0.55);
+
+  --devlog-press: #ffffff;
+}

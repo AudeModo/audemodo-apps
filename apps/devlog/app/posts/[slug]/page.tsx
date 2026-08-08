@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import { PostDetailPage } from '@/_pages/posts';
+import { PostDetail } from '@/_pages/post-detail';
 
-import { getPostDetail, getPostSlugs } from '@/entities/post';
+import { getPostDetail, getPostSlugs } from '@/entities/post/server';
 
 export const dynamicParams = false;
 
@@ -46,9 +46,14 @@ export async function generateMetadata({
   };
 }
 
-/** 게시글 상세 페이지 */
+/**
+ * 게시글 상세 페이지.
+ *
+ * 목록 페이지와 같은 규칙이다 — 파일을 읽는 일은 라우트가, 조립은 화면 슬라이스가 맡는다.
+ */
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  const post = await getPostDetail(slug);
 
-  return <PostDetailPage slug={slug} />;
+  return <PostDetail post={post} />;
 }

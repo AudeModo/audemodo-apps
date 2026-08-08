@@ -1,13 +1,18 @@
+import type { ReactElement } from 'react';
+
 import { Divider, Heading, Text, VStack } from '@audemodo/design-system';
 
-import { formatPostDate, getPostDetail } from '@/entities/post';
+import type { PostDetail as PostDetailModel } from '@/entities/post';
+import { formatPostDate } from '@/entities/post';
 
 import { MdxContent } from '@/shared/ui';
 
-/** 게시글 상세 페이지 */
-export const PostDetailPage = async ({ slug }: { slug: string }) => {
-  const post = await getPostDetail(slug);
+interface PostDetailProps {
+  post: PostDetailModel;
+}
 
+/** 게시글 상세 페이지 */
+export const PostDetail = ({ post }: PostDetailProps): ReactElement => {
   return (
     <main>
       <article>
@@ -20,7 +25,7 @@ export const PostDetailPage = async ({ slug }: { slug: string }) => {
             </Text>
 
             <time dateTime={post.createdAt}>
-              <Text color="secondary" size="sm">
+              <Text color="secondary" type="supporting">
                 {formatPostDate(post.createdAt)}
               </Text>
             </time>

@@ -1,0 +1,17 @@
+/*
+ * 빈 상태의 틀.
+ *
+ * 세로 여백이 스텝 프롭이 닿는 범위(최대 40) 밖이라 여기서 잡는다.
+ * 아이콘도 삽화도 쓰지 않는다 — 할 말이 문장 하나면 그림은 자리만 차지한다.
+ */
+
+.frame {
+  padding: 88px 32px 96px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .frame {
+    padding: 64px 24px 72px;
+  }
+}
