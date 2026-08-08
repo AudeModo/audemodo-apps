@@ -24,7 +24,3 @@
 .kind[data-kind='학습'] {
   color: var(--devlog-green-strong);
 }
-
-.kind[data-kind='예비'] {
-  color: var(--color-text-secondary);
-}
