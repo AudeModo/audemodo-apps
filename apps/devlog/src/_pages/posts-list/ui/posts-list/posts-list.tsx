@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 
 import type { PostSummary } from '@/entities/post';
 
+import { PostsListSkeleton } from '../posts-list-skeleton/posts-list-skeleton';
 import { PostsListView } from '../posts-list-view/posts-list-view';
 import styles from './posts-list.module.css';
 
@@ -50,7 +51,7 @@ export const PostsList = ({ posts }: PostsListProps): ReactElement => {
           쿼리를 읽는 지점이라 경계가 필요하다. 빌드 시점에는 어떤 필터로 들어올지 알 수
           없으므로 이 안쪽은 브라우저에서 처음 그려진다.
         */}
-        <Suspense fallback={null}>
+        <Suspense fallback={<PostsListSkeleton rowCount={posts.length} />}>
           <PostsListView posts={posts} />
         </Suspense>
       </VStack>

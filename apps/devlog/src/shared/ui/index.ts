@@ -9,3 +9,5 @@ export { MdxContent } from './mdx-content/mdx-content';
 export { SiteFooter } from './site-footer/site-footer';
 
 export { SiteHeader } from './site-header/site-header';
+
+export { Skeleton } from './skeleton/skeleton';
