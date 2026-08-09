@@ -48,8 +48,6 @@
   --devlog-disabled: #a4b0bc;
   --devlog-line-soft: #05365910;
   --devlog-track: #edf0f3;
-  /* 로딩 자리를 훑고 지나가는 빛. 면 위에서만 보여야 하므로 반투명이다 */
-  --devlog-track-sheen: rgba(255, 255, 255, 0.65);
   --devlog-solid: #0a1317;
   --devlog-on-solid: #ffffff;
 
@@ -206,8 +204,6 @@
   --devlog-disabled: #4a5560; /* 2.5:1 — 비활성은 대비 요구에서 면제된다 */
   --devlog-line-soft: rgba(255, 255, 255, 0.05);
   --devlog-track: #2a2a2e;
-  /* 다크에서 같은 세기로 훑으면 면이 하얗게 뜬다 */
-  --devlog-track-sheen: rgba(255, 255, 255, 0.06);
   --devlog-solid: #26262a;
   --devlog-on-solid: #f1f4f7;
 

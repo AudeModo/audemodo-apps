@@ -6,15 +6,12 @@ import { useCallback, useMemo, useState } from 'react';
 import type { PostSummary } from '@/entities/post';
 
 import type { AxisKey, AxisSelection } from '@/shared/config';
-import { AXIS_KEYS, AXIS_VALUES } from '@/shared/config';
+import { AXIS_KEYS, AXIS_VALUES, POSTS_PER_PAGE } from '@/shared/config';
 import type { FacetOption } from '@/shared/lib';
 import { countFacets, findCulpritAxis } from '@/shared/lib';
 
 import { filterPosts } from './filter-posts';
 import { parseAxisSelection } from './parse-axis-selection';
-
-/** 초기 노출 편수이자 증분. 둘을 같은 값으로 둔다 */
-const PAGE = 10;
 
 /** 축 이름은 화면에 쓰는 말이라 어휘와 따로 둔다 */
 const AXIS_LABELS: Record<AxisKey, string> = {
@@ -79,12 +76,12 @@ export const usePostFilters = (posts: PostSummary[]): PostFilters => {
    * 다시 그려지기 때문이다.
    */
   const signature = AXIS_KEYS.map((key) => (selection[key] ?? []).join(',')).join('|');
-  const [visible, setVisible] = useState(PAGE);
+  const [visible, setVisible] = useState(POSTS_PER_PAGE);
   const [lastSignature, setLastSignature] = useState(signature);
 
   if (signature !== lastSignature) {
     setLastSignature(signature);
-    setVisible(PAGE);
+    setVisible(POSTS_PER_PAGE);
   }
 
   const axes = useMemo(
@@ -157,7 +154,7 @@ export const usePostFilters = (posts: PostSummary[]): PostFilters => {
     hasMore: results.length > visible,
     remaining: Math.max(0, results.length - visible),
     showMore: () => {
-      setVisible((count) => count + PAGE);
+      setVisible((count) => count + POSTS_PER_PAGE);
     },
     axes,
     chips,

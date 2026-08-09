@@ -10,6 +10,4 @@ export { formatPostDate } from './lib/format-post-date';
 
 export type { PostDetail, PostSummary } from './model/types';
 
-export { PostRowSkeleton } from './ui/post-row-skeleton/post-row-skeleton';
-
 export { PostRow } from './ui/post-row/post-row';
