@@ -1,0 +1,72 @@
+/*
+ * 프로젝트 목록.
+ *
+ * 필터를 두지 않는다 — 여섯이 한 화면에 다 보이면 필터가 줄여줄 것이 없다.
+ *
+ * 면 교차: 히어로(흰) → 카드(회색) → 타임라인(흰) → 푸터(회색).
+ * 카드 구간이 회색인 이유가 둘이다. 앞이 흰 두 구간이면 흰-흰-회-회로 갈려 교차가
+ * 아니라 두 덩어리가 되고, 흰 카드가 회색 면 위에 떠야 카드가 주인공으로 읽힌다.
+ */
+
+.page {
+  padding-top: 40px;
+}
+
+/*
+ * 컨테이너는 폭과 좌우 여백만 맡는다. 면은 section이 바깥에서 갖는다 —
+ * 면이 컨테이너에서 끊기면 구간이 갈린 것이 아니라 판이 얹힌 것으로 읽힌다.
+ */
+.container {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+/* 카드가 주인공인 구간이라 면이 뒤로 물러난다 */
+.cardsSection {
+  margin-top: 32px;
+  padding-block: 32px 40px;
+  background: var(--color-background-muted);
+}
+
+/*
+ * 열 수를 못 박는다. `auto-fit`을 쓰지 않는 이유는 항목 수가 그 대역에서 나올 수 있는
+ * 모든 열 수로 나눠떨어지지 않으면 고아가 생기기 때문이다.
+ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* 면이 갈리는 것으로 구간이 나뉘므로 경계선을 따로 긋지 않는다 */
+.timeline {
+  padding-block: 52px 80px;
+}
+
+.timelineBody {
+  margin-top: 28px;
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding-top: 32px;
+  }
+
+  .container {
+    padding-inline: 20px;
+  }
+
+  .cardsSection {
+    margin-top: 24px;
+    padding-block: 24px 32px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline {
+    padding-block: 40px 66px;
+  }
+}
