@@ -21,3 +21,7 @@ export {
 } from './theme/theme';
 
 export type { Theme } from './theme/theme';
+
+export { buildTimeline } from './timeline/timeline';
+
+export type { Timeline, TimelineRow, TimelineSpan } from './timeline/timeline';

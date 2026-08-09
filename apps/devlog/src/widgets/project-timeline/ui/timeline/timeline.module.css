@@ -1,0 +1,190 @@
+/*
+ * 타임라인.
+ *
+ * 카드는 중요도 순, 여기는 시작 순이다. 같은 것을 다른 축으로 보면 무엇이 겹쳤고
+ * 무엇이 이어졌는지가 드러난다.
+ *
+ * 막대 색에 의미는 없고 구분이 목적이다. 여섯 칸이 돌아간다.
+ * 색 단계는 「막대 안에 글자가 있는가」가 정한다 — 규칙은 하나이고 답이 분기마다 갈린다.
+ */
+
+.axis {
+  display: grid;
+  gap: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.axisMonth {
+  font-size: var(--font-size-4xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.row {
+  display: grid;
+  gap: 0;
+}
+
+/* 넓은 화면 — 이름이 막대 안에 있으므로 텍스트 단계로 채우고 글자는 on-fill이다 */
+.bar {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--radius-inner);
+  background: var(--bar-strong);
+  color: var(--devlog-on-fill);
+  font-size: var(--font-size-2xs);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 진행 중인 것은 오른쪽 끝이 열려 있다 */
+.bar[data-open='true'] {
+  border-radius: var(--radius-inner) 0 0 var(--radius-inner);
+  background: linear-gradient(
+    90deg,
+    var(--bar-strong) 0%,
+    var(--bar-strong) calc(100% - 56px),
+    transparent 100%
+  );
+}
+
+/* 여섯 칸 순환. 다섯째·여섯째는 이미 텍스트 등급이라 두 분기가 같은 값을 쓴다 */
+.row[data-tone='0'] {
+  --bar-strong: var(--devlog-blue-strong);
+  --bar-base: var(--devlog-blue);
+}
+
+.row[data-tone='1'] {
+  --bar-strong: var(--devlog-coral-strong);
+  --bar-base: var(--devlog-coral);
+}
+
+.row[data-tone='2'] {
+  --bar-strong: var(--devlog-yellow-strong);
+  --bar-base: var(--devlog-yellow);
+}
+
+.row[data-tone='3'] {
+  --bar-strong: var(--devlog-green-strong);
+  --bar-base: var(--devlog-green);
+}
+
+.row[data-tone='4'] {
+  --bar-strong: var(--color-text-primary);
+  --bar-base: var(--color-text-primary);
+}
+
+.row[data-tone='5'] {
+  --bar-strong: var(--color-text-secondary);
+  --bar-base: var(--color-text-secondary);
+}
+
+/* ── 좁은 화면 ── 이름이 왼쪽 열로 나가고 막대에는 글자가 없다 */
+
+.mobile {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobileRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileName {
+  flex: none;
+  width: 84px;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileTrack {
+  display: grid;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 0;
+  background: var(--devlog-track);
+  border-radius: var(--radius-full);
+}
+
+/* 글자가 올라가지 않는 면이라 기본색이다 */
+.mobileBar {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--bar-base);
+}
+
+.mobileBar[data-open='true'] {
+  border-radius: var(--radius-full) 0 0 var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--bar-base) 0%,
+    var(--bar-base) calc(100% - 20px),
+    transparent 100%
+  );
+}
+
+.mobilePeriod {
+  flex: none;
+  width: 46px;
+  text-align: right;
+  font-size: var(--font-size-4xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .axis,
+  .rows {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+  }
+}
+
+/* ── 범례 ── */
+
+.legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--devlog-line-soft);
+  font-size: var(--font-size-4xs);
+  color: var(--color-text-secondary);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.legendBar {
+  width: 26px;
+  height: 8px;
+  border-radius: var(--radius-none) 0 0 var(--radius-none);
+  background: linear-gradient(90deg, var(--color-text-secondary) 0%, transparent 100%);
+}

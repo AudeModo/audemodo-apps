@@ -1,0 +1,42 @@
+/*
+ * 프로젝트 목록.
+ *
+ * 필터를 두지 않는다 — 여섯이 한 화면에 다 보이면 필터가 줄여줄 것이 없다.
+ */
+
+.page {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding: 40px 32px 80px;
+}
+
+/*
+ * 열 수를 못 박는다. `auto-fit`을 쓰지 않는 이유는 항목 수가 그 대역에서 나올 수 있는
+ * 모든 열 수로 나눠떨어지지 않으면 고아가 생기기 때문이다.
+ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.timeline {
+  margin-top: 64px;
+  padding-top: 36px;
+  border-top: 1px solid var(--color-border);
+}
+
+.timelineBody {
+  margin-top: 28px;
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 32px 20px 66px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,27 @@
+/*
+ * 상태 점.
+ *
+ * 이 카드에서 색이 쓰이는 유일한 자리다 — 「색은 점에만, 라벨은 본문색」.
+ * 글자가 올라가지 않는 면이라 기본색을 쓴다.
+ */
+
+.dot {
+  display: inline-block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+}
+
+.dot[data-tone='active'] {
+  background: var(--devlog-green);
+}
+
+.dot[data-tone='released'] {
+  background: var(--devlog-blue);
+}
+
+/* 멈춘 것이지 못 쓰는 것이 아니다. `disabled`가 아니라 `secondary`를 쓴다 */
+.dot[data-tone='paused'] {
+  background: var(--color-text-secondary);
+}
