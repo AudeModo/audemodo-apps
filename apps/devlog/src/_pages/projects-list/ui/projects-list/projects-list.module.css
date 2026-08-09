@@ -5,9 +5,18 @@
  */
 
 .page {
+  padding-top: 40px;
+}
+
+/*
+ * 면이 갈리는 구간이 있어 컨테이너를 바깥 여백에서 떼어냈다.
+ * 회색 면은 화면 끝까지 가고 글자만 1080 안에 머문다 — 면이 컨테이너에서 끊기면
+ * 구간이 갈린 것이 아니라 판이 얹힌 것으로 읽힌다.
+ */
+.container {
   max-width: 1080px;
   margin-inline: auto;
-  padding: 40px 32px 80px;
+  padding-inline: 32px;
 }
 
 /*
@@ -21,9 +30,14 @@
   margin-top: 32px;
 }
 
+/*
+ * 카드 그리드와 타임라인은 성격이 다른 구간이라 면을 갈라 읽기를 돕는다.
+ * 흰 → 회색으로 넘어가는 자리이고, 이 화면이 쓰는 배경색은 둘뿐이다.
+ */
 .timeline {
   margin-top: 64px;
-  padding-top: 36px;
+  padding-block: 36px 80px;
+  background: var(--color-background-muted);
   border-top: 1px solid var(--color-border);
 }
 
@@ -33,10 +47,18 @@
 
 @media (max-width: 767px) {
   .page {
-    padding: 32px 20px 66px;
+    padding-top: 32px;
+  }
+
+  .container {
+    padding-inline: 20px;
   }
 
   .cards {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .timeline {
+    padding-block: 32px 66px;
   }
 }

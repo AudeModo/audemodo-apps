@@ -35,57 +35,62 @@ export const ProjectsList = ({
 
   return (
     <main className={styles.page}>
-      <VStack gap={2}>
-        {/* 래퍼의 vAlign에는 baseline이 없다 */}
-        <HStack gap={3} style={{ alignItems: 'baseline' }}>
-          <Heading level={1} style={{ letterSpacing: 'var(--devlog-tracking-title)' }}>
-            프로젝트
-          </Heading>
-
-          <Text color="secondary" hasTabularNumbers type="label">
-            {projects.length}
-          </Text>
-        </HStack>
-
-        <VStack maxWidth={671}>
-          <Text as="p" color="secondary">
-            만든 것들. 같은 목록을 아래 타임라인에서 시작 순으로 다시 본다.
-          </Text>
-        </VStack>
-      </VStack>
-
-      <div className={styles.cards}>
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            postCount={posts.filter((post) => post.project === project.name).length}
-            project={project}
-          />
-        ))}
-      </div>
-
-      <section className={styles.timeline}>
+      <div className={styles.container}>
         <VStack gap={2}>
+          {/* 래퍼의 vAlign에는 baseline이 없다 */}
           <HStack gap={3} style={{ alignItems: 'baseline' }}>
-            <Heading level={2} style={{ letterSpacing: 'var(--devlog-tracking-title)' }}>
-              언제 무엇을 만들었나
+            <Heading level={1} style={{ letterSpacing: 'var(--devlog-tracking-title)' }}>
+              프로젝트
             </Heading>
 
-            <Text color="secondary" type="label">
-              시작 순
+            <Text color="secondary" hasTabularNumbers type="label">
+              {projects.length}
             </Text>
           </HStack>
 
           <VStack maxWidth={671}>
             <Text as="p" color="secondary">
-              위 카드는 중요도 순이고 여기는 시작 순이다. 같은 것을 다른 축으로 보면 무엇이 겹쳤고
-              무엇이 이어졌는지가 드러난다.
+              만든 것들. 같은 목록을 아래 타임라인에서 시작 순으로 다시 본다.
             </Text>
           </VStack>
         </VStack>
 
-        <div className={styles.timelineBody}>
-          <Timeline currentMonth={currentMonth} projects={byStart} />
+        <div className={styles.cards}>
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              postCount={posts.filter((post) => post.project === project.name).length}
+              project={project}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* 회색 면은 화면 끝까지 가고 글자만 컨테이너 안에 머문다 */}
+      <section className={styles.timeline}>
+        <div className={styles.container}>
+          <VStack gap={2}>
+            <HStack gap={3} style={{ alignItems: 'baseline' }}>
+              <Heading level={2} style={{ letterSpacing: 'var(--devlog-tracking-title)' }}>
+                언제 무엇을 만들었나
+              </Heading>
+
+              <Text color="secondary" type="label">
+                시작 순
+              </Text>
+            </HStack>
+
+            <VStack maxWidth={671}>
+              <Text as="p" color="secondary">
+                위 카드는 중요도 순이고 여기는 시작 순이다. 같은 것을 다른 축으로 보면 무엇이 겹쳤고
+                무엇이 이어졌는지가 드러난다.
+              </Text>
+            </VStack>
+          </VStack>
+
+          <div className={styles.timelineBody}>
+            <Timeline currentMonth={currentMonth} projects={byStart} />
+          </div>
         </div>
       </section>
     </main>
