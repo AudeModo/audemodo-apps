@@ -54,19 +54,23 @@ export const ProjectsList = ({
             </Text>
           </VStack>
         </VStack>
-
-        <div className={styles.cards}>
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              postCount={posts.filter((post) => post.project === project.name).length}
-              project={project}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* 회색 면은 화면 끝까지 가고 글자만 컨테이너 안에 머문다 */}
+      {/* 흰 카드가 회색 면 위에 떠야 카드가 주인공으로 읽힌다 */}
+      <section className={styles.cardsSection}>
+        <div className={styles.container}>
+          <div className={styles.cards}>
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                postCount={posts.filter((post) => post.project === project.name).length}
+                project={project}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className={styles.timeline}>
         <div className={styles.container}>
           <VStack gap={2}>

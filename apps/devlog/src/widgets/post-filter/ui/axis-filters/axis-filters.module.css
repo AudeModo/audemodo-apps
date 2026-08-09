@@ -119,7 +119,7 @@
 
 .option:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
+    0 0 0 2px var(--color-background-card),
     0 0 0 4px var(--color-accent);
 }
 
@@ -190,7 +190,7 @@
 
 .axisClear:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
+    0 0 0 2px var(--color-background-card),
     0 0 0 4px var(--color-accent);
 }
 
@@ -266,7 +266,7 @@
 
 .apply:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
+    0 0 0 2px var(--color-background-card),
     0 0 0 4px var(--color-text-primary);
 }
 
@@ -299,7 +299,7 @@
 
 .iconButton:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
+    0 0 0 2px var(--color-background-card),
     0 0 0 4px var(--color-accent);
 }
 
@@ -317,7 +317,7 @@
 
 .textButton:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
+    0 0 0 2px var(--color-background-card),
     0 0 0 4px var(--color-accent);
 }
 
