@@ -40,10 +40,6 @@ export const SiteFooter = (): ReactElement => {
               <IconExternalLink aria-hidden size={16} />
             </a>
 
-            <a className={styles.link} href={`mailto:${SITE.email}`}>
-              메일 보내기
-            </a>
-
             <a className={styles.link} href={SITE.feedPath}>
               글 구독
             </a>

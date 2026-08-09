@@ -2,7 +2,7 @@
 
 import type { ReactElement } from 'react';
 
-import { IconBrandGithub, IconMail, IconMenu2, IconX } from '@tabler/icons-react';
+import { IconBrandGithub, IconMenu2, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -67,14 +67,6 @@ export const SiteHeader = (): ReactElement => {
             <IconBrandGithub aria-hidden size={20} />
           </a>
 
-          <a
-            aria-label="메일 보내기"
-            className={`${styles.iconLink} ${styles.desktopOnly}`}
-            href={`mailto:${SITE.email}`}
-          >
-            <IconMail aria-hidden size={20} />
-          </a>
-
           <button
             aria-expanded={isPanelOpen}
             aria-label={isPanelOpen ? '메뉴 닫기' : '메뉴 열기'}
@@ -110,11 +102,6 @@ export const SiteHeader = (): ReactElement => {
           >
             GitHub
             <IconBrandGithub aria-hidden size={16} />
-          </a>
-
-          <a className={styles.panelExternal} href={`mailto:${SITE.email}`}>
-            메일 보내기
-            <IconMail aria-hidden size={16} />
           </a>
         </div>
       )}
