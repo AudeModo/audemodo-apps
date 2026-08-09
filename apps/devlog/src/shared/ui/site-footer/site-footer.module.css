@@ -1,0 +1,82 @@
+/*
+ * 푸터. 면 교차의 마지막 칸이라 `muted`를 쓴다 —
+ * 흰 → 회색으로 번갈아 온 리듬이 여기서 닫힌다.
+ */
+
+.footer {
+  background: var(--color-background-muted);
+  border-top: 1px solid var(--color-border);
+}
+
+.inner {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding: 36px 32px 48px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.brand {
+  font-family: var(--font-family-heading);
+  font-weight: 500;
+  font-size: var(--font-size-xl);
+  letter-spacing: var(--devlog-tracking-hero);
+  color: var(--color-text-primary);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-left: auto;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--devlog-font-size-control);
+  color: var(--color-accent);
+  text-decoration: none;
+  border-radius: var(--radius-inner);
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.link:hover {
+  color: var(--devlog-blue-strong);
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-muted),
+    0 0 0 4px var(--color-accent);
+}
+
+.bottom {
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 32px 20px 40px;
+  }
+
+  .links {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition-duration: 0s;
+  }
+}

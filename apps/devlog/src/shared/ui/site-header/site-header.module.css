@@ -1,0 +1,190 @@
+/*
+ * 네비. 아홉 화면 전부에 있고 스크롤을 따라온다.
+ *
+ * 면은 `--color-background-body`다. 시안 마크업은 카드 면을 쓰지만 그러면 다크에서
+ * 네비만 본문보다 밝게 떠 페이지 위에 얹힌 판처럼 읽힌다. 공용 문서 쪽을 따른다.
+ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--color-background-body);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  max-width: 1080px;
+  height: 60px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+.logo {
+  font-family: var(--font-family-heading);
+  font-weight: 500;
+  font-size: var(--font-size-xl);
+  letter-spacing: var(--devlog-tracking-hero);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-inner);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.link {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding-bottom: 2px;
+  /* 현재 화면 표시는 아래 테두리로 하되, 평소에도 같은 자리를 비워 글자가 밀리지 않게 한다 */
+  border-bottom: 2px solid transparent;
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.link:hover {
+  color: var(--color-text-primary);
+}
+
+/* 「지금 여기」는 색만으로 말하지 않는다. 색을 못 보는 사람에게도 밑줄이 남는다 */
+.link[aria-current='page'] {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  color: var(--color-text-secondary);
+}
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--radius-element);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--devlog-ease),
+    color var(--duration-fast) var(--devlog-ease);
+}
+
+.iconLink:hover {
+  background: var(--color-background-muted);
+  color: var(--color-text-primary);
+}
+
+.logo:focus-visible,
+.link:focus-visible,
+.iconLink:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/* ── 좁은 화면 ── */
+
+.menuButton {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .bar {
+    height: 56px;
+    padding-inline: 20px;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: var(--font-size-lg);
+  }
+
+  /* 링크 넷은 패널로 옮긴다. 56 높이에 넷을 밀어넣으면 히트 영역이 44 밑으로 내려간다 */
+  .nav,
+  .actions .desktopOnly {
+    display: none;
+  }
+
+  .actions {
+    gap: 0;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .iconLink {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/*
+ * 좁은 화면의 메뉴 패널.
+ *
+ * 시안에 이 패널의 안쪽은 그려져 있지 않다. 네비가 가진 것(링크 넷 + 바깥 링크 둘)을
+ * 그대로 세로로 편 형태로 둔다.
+ */
+.panel {
+  position: fixed;
+  inset: 56px 0 0;
+  z-index: 39;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 20px 24px;
+  background: var(--color-background-body);
+  overflow: auto;
+}
+
+.panelLink {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--devlog-line-soft);
+}
+
+.panelLink[aria-current='page'] {
+  color: var(--color-text-primary);
+}
+
+.panelLink:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.panelExternal {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 44px;
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .iconLink {
+    transition-duration: 0s;
+  }
+}

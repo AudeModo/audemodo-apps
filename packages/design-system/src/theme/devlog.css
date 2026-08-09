@@ -58,6 +58,12 @@
   --devlog-shadow-a: rgba(5, 54, 89, 0.05);
   --devlog-shadow-b: rgba(5, 54, 89, 0.1);
 
+  /*
+   * 떠 있는 버튼의 그림자. 벤더 단계(--shadow-low|med|high)에 대응이 없다 —
+   * 아래쪽 번짐이 강조색으로 물들어야 본문 위에 뜬 것으로 읽힌다.
+   */
+  --devlog-shadow-float: 0 2px 4px rgba(5, 54, 89, 0.08), 0 12px 28px rgba(54, 85, 255, 0.24);
+
   /* 채운 버튼의 호버. 검정 채움이 한 단계 더 눌린 것으로 읽혀야 한다 */
   --devlog-press: #000000;
 
@@ -208,6 +214,7 @@
   /* 다크에서는 그림자가 거의 안 보인다. 깊이는 테두리와 면 밝기 단계가 만든다 */
   --devlog-shadow-a: rgba(0, 0, 0, 0.4);
   --devlog-shadow-b: rgba(0, 0, 0, 0.55);
+  --devlog-shadow-float: 0 2px 4px rgba(0, 0, 0, 0.5), 0 12px 28px rgba(92, 119, 255, 0.3);
 
   --devlog-press: #ffffff;
 }
