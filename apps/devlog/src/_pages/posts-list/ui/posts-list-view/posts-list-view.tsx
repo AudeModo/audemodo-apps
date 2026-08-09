@@ -7,11 +7,10 @@ import { HStack, VStack } from '@audemodo/design-system';
 import { ActiveFilterStrip, AxisFilters, usePostFilters } from '@/widgets/post-filter';
 
 import type { PostSummary } from '@/entities/post';
-import { PostRow } from '@/entities/post';
 
 import { ActionButton, EmptyState } from '@/shared/ui';
 
-import styles from './posts-list-view.module.css';
+import { PostColumn } from '../post-column/post-column';
 
 interface PostsListViewProps {
   /** 빌드 시점에 읽어 넘어온 전체 글 */
@@ -71,11 +70,7 @@ export const PostsListView = ({ posts }: PostsListViewProps): ReactElement => {
         />
       ) : (
         <>
-          <div className={styles.list}>
-            {shown.map((post) => (
-              <PostRow key={post.slug} post={post} />
-            ))}
-          </div>
+          <PostColumn posts={shown} />
 
           {hasMore && (
             <HStack justify="center">

@@ -5,6 +5,9 @@ import { Suspense } from 'react';
 
 import type { PostSummary } from '@/entities/post';
 
+import { POSTS_PER_PAGE } from '@/shared/config';
+
+import { PostColumn } from '../post-column/post-column';
 import { PostsListView } from '../posts-list-view/posts-list-view';
 import styles from './posts-list.module.css';
 
@@ -49,8 +52,15 @@ export const PostsList = ({ posts }: PostsListProps): ReactElement => {
         {/*
           쿼리를 읽는 지점이라 경계가 필요하다. 빌드 시점에는 어떤 필터로 들어올지 알 수
           없으므로 이 안쪽은 브라우저에서 처음 그려진다.
+
+          기다리는 동안 자리표시자 대신 거르지 않은 실제 목록을 둔다. 정적 사이트라
+          글은 이미 다 알려져 있고, 아는 것을 감추고 회색 상자를 보여줄 이유가 없다 —
+          크롤러와 자바스크립트를 끈 방문자에게는 그 상자가 이 페이지의 전부가 된다.
+
+          대가는 URL에 필터가 있을 때 전체가 잠깐 보였다 걸러지는 것이다. 파라미터 없이
+          들어오는 흔한 경로에는 깜빡임이 없다.
         */}
-        <Suspense fallback={null}>
+        <Suspense fallback={<PostColumn posts={posts.slice(0, POSTS_PER_PAGE)} />}>
           <PostsListView posts={posts} />
         </Suspense>
       </VStack>
