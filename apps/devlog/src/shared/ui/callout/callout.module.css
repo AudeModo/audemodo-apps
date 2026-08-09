@@ -1,0 +1,76 @@
+/*
+ * 콜아웃.
+ *
+ * 면 규칙 그대로다 — 글자가 없는 면(좌측 바)은 기본색, 글리프가 올라가는 면(원)은
+ * 텍스트 단계에 `on-fill` 글자다. 조건이 바뀌는 것이 아니라 답만 다크에서 뒤집힌다.
+ *
+ * 네 종을 다 그릴 수 있게 두고 화면이 필요한 것만 쓴다.
+ */
+
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--devlog-radius-callout);
+  border-left: 4px solid var(--callout-bar);
+  background: var(--callout-surface);
+  font-size: var(--devlog-font-size-callout);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.callout[data-kind='info'] {
+  --callout-bar: var(--devlog-blue);
+  --callout-surface: var(--devlog-blue-pale);
+  --callout-glyph: var(--devlog-blue-strong);
+}
+
+.callout[data-kind='warn'] {
+  --callout-bar: var(--devlog-yellow);
+  --callout-surface: var(--devlog-yellow-pale);
+  --callout-glyph: var(--devlog-yellow-strong);
+}
+
+.callout[data-kind='done'] {
+  --callout-bar: var(--devlog-green);
+  --callout-surface: var(--devlog-green-pale);
+  --callout-glyph: var(--devlog-green-strong);
+}
+
+.callout[data-kind='error'] {
+  --callout-bar: var(--devlog-coral);
+  --callout-surface: var(--devlog-coral-pale);
+  --callout-glyph: var(--devlog-coral-strong);
+}
+
+/* 글리프가 올라가는 면이라 텍스트 단계로 채운다 */
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 25px;
+  height: 25px;
+  border-radius: var(--radius-full);
+  background: var(--callout-glyph);
+  color: var(--devlog-on-fill);
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+/*
+ * 안쪽 문단은 곁말 크기를 따른다.
+ *
+ * 본문 문단은 읽기 단계(17 / 1.75)로 나오는데, 그 크기가 여기까지 들어오면
+ * 곁가지가 본문과 같은 목소리가 된다.
+ */
+.body p {
+  font-size: inherit;
+  line-height: inherit;
+}

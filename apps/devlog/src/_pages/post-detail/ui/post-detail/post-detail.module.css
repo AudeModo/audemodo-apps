@@ -1,0 +1,171 @@
+/*
+ * 읽기 화면. 문서 톤.
+ *
+ * 경계는 1144다. 본문 671을 지키려면 목차 239 + 간격 66 + 여백 64 = 1040이 필요하다.
+ * 그 아래에서는 목차가 본문을 밀어내므로 목차가 형태를 바꾼다.
+ * 새 브레이크포인트를 만들지 않고 이미 있는 값을 쓴다.
+ *
+ * 1144 경계에서 본문이 가로로 한 번 움직인다. 없애려면 「본문 1~8열」 규칙을 깨야 해서
+ * 그대로 둔다.
+ */
+
+.page {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding: 40px 32px 96px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 711px) minmax(0, 239px);
+  gap: 66px;
+}
+
+.body {
+  /* 본문 671 + 들여쓰기 40 */
+  padding-left: 40px;
+  min-width: 0;
+}
+
+@media (max-width: 1143px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .body {
+    max-width: 671px;
+    margin-inline: auto;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .page {
+    padding: 24px 20px 66px;
+  }
+}
+
+/* ── 메타 한 줄 ── */
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}
+
+.metaLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-inner);
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.metaLink:hover {
+  color: var(--color-text-primary);
+}
+
+.metaLink:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/*
+ * 호버가 없는 기기에서는 항상 밑줄을 붙인다.
+ * 색만으로는 링크임을 알 수 없고, 이 줄이 읽기 화면에서 탐색으로 돌아가는 유일한 길이다.
+ */
+@media (hover: none) {
+  .metaLink {
+    text-decoration: underline;
+  }
+}
+
+.separator {
+  color: var(--devlog-disabled);
+}
+
+/* ── 꼬리 ── */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-element);
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color var(--duration-fast) var(--devlog-ease);
+}
+
+.tag:hover {
+  border-color: var(--color-text-primary);
+}
+
+.tag:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.neighbors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 767px) {
+  .neighbors {
+    grid-template-columns: 1fr;
+  }
+}
+
+.neighbor {
+  display: block;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--devlog-ease);
+}
+
+.neighbor:hover {
+  border-color: var(--color-text-primary);
+}
+
+.neighbor:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+/* 다음 글이 없을 때 이전 글이 가운데로 가지 않도록 자리를 지킨다 */
+.neighborEnd {
+  grid-column: 2;
+}
+
+@media (max-width: 767px) {
+  .neighborEnd {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metaLink,
+  .tag,
+  .neighbor {
+    transition-duration: 0s;
+  }
+}

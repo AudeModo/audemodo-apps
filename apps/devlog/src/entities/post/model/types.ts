@@ -35,6 +35,10 @@ export interface PostFrontmatter {
   tag: string[];
   /** 없으면 목록에서 자리 자체가 사라진다. 폴백 이미지를 만들지 않는다. */
   thumbnail?: PostThumbnail;
+  /** 묶어 읽히는 연작의 이름 */
+  series?: string;
+  /** 연작 안의 순서. 1부터 */
+  seriesOrder?: number;
 }
 
 /** 게시글 요약 ─ frontmatter에 slug를 더한 것. */

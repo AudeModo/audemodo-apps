@@ -1,0 +1,97 @@
+/*
+ * devlog 브랜드 층 — @audemodo/design-system 안에만 둔다.
+ *
+ * 래퍼가 벤더 위에 얹는 유일한 층이다.
+ * 앱은 이 이름만 보고, 벤더 이름은 보지 않는다.
+ *
+ * 래퍼는 벤더 테마 토큰을 싣고 온다.
+ * 겹치는 것은 벤더 이름을 그대로 쓰고(--color-text-primary 등),
+ * 브랜드 고유값만 --devlog-* 로 추가한다. 두 갈래를 섞지 않는다.
+ */
+
+:root {
+  /* 벤더 토큰에 브랜드 값을 얹는다 — 이름은 벤더 것을 유지 */
+  --color-background-body: #FFFFFF;
+  --color-background-muted: #F1F4F7;
+  --color-background-card: #FFFFFF;
+  --color-text-primary: #0A1317;
+  --color-text-secondary: #4E606F;
+  --color-border: #05365919;
+  --color-border-emphasized: #CCD3DB;
+  --color-accent: #3655FF;
+
+  /* 브랜드 고유 — 벤더에 대응이 없는 것 */
+  --devlog-blue: #3655FF;
+  --devlog-coral: #F65660;
+  --devlog-yellow: #FFC940;
+  --devlog-green: #37A878;
+
+  /* 글자·글리프가 올라가는 면 (흰 글자 7:1 이상) */
+  --devlog-blue-strong: #1B2E99;
+  --devlog-coral-strong: #A3282F;
+  --devlog-yellow-strong: #6B4E00;
+  --devlog-green-strong: #1B5E42;
+
+  --devlog-blue-pale: #E6EAFF;
+  --devlog-coral-pale: #FFE6E8;
+  --devlog-yellow-pale: #FFF4D6;
+  --devlog-green-pale: #E3F5EC;
+
+  --devlog-on-fill: #FFFFFF;      /* 채운 면 위 글자 */
+  --devlog-disabled: #A4B0BC;     /* 실제 비활성 전용 */
+  --devlog-line-soft: #05365910;
+  --devlog-track: #EDF0F3;
+  --devlog-solid: #0A1317;        /* 어두운 채로 남아야 하는 면 (잔디) */
+  --devlog-on-solid: #FFFFFF;
+
+  --devlog-hl-main: #C9D3FF;
+  --devlog-hl-alt: #FFE3AC;
+  --devlog-hl-ink: #0A1317;       /* 형광펜 글자색은 항상 명시한다 */
+
+  --devlog-ease: cubic-bezier(0.24, 1, 0.4, 1);
+}
+
+/*
+ * 다크 — 구조가 뒤집힌다.
+ *   라이트: 옅은 면(밝음) → 기본색 → 텍스트 단계(어두움)
+ *   다크:   옅은 면(어두움) → 기본색 → 밝은 단계(밝음)
+ *
+ * 면 규칙 자체는 안 바뀐다. "글자·글리프가 올라가는 면"이라는 조건이 그대로이고
+ * 그 답이 다크에서는 밝은 쪽일 뿐이다. 노랑만 예외인 규칙은 없다.
+ */
+:root[data-theme='dark'] {
+  --color-background-body: #111112;
+  --color-background-muted: #1A1A1D;
+  --color-background-card: #1F1F22;
+  --color-text-primary: #F1F4F7;
+  --color-text-secondary: #A4B0BC;
+  --color-border: rgba(255, 255, 255, 0.09);
+  --color-border-emphasized: #3A3B40;
+  --color-accent: #5C77FF;
+
+  --devlog-blue: #5C77FF;
+  --devlog-coral: #FF7A83;
+  --devlog-yellow: #FFD470;
+  --devlog-green: #4FCF9B;
+
+  --devlog-blue-strong: #A8B8FF;
+  --devlog-coral-strong: #FFB0B6;
+  --devlog-yellow-strong: #FFE3A3;
+  --devlog-green-strong: #8ADFBB;
+
+  --devlog-blue-pale: #1A2140;
+  --devlog-coral-pale: #3A1D22;
+  --devlog-yellow-pale: #33290F;
+  --devlog-green-pale: #153328;
+
+  --devlog-on-fill: #111112;
+  --devlog-disabled: #4A5560;     /* 2.5:1 — 비활성은 대비 요구에서 면제된다 */
+  --devlog-line-soft: rgba(255, 255, 255, 0.05);
+  --devlog-track: #2A2A2E;
+  --devlog-solid: #26262A;        /* 잔디는 밝아지면 잔디로 안 읽힌다 */
+  --devlog-on-solid: #F1F4F7;
+
+  --devlog-hl-main: #2C3A7A;
+  --devlog-hl-alt: #4A3A16;
+  --devlog-hl-ink: #FFFFFF;
+}

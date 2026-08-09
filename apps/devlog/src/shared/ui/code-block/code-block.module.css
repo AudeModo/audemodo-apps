@@ -1,0 +1,95 @@
+/*
+ * 코드블록.
+ *
+ * 면을 검정으로 박지 않는다 — 다크에서 페이지 배경과 같아져 코드가 면을 잃는다.
+ * 토큰(`--devlog-code-bg`)이 두 대역에서 각각 한 단계 다른 값을 준다.
+ *
+ * 신택스 색은 하이라이터 테마가 정한다. 여기서 만들지 않는다.
+ */
+
+.block {
+  margin: 0;
+  position: relative;
+  border-radius: var(--devlog-radius-callout);
+  background: var(--devlog-code-bg);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--devlog-code-head);
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}
+
+.name {
+  font-family: var(--font-family-code);
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 4px 8px;
+  border: none;
+  border-radius: var(--radius-inner);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.copy:hover {
+  color: var(--color-text-primary);
+}
+
+.copy:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--devlog-code-head),
+    0 0 0 4px var(--color-accent);
+}
+
+/* 헤더가 없으면 복사 버튼이 코드 위에 뜬다 */
+.floatingCopy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  background: var(--devlog-code-head);
+}
+
+.pre {
+  margin: 0;
+  padding: 14px 0;
+  overflow-x: auto;
+  font-family: var(--font-family-code);
+  font-size: var(--devlog-font-size-callout);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.line {
+  display: block;
+  padding: 0 16px;
+  /* 강조 줄과 아닌 줄의 글자 시작점이 같아야 한다 */
+  border-left: 2px solid transparent;
+}
+
+/* 강조는 면 + 좌측 2px 기본색. 글자가 올라가는 면이 아니라 옅게 깐다 */
+.line[data-mark='true'] {
+  background: var(--devlog-code-mark);
+  border-left-color: var(--devlog-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy {
+    transition-duration: 0s;
+  }
+}

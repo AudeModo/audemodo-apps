@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import { PostDetail } from '@/_pages/post-detail';
 
-import { getPostDetail, getPostSlugs } from '@/entities/post/server';
+import { getPostDetail, getPostSlugs, getPostSummaries } from '@/entities/post/server';
 
 export const dynamicParams = false;
 
@@ -53,7 +53,7 @@ export async function generateMetadata({
  */
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await getPostDetail(slug);
+  const [post, posts] = await Promise.all([getPostDetail(slug), getPostSummaries()]);
 
-  return <PostDetail post={post} />;
+  return <PostDetail post={post} posts={posts} />;
 }
