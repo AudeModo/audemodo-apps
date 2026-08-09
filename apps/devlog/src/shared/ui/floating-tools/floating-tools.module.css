@@ -1,0 +1,139 @@
+/*
+ * 플로팅 도구.
+ *
+ * 본문 위에 겹치는 것은 플로팅의 정의다. 스크롤하면 가려진 것이 빠져나오므로 손실이
+ * 아니고, 스크롤로 못 푸는 자리(페이지 끝)는 화면마다 하단 여백으로 해결한다.
+ *
+ * 여백은 콘텐츠 여백과 같은 값이다(32 / 20). 정렬선과 어긋나면 화면 밖에 뜬 것처럼 보인다.
+ */
+
+/*
+ * column-reverse인 이유: 여는 버튼이 마크업에서 먼저 와야 키보드가 버튼 → 항목 순서로
+ * 지나간다. 화면에서는 항목이 버튼 위에 쌓여야 하므로 방향만 뒤집는다.
+ */
+.root {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 35;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/*
+ * 펼침을 CSS가 맡는다.
+ *
+ * 마우스로 얹으면 · 키보드로 들어오면 · 눌러서 열면 셋이 같은 결과를 내야 하는데,
+ * 그중 「얹으면」만 자바스크립트로 다루면 컨테이너가 마우스 전용 손잡이가 된다.
+ * visibility로 감추므로 접힌 동안에는 탭 순서에도 들어가지 않는다.
+ */
+.tools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--devlog-ease);
+}
+
+.root:hover .tools,
+.root:focus-within .tools,
+.root[data-open='true'] .tools {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 글리프도 같은 조건으로 갈린다. 상태가 둘로 갈리지 않게 조건을 공유한다 */
+.glyphOpen {
+  display: none;
+}
+
+.root:hover .glyphOpen,
+.root:focus-within .glyphOpen,
+.root[data-open='true'] .glyphOpen {
+  display: inline-flex;
+}
+
+.root:hover .glyphClosed,
+.root:focus-within .glyphClosed,
+.root[data-open='true'] .glyphClosed {
+  display: none;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-background-card);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--devlog-font-size-control);
+  white-space: nowrap;
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--shadow-med);
+  transition: border-color var(--duration-fast) var(--devlog-ease);
+}
+
+.pill:hover {
+  border-color: var(--color-text-primary);
+}
+
+.fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--devlog-blue), var(--devlog-coral));
+  color: var(--devlog-on-fill);
+  cursor: pointer;
+  outline: none;
+  box-shadow: var(--devlog-shadow-float);
+  transition: transform var(--duration-fast-max) var(--devlog-ease);
+}
+
+.fab:hover {
+  transform: translateY(-2px);
+}
+
+.fab:active {
+  transform: scale(0.98);
+}
+
+/* 호버와 포커스는 다른 표현이어야 한다 */
+.pill:focus-visible,
+.fab:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+@media (max-width: 767px) {
+  .root {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tools,
+  .pill,
+  .fab {
+    transition-duration: 0s;
+  }
+
+  .fab:hover,
+  .fab:active {
+    transform: none;
+  }
+}
