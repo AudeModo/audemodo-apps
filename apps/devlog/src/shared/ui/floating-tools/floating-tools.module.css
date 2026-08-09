@@ -110,12 +110,27 @@
   transform: scale(0.98);
 }
 
-/* 호버와 포커스는 다른 표현이어야 한다 */
-.pill:focus-visible,
+/*
+ * 호버와 포커스는 다른 표현이어야 한다.
+ *
+ * 다른 곳과 달리 링에 2px 간격을 두지 않는다. 간격의 목적은 링이 요소 테두리에 붙어
+ * 안 보이는 것을 막는 것인데, 이 둘은 이미 그림자로 페이지에서 떠 있어 배경과 섞이지
+ * 않는다. 떠 있는 요소에는 「놓인 배경색」자체가 없어 그 규칙을 적용할 수 없고,
+ * 간격 없이 링만 두면 아래가 무엇이든 상관없어진다.
+ *
+ * 원래 그림자를 함께 적는다 — box-shadow는 통째로 바뀌므로 링만 적으면 포커스를 받는
+ * 순간 떠 있던 것이 페이지에 내려앉는다.
+ */
+.pill:focus-visible {
+  box-shadow:
+    0 0 0 2px var(--color-accent),
+    var(--shadow-med);
+}
+
 .fab:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-background-body),
-    0 0 0 4px var(--color-accent);
+    0 0 0 2px var(--color-accent),
+    var(--devlog-shadow-float);
 }
 
 @media (max-width: 767px) {
