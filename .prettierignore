@@ -13,3 +13,7 @@ ds-bundle
 # 도구가 관리하는 블록(<!-- ASTRYX:START -->)이 들어 있다.
 # Prettier가 표 정렬을 무너뜨리고 `var(--color-*|...)`의 `*`를 강조 문법으로 먹는다.
 packages/design-system/AGENTS.md
+
+# 디자인 핸드오프 원본 — 우리가 고치는 파일이 아니다.
+# reference/ 는 "형태를 보여주는" 참조 구현이라 그대로 컴파일되지도 않는다.
+docs/handoff

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.31.0/dist/tabler-icons.min.css">
+<style>
+:root{
+--bg:#FFFFFF; --surf:#F1F4F7; --card:#FFFFFF; --raised:#F1F4F7;
+--ink:#0A1317; --ink-2:#4E606F; --ink-3:#A4B0BC;
+--line:#05365919; --line-soft:#05365910; --line-hard:#CCD3DB; --track:#EDF0F3;
+--blue:#3655FF; --coral:#F65660; --yellow:#FFC940; --green:#37A878;
+--blue-strong:#1B2E99; --coral-strong:#A3282F; --yellow-strong:#6B4E00; --green-strong:#1B5E42;
+--blue-pale:#E6EAFF; --coral-pale:#FFE6E8; --yellow-pale:#FFF4D6; --green-pale:#E3F5EC;
+--on-fill:#FFFFFF; --solid:#0A1317; --on-solid:#FFFFFF; --on-solid-2:#CCD3DB;
+--hl-main:#C9D3FF; --hl-alt:#FFE3AC; --hl-ink:#0A1317;
+--code-bg:#F1F4F7; --code-head:#E7ECF1; --code-mark:rgba(54,85,255,.11);
+--press:#000000;
+--shadow-a:rgba(5,54,89,.05); --shadow-b:rgba(5,54,89,.1); --shadow-c:rgba(5,54,89,.08); --shadow-fab:rgba(54,85,255,.24);
+}
+:root[data-theme="dark"], body[data-theme="dark"]{
+--bg:#111112; --surf:#1A1A1D; --card:#1F1F22; --raised:#28292C;
+--ink:#F1F4F7; --ink-2:#A4B0BC; --ink-3:#4A5560;
+--line:rgba(255,255,255,.09); --line-soft:rgba(255,255,255,.05); --line-hard:#3A3B40; --track:#2A2A2E;
+--blue:#5C77FF; --coral:#FF7A83; --yellow:#FFD470; --green:#4FCF9B;
+--blue-strong:#A8B8FF; --coral-strong:#FFB0B6; --yellow-strong:#FFE3A3; --green-strong:#8ADFBB;
+--blue-pale:#1A2140; --coral-pale:#3A1D22; --yellow-pale:#33290F; --green-pale:#153328;
+--on-fill:#111112; --solid:#26262A; --on-solid:#F1F4F7; --on-solid-2:#A4B0BC;
+--hl-main:#2C3A7A; --hl-alt:#4A3A16; --hl-ink:#FFFFFF;
+--code-bg:#1F1F22; --code-head:#28292C; --code-mark:rgba(92,119,255,.22);
+--press:#FFFFFF;
+--shadow-a:rgba(0,0,0,.4); --shadow-b:rgba(0,0,0,.55); --shadow-c:rgba(0,0,0,.5); --shadow-fab:rgba(92,119,255,.3);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);transition:background 160ms,color 160ms;font-family:'SUIT Variable','Apple SD Gothic Neo',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-wrap:pretty}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--blue-strong)}
+h1,h2,h3,p{margin:0}
+button{font-family:inherit}
+@media (prefers-reduced-motion:reduce){*{transition-duration:0s !important}}
+</style>
+</helmet>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<div style="position:sticky;top:0;z-index:40;background:var(--card);border-bottom:1px solid var(--line)">
+<div style="max-width:390px;margin:0 auto;padding:0 20px;height:56px;display:flex;align-items:center;gap:10px">
+<span style="font-family:'SUITE Variable',sans-serif;font-weight:500;font-size:19px;letter-spacing:-.035em">devlog</span>
+<span style="margin-left:auto;width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink-2);cursor:pointer"><i class="ti ti-search" style="font-size:22px"></i></span>
+<span style="width:36px;height:36px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);cursor:pointer"><i class="ti ti-menu-2" style="font-size:22px"></i></span>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div style="position:sticky;top:0;z-index:40;background:var(--card);border-bottom:1px solid var(--line)">
+<div style="max-width:1080px;margin:0 auto;padding:0 32px;height:60px;display:flex;align-items:center;gap:28px">
+<span style="font-family:'SUITE Variable',sans-serif;font-weight:500;font-size:21px;letter-spacing:-.035em">devlog</span>
+<nav style="display:flex;gap:20px;align-items:center">
+<a href="devlog Posts List.dc.html" style="font-size:14px;color:var(--ink-2)" style-hover="color:var(--ink)">글</a>
+<a href="devlog Projects List.dc.html" style="font-size:14px;color:var(--ink-2)" style-hover="color:var(--ink)">프로젝트</a>
+<a href="#top" style="font-size:14px;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:2px">소개</a>
+<a href="#top" style="font-size:14px;color:var(--ink-2)" style-hover="color:var(--ink)">대시보드</a>
+</nav>
+<div style="margin-left:auto;display:flex;gap:6px;align-items:center;color:var(--ink-2)">
+<span style="width:34px;height:34px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background 120ms,color 120ms" style-hover="background:var(--surf);color:var(--ink)"><i class="ti ti-search" style="font-size:20px"></i></span>
+<span style="width:34px;height:34px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background 120ms,color 120ms" style-hover="background:var(--surf);color:var(--ink)"><i class="ti ti-brand-github" style="font-size:20px"></i></span>
+<span style="width:34px;height:34px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background 120ms,color 120ms" style-hover="background:var(--surf);color:var(--ink)"><i class="ti ti-mail" style="font-size:20px"></i></span>
+</div>
+</div>
+</div>
+
+</sc-if>
+
+<div style="max-width:1080px;margin:0 auto;padding:0 32px">
+<div style="display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--line-soft)">
+<span style="font-size:11px;font-weight:500;letter-spacing:.1em;white-space:nowrap;color:var(--ink-2)">미리보기</span>
+<div style="display:flex;gap:4px;padding:3px;background:var(--surf);border-radius:8px">
+<button onClick="{{ toDesktop }}" style="font-size:12px;padding:5px 12px;border-radius:6px;border:none;background:{{ dBg }};color:{{ dFg }};cursor:pointer;white-space:nowrap">데스크톱</button>
+<button onClick="{{ toMobile }}" style="font-size:12px;padding:5px 12px;border-radius:6px;border:none;background:{{ mBg }};color:{{ mFg }};cursor:pointer;white-space:nowrap">모바일 390</button>
+</div>
+</div>
+</div>
+
+<section id="top" style="background:var(--card)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ heroPad }}">
+<sc-if value="{{ openToWork }}" hint-placeholder-val="{{ true }}">
+<div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;white-space:nowrap;padding:6px 12px;border-radius:9999px;background:var(--green-pale);color:var(--green-strong)">
+<span style="width:7px;height:7px;border-radius:9999px;background:var(--green)"></span>구직 중 · 2026년 하반기 합류 가능
+</div>
+</sc-if>
+
+<h1 style="max-width:900px;margin-top:22px;font-family:'SUITE Variable',sans-serif;font-weight:500;line-height:1.35;letter-spacing:-.035em;font-size:{{ h1Size }}">프론트엔드로 시작해 <span style="color:var(--blue)">양쪽을 다 설명할 수 있는</span> 사람이 되려고 한다.</h1>
+
+<p style="max-width:671px;margin-top:24px;font-size:17px;line-height:1.75;color:var(--ink-2)">화면부터 들어왔다. 버튼이 왜 여기 있어야 하는지 설명할 수 있게 되자, 그 버튼이 부르는 쿼리가 왜 느린지도 설명할 수 있어야 한다는 걸 알았다. 지금은 앱 둘과 패키지 셋을 혼자 굴리면서 경계를 사람이 아니라 도구가 지키게 만드는 일에 시간을 쓴다.</p>
+<p style="max-width:671px;margin-top:20px;font-size:17px;line-height:1.75;color:var(--ink-2)">만든 것보다 <span style="background-image:linear-gradient(transparent 55%,var(--hl-main) 55%);color:var(--ink)">왜 그렇게 만들었는지를 남기는 편</span>이 나중에 더 쓸모 있었다. 그래서 이 사이트는 전시장이 아니라 작업 기록이다.</p>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:28px">
+<a href="#contact" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:14px;white-space:nowrap;padding:13px 16px;border-radius:8px;background:var(--blue);color:var(--on-fill)"><i class="ti ti-mail" style="font-size:18px"></i>메일 보내기</a>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+<a href="#top" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:14px;white-space:nowrap;padding:13px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)"><i class="ti ti-download" style="font-size:18px"></i>이력서 PDF</a>
+<a href="#top" style="display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:14px;white-space:nowrap;padding:13px 16px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)"><i class="ti ti-brand-github" style="font-size:18px"></i>GitHub<i class="ti ti-external-link" style="font-size:16px"></i></a>
+</div>
+<sc-if value="{{ resumeDate }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">이력서 2026.08 갱신</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:32px">
+<a href="#contact" style="display:inline-flex;align-items:center;gap:7px;font-size:14px;white-space:nowrap;padding:11px 20px;border-radius:8px;background:var(--blue);color:var(--on-fill);transition:background 120ms" style-hover="background:var(--blue-strong);color:var(--on-fill)"><i class="ti ti-mail" style="font-size:18px"></i>메일 보내기</a>
+<a href="#top" style="display:inline-flex;align-items:center;gap:7px;font-size:14px;white-space:nowrap;padding:11px 20px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);transition:border-color 120ms" style-hover="border-color:var(--ink);color:var(--ink)"><i class="ti ti-download" style="font-size:18px"></i>이력서 PDF</a>
+<a href="#top" style="display:inline-flex;align-items:center;gap:7px;font-size:14px;white-space:nowrap;padding:11px 20px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);transition:border-color 120ms" style-hover="border-color:var(--ink);color:var(--ink)"><i class="ti ti-brand-github" style="font-size:18px"></i>GitHub<i class="ti ti-external-link" style="font-size:16px"></i></a>
+<sc-if value="{{ resumeDate }}" hint-placeholder-val="{{ false }}">
+<span style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">이력서 2026.08 갱신</span>
+</sc-if>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section style="background:var(--surf);border-top:1px solid var(--line)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ secPad }}">
+<h2 style="font-family:'SUITE Variable',sans-serif;font-weight:500;letter-spacing:-.03em;font-size:{{ h2Size }}">지금까지</h2>
+<p style="max-width:671px;margin-top:8px;font-size:14px;line-height:1.65;color:var(--ink-2)">경력이 아니라 범위가 넓어진 순서다.</p>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:24px">
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--green);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:24px">
+<div style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">2026.07</div>
+<div style="margin-top:4px;font-size:15px;font-weight:500;line-height:1.45">devlog 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">만든 것과 그 판단을 한자리에 두기로 했다. 지금 보고 있는 이 사이트다.</p>
+</div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--green);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:24px">
+<div style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">2026.05</div>
+<div style="margin-top:4px;font-size:15px;font-weight:500;line-height:1.45">Audemodo 시작 — 앱 둘, 패키지 셋</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">혼자 굴리는 모노레포에서 경계를 CI가 지키게 만들었다. 지금 가장 시간을 쓰는 곳이다.</p>
+</div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--blue);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:24px">
+<div style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">2026.02</div>
+<div style="margin-top:4px;font-size:15px;font-weight:500;line-height:1.45">처음으로 남이 쓰는 코드를 냈다</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">responsive-keepalive 공개. 내 코드가 아니라 남의 코드에 들어가는 코드를 쓰는 일이 달랐다.</p>
+</div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--blue);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:24px">
+<div style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">2025.09</div>
+<div style="margin-top:4px;font-size:15px;font-weight:500;line-height:1.45">쿼리와 배포까지 직접 다루기 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">화면이 느린 이유가 화면 밖에 있을 때가 많았다. 범위를 넓히지 않고는 설명할 수 없었다.</p>
+</div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--line-hard);margin-top:5px"></span></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:0">
+<div style="font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums">2025.03</div>
+<div style="margin-top:4px;font-size:15px;font-weight:500;line-height:1.45">프론트엔드로 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">화면부터 들어왔다.</p>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:28px;max-width:671px">
+<div style="display:flex;gap:20px">
+<div style="width:82px;flex:none;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:1px">2026.07</div>
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--green);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:28px">
+<div style="font-size:15px;font-weight:500">devlog 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">만든 것과 그 판단을 한자리에 두기로 했다. 지금 보고 있는 이 사이트다.</p>
+</div>
+</div>
+<div style="display:flex;gap:20px">
+<div style="width:82px;flex:none;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:1px">2026.05</div>
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--green);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:28px">
+<div style="font-size:15px;font-weight:500">Audemodo 시작 — 앱 둘, 패키지 셋</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">혼자 굴리는 모노레포에서 경계를 CI가 지키게 만들었다. 지금 가장 시간을 쓰는 곳이다.</p>
+</div>
+</div>
+<div style="display:flex;gap:20px">
+<div style="width:82px;flex:none;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:1px">2026.02</div>
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--blue);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:28px">
+<div style="font-size:15px;font-weight:500">처음으로 남이 쓰는 코드를 냈다</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">responsive-keepalive 공개. 내 코드가 아니라 남의 코드에 들어가는 코드를 쓰는 일이 달랐다.</p>
+</div>
+</div>
+<div style="display:flex;gap:20px">
+<div style="width:82px;flex:none;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:1px">2025.09</div>
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--blue);margin-top:5px"></span><div style="flex:1;width:1px;background:var(--line-hard)"></div></div>
+<div style="flex:1 1 0;min-width:0;padding-bottom:28px">
+<div style="font-size:15px;font-weight:500">쿼리와 배포까지 직접 다루기 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">화면이 느린 이유가 화면 밖에 있을 때가 많았다. 범위를 넓히지 않고는 설명할 수 없었다.</p>
+</div>
+</div>
+<div style="display:flex;gap:20px">
+<div style="width:82px;flex:none;font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:1px">2025.03</div>
+<div style="flex:none;width:9px;display:flex;flex-direction:column;align-items:center"><span style="width:9px;height:9px;border-radius:9999px;background:var(--line-hard);margin-top:5px"></span></div>
+<div style="flex:1 1 0;min-width:0">
+<div style="font-size:15px;font-weight:500">프론트엔드로 시작</div>
+<p style="margin-top:5px;font-size:14px;line-height:1.65;color:var(--ink-2)">화면부터 들어왔다.</p>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section style="background:var(--card);border-top:1px solid var(--line)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ secPad }}">
+<h2 style="font-family:'SUITE Variable',sans-serif;font-weight:500;letter-spacing:-.03em;font-size:{{ h2Size }}">쓰는 기술</h2>
+<p style="max-width:671px;margin-top:8px;font-size:14px;line-height:1.65;color:var(--ink-2)">실제로 프로젝트에 들어간 것만 적는다. 이름을 아는 것과 쓴 것은 다르다.</p>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:22px">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-typescript" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">TypeScript</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-react" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">React 19</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-nextjs" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Next.js</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-css3" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">StyleX</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-vite" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Vite</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-nodejs" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Node.js</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-database" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">PostgreSQL</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-test-pipe" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Playwright</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-docker" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Docker</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-git" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">깃허브 액션</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-sitemap" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">FSD</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:70px;padding:8px 4px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2)"><i class="ti ti-brand-figma" style="font-size:20px"></i><span style="font-size:11px;color:var(--ink);text-align:center;line-height:1.3;word-break:keep-all">Figma</span></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px">
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-typescript" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">TypeScript</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-react" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">React 19</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-nextjs" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Next.js</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-css3" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">StyleX</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-vite" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Vite</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-nodejs" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Node.js</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-database" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">PostgreSQL</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-test-pipe" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Playwright</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-docker" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Docker</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-git" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">깃허브 액션</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-sitemap" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">FSD</span></div>
+<div style="display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--ink-2);white-space:nowrap"><i class="ti ti-brand-figma" style="font-size:20px"></i><span style="font-size:13px;color:var(--ink)">Figma</span></div>
+</div>
+</sc-if>
+
+
+</div>
+</section>
+
+<section style="background:var(--surf);border-top:1px solid var(--line)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ secPad }}">
+<div style="display:flex;align-items:baseline;gap:12px">
+<h2 style="font-family:'SUITE Variable',sans-serif;font-weight:500;letter-spacing:-.03em;font-size:{{ h2Size }}">어떻게 일하나</h2>
+<span style="font-size:15px;color:var(--ink-2);font-variant-numeric:tabular-nums">{{ qCount }}</span>
+</div>
+<p style="max-width:671px;margin-top:8px;font-size:14px;line-height:1.65;color:var(--ink-2)">면접에서 자주 나오는 질문을 미리 답해둔다. 지어낸 원칙이 아니라 지금 저장소에서 실제로 지켜지고 있는 것들이다.</p>
+
+<div style="display:flex;flex-direction:column;gap:16px;margin-top:28px;max-width:800px">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px">
+<div style="display:flex;align-items:flex-start;gap:14px">
+<span style="flex:none;width:26px;height:26px;border-radius:6px;background:var(--blue-strong);color:var(--on-fill);display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums">1</span>
+<div style="flex:1 1 0;min-width:0">
+<div style="font-family:'SUITE Variable',sans-serif;font-weight:500;line-height:1.45;letter-spacing:-.025em;font-size:{{ h3Size }}">기술을 고를 때 무엇을 먼저 보나</div>
+<p style="margin-top:12px;font-size:17px;line-height:1.75;color:var(--ink-2)"><span style="background-image:linear-gradient(transparent 55%,var(--hl-main) 55%);color:var(--ink)">기존 것으로는 왜 안 되는가에 먼저 답한다.</span> 새 도구가 좋아 보이는 이유는 대개 그 도구의 문서가 잘 쓰여 있기 때문이다. 지금 쓰는 것으로 못 하는 일을 한 문장으로 못 적으면 도입하지 않는다.</p>
+</div>
+</div>
+</div>
+
+<sc-if value="{{ q2 }}" hint-placeholder-val="{{ true }}">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px">
+<div style="display:flex;align-items:flex-start;gap:14px">
+<span style="flex:none;width:26px;height:26px;border-radius:6px;background:var(--green-strong);color:var(--on-fill);display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums">2</span>
+<div style="flex:1 1 0;min-width:0">
+<div style="font-family:'SUITE Variable',sans-serif;font-weight:500;line-height:1.45;letter-spacing:-.025em;font-size:{{ h3Size }}">혼자 만들 때 품질을 어떻게 지키나</div>
+<p style="margin-top:12px;font-size:17px;line-height:1.75;color:var(--ink-2)"><span style="background-image:linear-gradient(transparent 55%,var(--hl-main) 55%);color:var(--ink)">규율 대신 도구로 강제한다.</span> 리뷰어가 없으니 규칙을 기억할 사람도 없다. FSD 경계 검사기를 CI에 물려 위반이 있으면 머지가 막히게 했다. 남은 예외는 파일 하나에 모아두고 줄어들기만 하게 감시한다.</p>
+<a href="devlog Project Detail.dc.html" style="display:inline-flex;align-items:center;gap:4px;margin-top:12px;font-size:13px">Audemodo의 핵심 결정 보기<i class="ti ti-arrow-right" style="font-size:16px"></i></a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ q3 }}" hint-placeholder-val="{{ true }}">
+<div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px">
+<div style="display:flex;align-items:flex-start;gap:14px">
+<span style="flex:none;width:26px;height:26px;border-radius:6px;background:var(--coral-strong);color:var(--on-fill);display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums">3</span>
+<div style="flex:1 1 0;min-width:0">
+<div style="font-family:'SUITE Variable',sans-serif;font-weight:500;line-height:1.45;letter-spacing:-.025em;font-size:{{ h3Size }}">추상화는 언제 하나</div>
+<p style="margin-top:12px;font-size:17px;line-height:1.75;color:var(--ink-2)"><span style="background-image:linear-gradient(transparent 55%,var(--hl-main) 55%);color:var(--ink)">두 번째 소비자가 생기기 전에는 안 한다.</span> 오지 않은 요구에 맞춘 추상은 대개 틀리고, 틀린 추상을 되돌리는 비용이 중복을 참는 비용보다 크다. 이 원칙이 실제로 발동한 것은 지금까지 한 번이다.</p>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<section id="contact" style="background:var(--card);border-top:1px solid var(--line)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ secPadLast }}">
+<h2 style="font-family:'SUITE Variable',sans-serif;font-weight:500;letter-spacing:-.03em;font-size:{{ h2Size }}">연락</h2>
+<p style="max-width:671px;margin-top:8px;font-size:14px;line-height:1.65;color:var(--ink-2)">주소를 그대로 적어둔다. 눌러서 열든 복사해서 쓰든 상관없다.</p>
+
+<div style="display:grid;gap:{{ contactGap }};margin-top:26px;grid-template-columns:{{ contactCols }}">
+<a href="#contact" style="border:1px solid var(--line);border-radius:12px;padding:20px;color:var(--ink);transition:border-color 180ms,box-shadow 180ms,transform 180ms" style-hover="border-color:transparent;box-shadow:0 2px 4px var(--shadow-a),0 12px 28px var(--shadow-b);transform:translateY(-2px);color:var(--ink)">
+<div style="display:flex;align-items:center;gap:8px;color:var(--ink-2)"><i class="ti ti-mail" style="font-size:20px"></i><span style="font-size:11px;font-weight:500;letter-spacing:.1em;white-space:nowrap">메일</span></div>
+<div style="margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;word-break:break-all">hello@devlog.kr</div>
+<div style="margin-top:6px;font-size:12px;color:var(--ink-2)">평일에는 하루 안에 답한다</div>
+</a>
+<a href="#contact" style="border:1px solid var(--line);border-radius:12px;padding:20px;color:var(--ink);transition:border-color 180ms,box-shadow 180ms,transform 180ms" style-hover="border-color:transparent;box-shadow:0 2px 4px var(--shadow-a),0 12px 28px var(--shadow-b);transform:translateY(-2px);color:var(--ink)">
+<div style="display:flex;align-items:center;gap:8px;color:var(--ink-2)"><i class="ti ti-brand-github" style="font-size:20px"></i><span style="font-size:11px;font-weight:500;letter-spacing:.1em;white-space:nowrap">GitHub</span><i class="ti ti-external-link" style="font-size:16px;margin-left:auto"></i></div>
+<div style="margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;word-break:break-all">github.com/audemodo</div>
+<div style="margin-top:6px;font-size:12px;color:var(--ink-2)">저장소 여섯 · 커밋 1,318</div>
+</a>
+<a href="#contact" style="border:1px solid var(--line);border-radius:12px;padding:20px;color:var(--ink);transition:border-color 180ms,box-shadow 180ms,transform 180ms" style-hover="border-color:transparent;box-shadow:0 2px 4px var(--shadow-a),0 12px 28px var(--shadow-b);transform:translateY(-2px);color:var(--ink)">
+<div style="display:flex;align-items:center;gap:8px;color:var(--ink-2)"><i class="ti ti-rss" style="font-size:20px"></i><span style="font-size:11px;font-weight:500;letter-spacing:.1em;white-space:nowrap">글 구독</span></div>
+<div style="margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;word-break:break-all">devlog.kr/rss.xml</div>
+<div style="margin-top:6px;font-size:12px;color:var(--ink-2)">새 글은 여기로 나간다</div>
+</a>
+</div>
+</div>
+</section>
+
+
+<div onMouseEnter="{{ fabIn }}" onMouseLeave="{{ fabOut }}" style="position:fixed;z-index:50;right:{{ fabGut }};bottom:{{ fabGut }};display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+<sc-if value="{{ fabOpen }}" hint-placeholder-val="{{ false }}">
+<button onClick="{{ toTop }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:9999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px;white-space:nowrap;cursor:pointer;outline:none;box-shadow:0 2px 4px var(--shadow-a),0 12px 28px var(--shadow-b);transition:border-color 120ms" style-hover="border-color:var(--ink)" style-focus="box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--blue)"><i class="ti ti-arrow-up" style="font-size:16px"></i>맨 위로</button>
+<button onClick="{{ darkToggle }}" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:9999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px;white-space:nowrap;cursor:pointer;outline:none;box-shadow:0 2px 4px var(--shadow-a),0 12px 28px var(--shadow-b);transition:border-color 120ms" style-hover="border-color:var(--ink)" style-focus="box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--blue)"><i class="{{ darkIcon }}" style="font-size:16px"></i>{{ darkLabel }}</button>
+</sc-if>
+<button onClick="{{ fabTap }}" aria-label="도구 열기" style="width:46px;height:46px;border-radius:9999px;border:none;background:linear-gradient(135deg,var(--blue),var(--coral));color:var(--on-fill);cursor:pointer;outline:none;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 2px 4px var(--shadow-c),0 12px 28px var(--shadow-fab);transition:transform 160ms cubic-bezier(.24,1,.4,1)" style-hover="transform:translateY(-2px)" style-focus="box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--blue)" style-active="transform:scale(.98)"><i class="{{ fabIcon }}" style="font-size:20px"></i></button>
+</div>
+
+<footer style="background:var(--surf);border-top:1px solid var(--line)">
+<div style="margin:0 auto;max-width:{{ pageW }};padding:{{ footPad }}">
+<div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+<div>
+<div style="font-family:'SUITE Variable',sans-serif;font-weight:500;font-size:21px;letter-spacing:-.035em">devlog</div>
+<p style="margin-top:6px;font-size:12px;color:var(--ink-2)">만들고 기록하는 사람의 작업실</p>
+</div>
+<div style="margin-left:auto;display:flex;gap:18px;font-size:13px;align-items:center">
+<a href="#top" style="display:inline-flex;align-items:center;gap:5px">GitHub<i class="ti ti-external-link" style="font-size:16px"></i></a>
+<a href="#contact">메일 보내기</a>
+<a href="#top">글 구독</a>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-2)">
+<span>© 2026 devlog</span>
+<span>/about</span>
+</div>
+</div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;openToWork&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;소개&quot;,&quot;label&quot;:&quot;구직 중 배지 (취업하면 끈다)&quot;},&quot;questionCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:1,&quot;max&quot;:3,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;소개&quot;,&quot;label&quot;:&quot;어떻게 일하나 — 질문 수&quot;},&quot;showResumeDate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;소개&quot;,&quot;label&quot;:&quot;이력서 갱신 날짜 표시&quot;}}">
+class Component extends DCLogic {
+  state = { fab: false, dark: false, wide: true, view: 'd' };
+  componentDidMount() {
+    this.mq = window.matchMedia('(min-width:1144px)');
+    this.onMq = e => this.setState({ wide: e.matches });
+    this.setState({ wide: this.mq.matches });
+    this.mq.addEventListener ? this.mq.addEventListener('change', this.onMq) : this.mq.addListener(this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener ? this.mq.removeEventListener('change', this.onMq) : this.mq.removeListener(this.onMq);
+  }
+  renderVals() {
+    const n = Math.max(1, Math.min(3, Math.round(this.props.questionCount ?? 3)));
+    const mob = this.state.view === 'm';
+    return {
+      contactCols: !mob && this.state.wide ? 'repeat(3,minmax(0,1fr))' : 'minmax(0,1fr)',
+      contactGap: mob ? '12px' : '20px',
+      isMobile: mob, isDesktop: !mob,
+      fabOpen: this.state.fab,
+      fabIcon: this.state.fab ? 'ti ti-x' : 'ti ti-dots',
+      fabIn: () => this.setState({ fab: true }),
+      fabOut: () => this.setState({ fab: false }),
+      fabTap: () => this.setState(s => ({ fab: !s.fab })),
+      toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      darkIcon: this.state.dark ? 'ti ti-sun' : 'ti ti-moon',
+      darkLabel: this.state.dark ? '라이트 모드' : '다크 모드',
+      darkToggle: () => this.setState(s => ({ dark: !s.dark }), () => { const on = this.state.dark; [document.documentElement, document.body].forEach(el => on ? el.setAttribute('data-theme','dark') : el.removeAttribute('data-theme')); }),
+      toDesktop: () => this.setState({ view: 'd' }),
+      toMobile: () => this.setState({ view: 'm' }),
+      dBg: mob ? 'transparent' : 'var(--card)', dFg: mob ? 'var(--ink-2)' : 'var(--ink)',
+      mBg: mob ? 'var(--card)' : 'transparent', mFg: mob ? 'var(--ink)' : 'var(--ink-2)',
+      pageW: mob ? '390px' : '1080px',
+      heroPad: mob ? '32px 20px 44px' : '56px 32px 60px',
+      secPad: mob ? '40px 20px 44px' : '52px 32px 56px',
+      secPadLast: mob ? '40px 20px 48px' : '52px 32px 64px',
+      footPad: mob ? '32px 20px 66px' : '36px 32px 48px',
+      h1Size: mob ? '29px' : '38px',
+      h2Size: mob ? '22px' : '26px',
+      h3Size: mob ? '19px' : '21px',
+      fabGut: mob ? '20px' : '32px',
+      openToWork: this.props.openToWork ?? true,
+      resumeDate: this.props.showResumeDate ?? false,
+      qCount: n,
+      q2: n >= 2,
+      q3: n >= 3
+    };
+  }
+}
+</script>
+</body>
+</html>

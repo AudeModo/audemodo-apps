@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignore": ["ds-bundle/**"],
+  "ignore": ["ds-bundle/**", "docs/handoff/**"],
   "workspaces": {
     ".": {
       "entry": ["steiger.config.ts"]
