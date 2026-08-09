@@ -1,5 +1,7 @@
 export { parseCodeMeta } from './code-meta/code-meta';
 
+export { monthsSince } from './elapsed/elapsed';
+
 export { countFacets, filterBySelection, findCulpritAxis } from './facet/facet';
 
 export type { FacetOption } from './facet/facet';

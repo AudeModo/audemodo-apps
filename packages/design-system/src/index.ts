@@ -32,4 +32,6 @@ export { VStack } from './foundation/v-stack/v-stack';
 
 export type { VStackProps } from './foundation/v-stack/v-stack';
 
+export { VENDOR_NAME } from './foundation/vendor/vendor';
+
 export { DesignSystemProvider } from './provider/design-system-provider/design-system-provider';

@@ -7,10 +7,9 @@ import { HStack, VStack } from '@audemodo/design-system';
 import { ActiveFilterStrip, AxisFilters, usePostFilters } from '@/widgets/post-filter';
 
 import type { PostSummary } from '@/entities/post';
+import { PostColumn } from '@/entities/post';
 
 import { ActionButton, EmptyState } from '@/shared/ui';
-
-import { PostColumn } from '../post-column/post-column';
 
 interface PostsListViewProps {
   /** 빌드 시점에 읽어 넘어온 전체 글 */

@@ -12,4 +12,9 @@ export { formatPostDate } from './lib/format-post-date';
 
 export type { PostDetail, PostSummary } from './model/types';
 
-export { PostRow } from './ui/post-row/post-row';
+export { PostColumn } from './ui/post-column/post-column';
+
+/*
+ * PostRow는 내보내지 않는다. 바깥에서 필요한 것은 「행 하나」가 아니라 「행이 쌓인 칸」이고,
+ * 그 칸이 항목 사이 여백(44 / 36)을 함께 들고 있어야 화면마다 다시 정하지 않는다.
+ */

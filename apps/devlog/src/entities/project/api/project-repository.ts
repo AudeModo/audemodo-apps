@@ -12,6 +12,19 @@ import { PROJECTS_DIR } from '@/shared/config';
  * 카드는 중요도 순, 타임라인은 시작 순이다. 같은 여섯을 다른 축으로 보면 무엇이
  * 겹쳤고 무엇이 이어졌는지가 드러난다 — 그래서 정렬을 하나로 고정하지 않는다.
  */
+export const getProjectSlugs = async (): Promise<string[]> => {
+  const files = await readdir(PROJECTS_DIR);
+
+  return files.filter((file) => file.endsWith('.mdx')).map((file) => file.replace(/\.mdx$/, ''));
+};
+
+/** 식별자 하나에 해당하는 프로젝트. 없으면 null이다 */
+export const getProject = async (slug: string): Promise<ProjectSummary | null> => {
+  const all = await getProjectSummaries();
+
+  return all.find((project) => project.slug === slug) ?? null;
+};
+
 export const getProjectSummaries = async (): Promise<ProjectSummary[]> => {
   const files = await readdir(PROJECTS_DIR);
   const slugs = files

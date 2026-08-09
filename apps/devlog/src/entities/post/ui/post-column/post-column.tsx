@@ -1,8 +1,7 @@
+import type { PostSummary } from '../../model/types';
 import type { ReactElement } from 'react';
 
-import type { PostSummary } from '@/entities/post';
-import { PostRow } from '@/entities/post';
-
+import { PostRow } from '../post-row/post-row';
 import styles from './post-column.module.css';
 
 interface PostColumnProps {

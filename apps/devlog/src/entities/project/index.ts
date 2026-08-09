@@ -4,6 +4,14 @@
  * 브라우저 번들에서 터진다.
  */
 
-export type { ProjectStatusTone, ProjectSummary } from './model/types';
+export type {
+  ProjectArchitecture,
+  ProjectDecision,
+  ProjectMilestone,
+  ProjectStatusTone,
+  ProjectSummary,
+} from './model/types';
 
 export { ProjectCard } from './ui/project-card/project-card';
+
+export { StatusDot } from './ui/status-dot/status-dot';

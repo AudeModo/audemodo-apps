@@ -1,0 +1,151 @@
+/*
+ * 의존 방향 도형 — 장식이 아니라 콘텐츠.
+ *
+ * 앱에서 벤더로 가는 화살표가 **없다**는 것이 이 도형의 내용이다.
+ *
+ * 화살표와 연결선은 `secondary`다. 비활성색을 쓰지 않는다 — 의미를 나르는 요소다.
+ */
+
+.frame {
+  margin-top: 32px;
+  padding: 28px 24px;
+  background: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+}
+
+.label {
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  letter-spacing: var(--devlog-tracking-label);
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+}
+
+.flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.consumers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-element);
+  background: var(--color-background-card);
+  font-family: var(--font-family-code);
+  font-size: var(--devlog-font-size-control);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+/* 경계가 되는 상자만 테두리를 진하게 — 이 도형이 말하려는 것이 여기다 */
+.wrapperBox {
+  border-color: var(--color-text-primary);
+}
+
+/* 벤더는 우리 것이 아니다. 점선과 회색 면이 그것을 말한다 */
+.vendorBox {
+  border-style: dashed;
+  border-color: var(--color-border-emphasized);
+  background: var(--color-background-muted);
+  color: var(--color-text-secondary);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.arrowLine {
+  width: 28px;
+  height: 1px;
+  background: var(--color-border-emphasized);
+}
+
+.arrowHead {
+  margin-left: -6px;
+}
+
+.wrapperColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: var(--radius-inner);
+  background: var(--devlog-green-strong);
+  color: var(--devlog-on-fill);
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--devlog-line-soft);
+  font-size: var(--font-size-3xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* ── 좁은 화면 ── 의존 방향이 원래 세로라 오히려 직관적이다 */
+
+.flowVertical {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.arrowVertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.arrowLineVertical {
+  width: 1px;
+  height: 14px;
+  background: var(--color-border-emphasized);
+}
+
+.arrowHeadVertical {
+  margin-top: -6px;
+}
+
+@media (max-width: 767px) {
+  .flow {
+    display: none;
+  }
+
+  .flowVertical {
+    display: flex;
+  }
+
+  .box {
+    text-align: center;
+    white-space: normal;
+  }
+
+  .wrapperColumn .box {
+    width: 100%;
+  }
+}
