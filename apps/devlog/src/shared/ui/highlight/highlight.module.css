@@ -1,0 +1,18 @@
+/*
+ * 형광펜.
+ *
+ * 55%에서 잘리는 그러데이션이라 글자 아랫부분만 물든다. 배경을 통째로 칠하면
+ * 칩처럼 읽혀 문장에서 떨어져 나온다.
+ *
+ * 글자색을 반드시 적는다. 부모 색을 물려받으면 보조 문단 안에서 4.41:1로 미달한다 —
+ * 형광펜은 어느 문단에 놓일지 미리 알 수 없으므로 값을 여기서 못 박는다.
+ */
+
+.highlight {
+  background-image: linear-gradient(transparent 55%, var(--devlog-hl-main) 55%);
+  color: var(--devlog-hl-ink);
+}
+
+.highlight[data-alt='true'] {
+  background-image: linear-gradient(transparent 55%, var(--devlog-hl-alt) 55%);
+}

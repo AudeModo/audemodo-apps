@@ -55,6 +55,14 @@
   --devlog-hl-alt: #ffe3ac;
   --devlog-hl-ink: #0a1317;
 
+  /*
+   * 코드 면. 검정으로 박지 않는다 — 다크에서 페이지 배경과 같아져 코드가 면을 잃는다.
+   * 신택스 색은 하이라이터 테마가 정한다. 여기서 만들지 않는다.
+   */
+  --devlog-code-bg: #f1f4f7;
+  --devlog-code-head: #e7ecf1;
+  --devlog-code-mark: rgba(54, 85, 255, 0.11);
+
   --devlog-shadow-a: rgba(5, 54, 89, 0.05);
   --devlog-shadow-b: rgba(5, 54, 89, 0.1);
 
@@ -134,6 +142,9 @@
    */
   --devlog-font-size-control: 0.8125rem; /* 13 */
 
+  /* 콜아웃 본문. 읽기 본문보다 한 단계 작아야 곁가지로 읽힌다 */
+  --devlog-font-size-callout: 0.84375rem; /* 13.5 */
+
   /*
    * 자간은 벤더가 토큰으로 노출하지 않는다. 값이 흩어지지 않도록 여기서 이름을 준다.
    * 한글 제목은 자간을 좁혀야 덩어리로 읽힌다.
@@ -148,6 +159,9 @@
   --radius-inner: 0.375rem;
   --radius-element: 0.5rem;
   --radius-container: 0.75rem;
+
+  /* 콜아웃·접이식은 8과 12 사이다. 벤더 스케일에 칸이 없어 이름을 따로 준다 */
+  --devlog-radius-callout: 10px;
 
   /* 그림자 2단 — 선을 지우고 공간으로 바꾸는 교환에 쓴다 */
   --shadow-med: 0 2px 4px var(--devlog-shadow-a), 0 12px 28px var(--devlog-shadow-b);
@@ -210,6 +224,10 @@
   --devlog-hl-main: #2c3a7a;
   --devlog-hl-alt: #4a3a16;
   --devlog-hl-ink: #ffffff;
+
+  --devlog-code-bg: #1f1f22;
+  --devlog-code-head: #28292c;
+  --devlog-code-mark: rgba(92, 119, 255, 0.22);
 
   /* 다크에서는 그림자가 거의 안 보인다. 깊이는 테두리와 면 밝기 단계가 만든다 */
   --devlog-shadow-a: rgba(0, 0, 0, 0.4);

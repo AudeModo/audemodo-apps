@@ -1,0 +1,29 @@
+/*
+ * 읽기 진행 바.
+ *
+ * 네비 아래에 붙어 스크롤을 따라온다. 3px이라 읽는 것을 방해하지 않고,
+ * 눈이 찾을 때만 보인다.
+ */
+
+.track {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 39;
+  height: 3px;
+  pointer-events: none;
+}
+
+.bar {
+  height: 100%;
+  background: var(--devlog-blue);
+  /* scaleX는 레이아웃을 다시 계산하지 않는다 — 스크롤마다 도는 값이라 중요하다 */
+  transform-origin: left center;
+}
+
+@media (max-width: 767px) {
+  .track {
+    top: 56px;
+  }
+}

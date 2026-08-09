@@ -1,0 +1,76 @@
+/*
+ * 목차.
+ *
+ * 넓은 화면에서는 우측에 붙어 따라오고, 좁아지면 본문 위 접이식이 된다.
+ * 두 형태를 둘 다 그려두고 CSS가 고른다 — 자바스크립트로 갈라내면 첫 렌더에서
+ * 서버와 브라우저가 다른 것을 그린다.
+ *
+ * 경계는 1144다. 본문 671을 지키려면 목차 239 + 간격 66 + 여백 64 = 1040이 필요하고,
+ * 그 아래에서는 목차가 본문을 밀어낸다. 새 브레이크포인트를 만들지 않는다.
+ */
+
+.side {
+  position: sticky;
+  top: 74px;
+}
+
+.inline {
+  display: none;
+}
+
+@media (max-width: 1143px) {
+  .side {
+    display: none;
+  }
+
+  .inline {
+    display: block;
+  }
+}
+
+.label {
+  margin-bottom: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: 4px 0;
+  font-size: var(--devlog-font-size-control);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-inner);
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.link:hover {
+  color: var(--color-text-primary);
+}
+
+/* 읽는 위치를 따라 진해진다. 색만으로 말하지 않도록 굵기도 함께 바꾼다 */
+.link[aria-current='true'] {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition-duration: 0s;
+  }
+}

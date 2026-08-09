@@ -1,0 +1,92 @@
+/*
+ * 본문의 리듬.
+ *
+ * 글자 자체는 Text/Heading이 맡고, 여기서는 요소 사이의 간격과 마크다운이 만들어내는
+ * 것(목록 · 구분선 · 그림)만 다룬다.
+ */
+
+.prose > * + * {
+  margin-top: 22px;
+}
+
+/* 소제목 앞은 더 벌린다. 절이 바뀌는 자리라 숨이 필요하다 */
+.prose > h2 + * {
+  margin-top: 16px;
+}
+
+.prose > * + h2 {
+  margin-top: 44px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: var(--devlog-tracking-heading);
+  /* 앵커로 뛰었을 때 네비와 진행 바 아래로 내려오게 한다 */
+  scroll-margin-top: 84px;
+}
+
+/*
+ * 번호 배지. 글자가 올라가는 면이라 텍스트 단계로 채우고 글자는 `on-fill`이다.
+ * 색은 의미가 없다 — 절이 바뀌는 리듬을 눈에 주는 것이 목적이라 셋을 돌린다.
+ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  color: var(--devlog-on-fill);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-3xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge[data-tone='0'] {
+  background: var(--devlog-blue-strong);
+}
+
+.badge[data-tone='1'] {
+  background: var(--devlog-green-strong);
+}
+
+.badge[data-tone='2'] {
+  background: var(--devlog-coral-strong);
+}
+
+.list {
+  margin: 0;
+  padding-left: 22px;
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+  color: var(--color-text-primary);
+}
+
+.list li + li {
+  margin-top: 6px;
+}
+
+.inlineCode {
+  padding: 2px 5px;
+  border-radius: var(--radius-none);
+  background: var(--devlog-code-bg);
+  font-family: var(--font-family-code);
+  font-size: 0.92em;
+}
+
+.rule {
+  height: 1px;
+  margin: 36px 0;
+  border: none;
+  background: var(--color-border);
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-element);
+}

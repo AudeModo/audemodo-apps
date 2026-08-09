@@ -6,6 +6,8 @@
  * 서버에서만 도는 것은 ./server 에 있다.
  */
 
+export { findAdjacentPosts } from './lib/find-adjacent-posts';
+
 export { formatPostDate } from './lib/format-post-date';
 
 export type { PostDetail, PostSummary } from './model/types';
