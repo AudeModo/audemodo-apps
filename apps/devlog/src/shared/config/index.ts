@@ -1,3 +1,7 @@
+export { ABOUT } from './about';
+
+export type { CareerEntry, WorkAnswer } from './about';
+
 export { AXIS_KEYS, AXIS_VALUES, KIND_VALUES, TRACK_VALUES } from './axes';
 
 export type { AxisKey, AxisSelection } from './axes';

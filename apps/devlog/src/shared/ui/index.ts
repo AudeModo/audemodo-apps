@@ -6,11 +6,15 @@
 
 export { ActionButton } from './action-button/action-button';
 
+export { ContactCard } from './contact-card/contact-card';
+
 export { Details } from './details/details';
 
 export { EmptyState } from './empty-state/empty-state';
 
 export { FloatingTools } from './floating-tools/floating-tools';
+
+export { Highlight } from './highlight/highlight';
 
 export { MdxContent } from './mdx-content/mdx-content';
 
