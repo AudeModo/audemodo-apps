@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 
 import { Heading } from '@audemodo/design-system';
 
+import { NeedsUpdateList, selectNeedsUpdate } from '@/widgets/needs-update';
 import { ReviewTable } from '@/widgets/review-table';
 
 import type { PostSummary } from '@/entities/post';
@@ -26,6 +27,9 @@ interface DashboardProps {
  * 전역 크롬(네비 · 플로팅)은 이 규칙 밖이다 — 그건 위젯 내용이 아니다.
  */
 export const Dashboard = ({ posts, builtAt }: DashboardProps): ReactElement => {
+  // 머리의 개수와 목록이 어긋나지 않도록 한 번만 센다
+  const needsUpdate = selectNeedsUpdate(posts, builtAt.toISOString());
+
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -45,6 +49,15 @@ export const Dashboard = ({ posts, builtAt }: DashboardProps): ReactElement => {
             </div>
 
             <ReviewTable posts={posts} />
+          </section>
+
+          <section className={styles.widget}>
+            <div className={styles.widgetHead}>
+              <h2 className={styles.widgetTitle}>갱신할 때가 된 글</h2>
+              <span className={styles.widgetCount}>{needsUpdate.length}편</span>
+            </div>
+
+            <NeedsUpdateList rows={needsUpdate} />
           </section>
         </div>
       </div>
