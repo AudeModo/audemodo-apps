@@ -4,7 +4,7 @@ description: '모노레포 하나에 앱과 라이브러리를 함께 둔다. �
 summary: '앱과 라이브러리를 한 저장소에서 함께 기른다. 경계 규칙을 문서가 아니라 검사기가 지키고, 위반이 있으면 머지가 막힌다.'
 status: '진행 중'
 statusTone: 'active'
-stack: ['TypeScript', 'React', 'Next.js', 'StyleX', 'FSD', 'Turborepo']
+stack: ['TypeScript', 'React', 'Next.js', 'StyleX', 'Turborepo']
 importance: 3
 startedAt: '2026-07'
 repoUrl: 'https://github.com/AudeModo/audemodo-apps'
@@ -32,8 +32,8 @@ decisions:
     verificationNote: '앱 코드에서 벤더 참조가 없다. 화면에 벤더 이름을 보여줄 때도 래퍼가 내보내는 상수를 읽는다.'
   - decision: '두 번째 소비자 원칙'
     reason: '오지 않은 요구에 맞춘 추상은 대개 틀리고, 틀린 추상을 되돌리는 비용이 중복을 참는 비용보다 크다.'
-    verification: '실제 발동 2회'
-    verificationNote: 'eslint-config를 뽑아냈고, 소비자가 없던 Skeleton 셋은 검사기가 잡아 지웠다.'
+    verification: '추출 1 · 삭제 3'
+    verificationNote: '두 번째 소비자가 생겨 eslint-config를 뽑아냈고, 소비자가 없던 Skeleton 셋은 knip이 잡아 지웠다. 같은 원칙이 양쪽으로 발동한다.'
 milestones:
   - title: '저장소 구조와 CI 골격'
     state: 'done'

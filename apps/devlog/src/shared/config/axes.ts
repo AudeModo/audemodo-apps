@@ -50,6 +50,7 @@ const STACK_VALUES = [
   'MDX',
   'pnpm',
   'GitHub Actions',
+  'Turborepo',
 ] as const;
 
 /**

@@ -32,16 +32,14 @@ export const Milestones = ({ milestones }: MilestonesProps): ReactElement => {
 
   return (
     <>
+      {/*
+        막대 옆에 수를 다시 적지 않는다. 구간 제목이 이미 `4 / 8`을 들고 있고,
+        막대는 그 비율을 눈으로 보여주는 쪽이다. 코드가 숫자를 말로 옮겨 해석해 주면
+        (「절반을 지났다」) 해석이 데이터와 따로 늙는다.
+      */}
       <div className={styles.progress}>
         <div className={styles.track}>
           <div className={styles.fill} style={{ width: `${String(Math.round(ratio * 100))}%` }} />
-        </div>
-
-        <div className={styles.progressMeta}>
-          <span>{ratio >= 0.5 ? '절반을 지났다' : '가는 중이다'}</span>
-          <span>
-            {done} / {total}
-          </span>
         </div>
       </div>
 

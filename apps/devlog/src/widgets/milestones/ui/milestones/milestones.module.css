@@ -23,15 +23,6 @@
   background: linear-gradient(90deg, var(--devlog-blue), var(--devlog-green));
 }
 
-.progressMeta {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  font-size: var(--font-size-3xs);
-  color: var(--color-text-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
 .list {
   margin-top: 28px;
   padding: 8px 20px;
