@@ -1,0 +1,47 @@
+/*
+ * 태그 구름.
+ *
+ * baseline 정렬이라 크기가 달라도 글자가 한 선에 앉는다 — 가운데 정렬하면
+ * 크기 차이가 위아래 흔들림으로 보인다.
+ */
+
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 20px;
+}
+
+.tag {
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-inner);
+  transition: color var(--duration-fast) var(--devlog-ease);
+}
+
+.tag:hover {
+  color: var(--color-accent);
+}
+
+.tag:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+.count {
+  margin-left: 4px;
+  font-size: var(--font-size-4xs);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag {
+    transition-duration: 0s;
+  }
+}

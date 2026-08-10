@@ -1,5 +1,9 @@
 export { parseCodeMeta } from './code-meta/code-meta';
 
+export { toFrequency, toMonthlyBuckets, toShares } from './corpus/corpus';
+
+export type { Frequency, MonthBucket, Share } from './corpus/corpus';
+
 export { monthsSince } from './elapsed/elapsed';
 
 export { countFacets, filterBySelection, findCulpritAxis } from './facet/facet';
@@ -11,6 +15,8 @@ export { buildRssFeed } from './feed/feed';
 export { extractHeadings } from './headings/headings';
 
 export type { Heading } from './headings/headings';
+
+export { toKoreanCount } from './korean-number/korean-number';
 
 export { readingTime } from './reading/reading';
 

@@ -1,0 +1,73 @@
+/*
+ * 최신 글 캐러셀.
+ *
+ * 스냅 기준선을 거터 안쪽으로 옮긴다 — 없으면 로드 시 첫 카드가 32px 밀린 채로
+ * 멈춰 정렬선과 어긋난다.
+ */
+
+.track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 32px;
+  /* 카드 그림자가 잘리지 않게 위아래로 숨 */
+  padding-block: 4px;
+}
+
+.card {
+  flex: none;
+  width: 239px;
+  scroll-snap-align: start;
+  text-decoration: none;
+}
+
+.thumb {
+  width: 239px;
+  height: 134px;
+  border-radius: var(--radius-element);
+  border: 1px solid var(--color-border);
+  background: var(--color-background-muted);
+  object-fit: cover;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.date {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 7px;
+  font-family: var(--font-family-heading);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  line-height: 1.45;
+  letter-spacing: var(--devlog-tracking-heading);
+  color: var(--color-text-primary);
+}
+
+.card:focus-visible {
+  outline: none;
+  border-radius: var(--radius-element);
+  box-shadow:
+    0 0 0 2px var(--color-background-body),
+    0 0 0 4px var(--color-accent);
+}
+
+@media (max-width: 767px) {
+  .track {
+    scroll-padding-inline: 20px;
+  }
+}
