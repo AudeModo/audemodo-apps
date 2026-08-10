@@ -1,0 +1,150 @@
+/*
+ * 핵심 결정 — 이 화면의 핵심.
+ *
+ * 폭 비율 1.15 : 1.35 : 1. 세 칸의 성격이 달라(짧은 결정 / 긴 이유 / 짧은 배지)
+ * 밀도가 무너지지 않는다.
+ *
+ * 「무엇을 했나」만이 아니라 「얼마나 잘 했나」를 담는 자리다.
+ */
+
+.table {
+  margin-top: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr 1fr;
+}
+
+.head {
+  background: var(--color-background-muted);
+}
+
+.headCell {
+  padding: 11px 20px;
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  letter-spacing: var(--devlog-tracking-label);
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+}
+
+/* 머리와 본문 사이는 진한 선, 행 사이는 옅은 선 */
+.body:first-of-type {
+  border-top: 1px solid var(--color-border);
+}
+
+.body + .body {
+  border-top: 1px solid var(--devlog-line-soft);
+}
+
+.decision {
+  padding: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+}
+
+.reason {
+  margin: 0;
+  padding: 20px;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.verification {
+  padding: 20px;
+}
+
+/* 글자가 올라가는 면이라 텍스트 단계로 채우고 글자는 on-fill이다 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: var(--radius-inner);
+  background: var(--devlog-green-strong);
+  color: var(--devlog-on-fill);
+  font-size: var(--font-size-4xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.note {
+  margin: 9px 0 0;
+  font-size: var(--font-size-2xs);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* ── 좁은 화면 ── 세로 카드 */
+
+.cards {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+@media (max-width: 767px) {
+  .table {
+    display: none;
+  }
+
+  .cards {
+    display: flex;
+  }
+}
+
+.card {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+  background: var(--color-background-card);
+}
+
+/*
+ * 표에서는 머리가 칸 이름을 알려주지만 카드에는 머리가 없다.
+ * 각 구획에 라벨을 붙이지 않으면 무엇을 읽고 있는지 알 수 없다.
+ */
+.cardLabel {
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  letter-spacing: var(--devlog-tracking-label);
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+}
+
+.cardDecision {
+  margin-top: 7px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--color-text-primary);
+}
+
+.cardGap {
+  margin-top: 16px;
+}
+
+.cardReason {
+  margin: 7px 0 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+.cardVerification {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--devlog-line-soft);
+}
+
+.cardBadgeRow {
+  margin-top: 8px;
+}

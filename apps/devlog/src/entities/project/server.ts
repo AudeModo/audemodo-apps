@@ -5,4 +5,4 @@
  * 레이어가 아니라 실행 환경이다.
  */
 
-export { getProjectSummaries } from './api/project-repository';
+export { getProject, getProjectSlugs, getProjectSummaries } from './api/project-repository';

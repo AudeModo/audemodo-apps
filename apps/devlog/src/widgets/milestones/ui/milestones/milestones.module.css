@@ -1,0 +1,136 @@
+/*
+ * 마일스톤.
+ *
+ * 전체 진행과 지금 단계 진행을 함께 본다 — 진행 중인 항목 안에 이중 막대가 있는 이유다.
+ */
+
+.progress {
+  margin-top: 20px;
+  max-width: 671px;
+}
+
+.track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--devlog-track);
+  overflow: hidden;
+}
+
+/* 파랑에서 초록으로 — 시작에서 끝으로 가는 것이 색으로도 읽힌다 */
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--devlog-blue), var(--devlog-green));
+}
+
+.list {
+  margin-top: 28px;
+  padding: 8px 20px;
+  background: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-container);
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+.item + .item {
+  border-top: 1px solid var(--devlog-line-soft);
+}
+
+/*
+ * 상태 원. 끝난 것과 하는 중인 것은 글리프가 올라가므로 텍스트 단계 채움 + `on-fill`,
+ * 예정은 옅은 면에 어두운 숫자다.
+ */
+.state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-3xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.state[data-state='done'] {
+  background: var(--devlog-green-strong);
+  color: var(--devlog-on-fill);
+}
+
+.state[data-state='active'] {
+  background: var(--devlog-blue-strong);
+  color: var(--devlog-on-fill);
+}
+
+.state[data-state='planned'] {
+  background: var(--color-background-muted);
+  color: var(--color-text-secondary);
+}
+
+.body {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* 아직 오지 않은 것은 한 단계 물러나 있다 */
+.item[data-state='planned'] .title {
+  color: var(--color-text-secondary);
+}
+
+.at {
+  margin-top: 3px;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stageLabel {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 이중 막대의 안쪽 — 지금 단계가 어디까지 왔나 */
+.stages {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+  max-width: 320px;
+}
+
+.stage {
+  flex: 1;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--devlog-track);
+}
+
+.stage[data-done='true'] {
+  background: var(--devlog-blue);
+}
+
+.stageNote {
+  margin-top: 8px;
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}

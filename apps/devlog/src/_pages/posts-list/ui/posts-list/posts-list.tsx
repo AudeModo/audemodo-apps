@@ -4,10 +4,10 @@ import { Heading, HStack, Text, VStack } from '@audemodo/design-system';
 import { Suspense } from 'react';
 
 import type { PostSummary } from '@/entities/post';
+import { PostColumn } from '@/entities/post';
 
 import { POSTS_PER_PAGE } from '@/shared/config';
 
-import { PostColumn } from '../post-column/post-column';
 import { PostsListView } from '../posts-list-view/posts-list-view';
 import styles from './posts-list.module.css';
 
