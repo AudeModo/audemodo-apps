@@ -80,13 +80,13 @@ export const ABOUT = {
       at: '2026.07',
       title: 'Audemodo 시작',
       body: '혼자 굴리는 모노레포에서 경계를 CI가 지키게 만들었다. 지금 가장 시간을 쓰는 곳이다.',
-      tone: 'start',
+      tone: 'recent',
     },
     {
       at: '2025.02–2025.08',
       title: '카카오페이증권 프론트엔드 인턴',
       body: '실제 사용자가 있는 서비스에서 화면을 만들었다. 혼자 만들 때와 여럿이 만들 때 무엇이 달라지는지를 여기서 봤다.',
-      tone: 'past',
+      tone: 'start',
     },
   ] satisfies CareerEntry[],
 

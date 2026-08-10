@@ -24,6 +24,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 쪼갠 기간이 각자 한 줄을 갖는다. tabular-nums라 자릿수가 맞물린다 */
+.atLine {
+  display: block;
+}
+
 .rail {
   display: flex;
   flex: none;

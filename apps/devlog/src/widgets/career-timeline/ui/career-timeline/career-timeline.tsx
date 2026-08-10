@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 
 import type { CareerEntry } from '@/shared/config';
 
+import { splitPeriod } from '../../model/split-period';
 import styles from './career-timeline.module.css';
 
 interface CareerTimelineProps {
@@ -21,7 +22,17 @@ export const CareerTimeline = ({ entries }: CareerTimelineProps): ReactElement =
     <div className={styles.list}>
       {entries.map((entry, index) => (
         <div className={styles.entry} key={`${entry.at}:${entry.title}`}>
-          <div className={styles.at}>{entry.at}</div>
+          {/*
+            기간은 두 줄로 쪼갠다. 82px 열은 `YYYY.MM` 기준으로 나온 값이라
+            넓히면 시점 하나뿐인 나머지가 다 헐거워진다.
+          */}
+          <div className={styles.at}>
+            {splitPeriod(entry.at).map((part) => (
+              <span className={styles.atLine} key={part}>
+                {part}
+              </span>
+            ))}
+          </div>
 
           <div aria-hidden className={styles.rail}>
             <span className={styles.dot} data-tone={entry.tone} />
