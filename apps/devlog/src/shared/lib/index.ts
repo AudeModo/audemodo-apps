@@ -1,3 +1,5 @@
+export { formatBuildTime } from './build-time/build-time';
+
 export { parseCodeMeta } from './code-meta/code-meta';
 
 export { toFrequency, toMonthlyBuckets, toShares } from './corpus/corpus';
