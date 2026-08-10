@@ -1,13 +1,14 @@
-import type { Heading } from '../../lib';
 import type { ReactElement } from 'react';
 
 import { MDXRemote } from 'next-mdx-remote-client/rsc';
 import { Suspense } from 'react';
 
+import type { Heading } from '@/shared/lib';
+
+import { rehypeCodeMeta } from '../../lib/rehype-code-meta';
 import { createMdxComponents } from './mdx-components';
 import { MdxContentFallback } from './mdx-content-fallback';
 import styles from './prose.module.css';
-import { rehypeCodeMeta } from './rehype-code-meta';
 
 interface MdxContentProps {
   /** frontmatter를 제거한 MDX 본문 문자열 */

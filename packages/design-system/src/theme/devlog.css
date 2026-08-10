@@ -83,6 +83,14 @@
   --font-family-heading: 'SUITE Variable', 'SUIT Variable', -apple-system, system-ui, sans-serif;
 
   /*
+   * 코드. 라틴 Iosevka(0.5em), 한글 나눔고딕코딩(1.0em) — 정확히 두 배다.
+   * 순서가 곧 규칙이다. Iosevka가 앞이라 라틴은 늘 Iosevka에서 나오고,
+   * Iosevka에 없는 한글만 나눔고딕코딩으로 떨어진다. 둘을 바꾸면 격자가 깨진다.
+   */
+  --font-family-code:
+    'Iosevka', 'Nanum Gothic Coding', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /*
    * 타이포 사다리. 시안이 확정한 값이라 벤더 기본 사다리를 통째로 덮는다.
    * 한 칸이라도 남겨두면 그 칸을 쓰는 컴포넌트만 다른 리듬으로 튄다.
    */
