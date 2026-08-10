@@ -12,6 +12,8 @@ export { formatPostDate } from './lib/format-post-date';
 
 export type { PostDetail, PostSummary } from './model/types';
 
+export { KindLabel } from './ui/kind-label/kind-label';
+
 export { PostColumn } from './ui/post-column/post-column';
 
 /*

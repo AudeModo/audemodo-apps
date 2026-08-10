@@ -1,0 +1,48 @@
+/*
+ * 쌓인 것 — 월별 막대.
+ *
+ * 최대값을 기준으로 정규화한다. 빈 달도 자리를 지켜 쉰 달이 쉰 채로 보인다.
+ */
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 120px;
+}
+
+.column {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 0;
+}
+
+.bar {
+  border-radius: var(--radius-none) var(--radius-none) 0 0;
+  background: var(--devlog-blue);
+}
+
+/* 쓰지 않은 달도 자리를 지킨다 — 바닥에 얇게 남겨 빈 것이 보이게 한다 */
+.bar[data-empty='true'] {
+  background: var(--devlog-track);
+}
+
+.axis {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.month {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: var(--font-size-4xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
