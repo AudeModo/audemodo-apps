@@ -1,4 +1,5 @@
 import type { KIND_VALUES, TRACK_VALUES } from '@/shared/config';
+import type { ReviewCycle } from '@/shared/lib';
 
 /** 글의 성격. 목록에서 색으로 인코딩되는 유일한 축이다. */
 export type PostKind = (typeof KIND_VALUES)[number];
@@ -39,6 +40,10 @@ export interface PostFrontmatter {
   series?: string;
   /** 연작 안의 순서. 1부터 */
   seriesOrder?: number;
+  /** 다시 볼 주기. 없으면 갱신 대상이 아니다 */
+  needsUpdate?: ReviewCycle;
+  /** 마지막으로 검토한 시각 (ISO 8601). 여기에 주기를 더해 기한을 낸다 */
+  lastReviewed?: string;
 }
 
 /** 게시글 요약 ─ frontmatter에 slug를 더한 것. */

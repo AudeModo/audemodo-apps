@@ -22,6 +22,10 @@ export { toKoreanCount } from './korean-number/korean-number';
 
 export { readingTime } from './reading/reading';
 
+export { reviewStatus } from './review-cycle/review-cycle';
+
+export type { ReviewCycle, ReviewLevel, ReviewStatus } from './review-cycle/review-cycle';
+
 export {
   getServerThemeSnapshot,
   getThemeSnapshot,

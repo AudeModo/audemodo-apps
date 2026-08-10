@@ -1,0 +1,77 @@
+/*
+ * 갱신할 때가 된 글.
+ *
+ * 배지는 옅은 면 + 텍스트 단계 글자다 — 글자가 올라가는 면이라 대비를 맞춘다.
+ * 조작 요소는 없다. 상태는 배지와 글로만 말한다.
+ */
+
+.list {
+  margin-top: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.item + .item {
+  border-top: 1px solid var(--devlog-line-soft);
+}
+
+.title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: var(--devlog-font-size-control);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.title:focus-visible {
+  outline: none;
+  border-radius: var(--radius-inner);
+  box-shadow:
+    0 0 0 2px var(--color-background-card),
+    0 0 0 4px var(--color-accent);
+}
+
+.badge {
+  flex: none;
+  padding: 3px 8px;
+  border-radius: var(--radius-inner);
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge[data-level='overdue'] {
+  background: var(--devlog-coral-pale);
+  color: var(--devlog-coral-strong);
+}
+
+.badge[data-level='soon'] {
+  background: var(--devlog-yellow-pale);
+  color: var(--devlog-yellow-strong);
+}
+
+.badge[data-level='ok'] {
+  background: var(--devlog-blue-pale);
+  color: var(--devlog-blue-strong);
+}
+
+.due {
+  flex: none;
+  font-size: var(--font-size-4xs);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
