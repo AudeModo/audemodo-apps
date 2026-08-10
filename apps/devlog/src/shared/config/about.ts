@@ -8,7 +8,7 @@
  */
 
 export interface CareerEntry {
-  /** `YYYY.MM` */
+  /** `YYYY.MM`. 기간이 있으면 `YYYY.MM–YYYY.MM` */
   at: string;
   title: string;
   body: string;
@@ -47,6 +47,7 @@ export const ABOUT = {
 
   intro: [
     '화면부터 들어왔다. 버튼이 왜 여기 있어야 하는지 설명할 수 있게 되자, 그 버튼이 부르는 쿼리가 왜 느린지도 설명할 수 있어야 한다는 걸 알았다.',
+    '지금은 앱과 라이브러리를 한 저장소에서 함께 기른다. 혼자 만들면 규율이 먼저 무너져서, 경계를 사람이 아니라 검사기가 지키게 했다.',
   ],
 
   /** 형광펜이 그어지는 문단 — 앞뒤와 강조를 나눠 둔다 */
@@ -63,6 +64,11 @@ export const ABOUT = {
 
   careerNote: '경력이 아니라 범위가 넓어진 순서다.',
 
+  /*
+   * 최신이 위다. 기간이 있는 것은 `–`로 잇는다.
+   *
+   * 아직 비어 있는 자리가 있다 — 2025.08과 2026.07 사이. 채워지면 tone은 past다.
+   */
   career: [
     {
       at: '2026.07',
@@ -75,6 +81,12 @@ export const ABOUT = {
       title: 'Audemodo 시작',
       body: '혼자 굴리는 모노레포에서 경계를 CI가 지키게 만들었다. 지금 가장 시간을 쓰는 곳이다.',
       tone: 'start',
+    },
+    {
+      at: '2025.02–2025.08',
+      title: '카카오페이증권 프론트엔드 인턴',
+      body: '실제 사용자가 있는 서비스에서 화면을 만들었다. 혼자 만들 때와 여럿이 만들 때 무엇이 달라지는지를 여기서 봤다.',
+      tone: 'past',
     },
   ] satisfies CareerEntry[],
 
