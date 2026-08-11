@@ -10,8 +10,6 @@ export { Card } from './component/card/card';
 
 export type { CardHover, CardProps } from './component/card/card';
 
-export type { CardVariant } from './component/card/card';
-
 export { Chip } from './component/chip/chip';
 
 export type { ChipProps } from './component/chip/chip';

@@ -50,11 +50,12 @@
   grid-column: span 2;
 }
 
+/*
+ * 면은 래퍼 `Card`가 든다. 여백만 여기 남는다 — 대역마다 달라지는 값(20 → 18)은
+ * 값이 아니라 관계라서 프롭으로 표현되지 않는다.
+ */
 .widget {
   padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-container);
-  background: var(--color-background-card);
 }
 
 .widgetHead {

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { Heading } from '@audemodo/design-system';
+import { Card, Heading } from '@audemodo/design-system';
 
 import { DoingNow, toNowRows } from '@/widgets/doing-now';
 import { IdeaList } from '@/widgets/idea-list';
@@ -74,34 +74,34 @@ export const Dashboard = ({
         </div>
 
         <div className={styles.grid}>
-          <section className={`${styles.widget} ${styles.wide}`}>
+          <Card as="section" className={`${styles.widget} ${styles.wide}`}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>손봐야 할 글</h2>
               <span className={styles.widgetCount}>{posts.length}편</span>
             </div>
 
             <ReviewTable posts={posts} />
-          </section>
+          </Card>
 
-          <section className={styles.widget}>
+          <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>갱신할 때가 된 글</h2>
               <span className={styles.widgetCount}>{needsUpdate.length}편</span>
             </div>
 
             <NeedsUpdateList rows={needsUpdate} />
-          </section>
+          </Card>
 
-          <section className={`${styles.widget} ${styles.wide}`}>
+          <Card as="section" className={`${styles.widget} ${styles.wide}`}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>지금 하는 것</h2>
               <span className={styles.widgetCount}>{nowRows.length}개</span>
             </div>
 
             <DoingNow rows={nowRows} />
-          </section>
+          </Card>
 
-          <section className={styles.widget}>
+          <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>할 일</h2>
               {/* 남은 것을 센다. 전체를 세면 다 끝내도 숫자가 그대로다 */}
@@ -109,34 +109,34 @@ export const Dashboard = ({
             </div>
 
             <TodoList items={todos} />
-          </section>
+          </Card>
 
-          <section className={styles.widget}>
+          <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>글감</h2>
               <span className={styles.widgetCount}>{ideas.length}개</span>
             </div>
 
             <IdeaList items={ideas} />
-          </section>
+          </Card>
 
-          <section className={styles.widget}>
+          <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>읽을거리</h2>
               <span className={styles.widgetCount}>{reading.length}개</span>
             </div>
 
             <ReadingList items={reading} />
-          </section>
+          </Card>
 
-          <section className={styles.widget}>
+          <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
               <h2 className={styles.widgetTitle}>바로가기</h2>
               <span className={styles.widgetCount}>{links.length}개</span>
             </div>
 
             <ShortcutLinks items={links} />
-          </section>
+          </Card>
         </div>
       </div>
     </main>
