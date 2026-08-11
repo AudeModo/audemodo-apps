@@ -1,0 +1,47 @@
+/*
+ * 할 일.
+ *
+ * 체크박스를 두지 않는다. 데이터가 빌드에 굳어 나도 남도 못 누르는데 누를 수 있게
+ * 생긴 것을 두면 고장난 것으로 읽힌다. 완료는 글리프와 취소선으로만 말한다.
+ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+}
+
+.row[data-done='true'] {
+  text-decoration: line-through;
+  color: var(--color-text-secondary);
+}
+
+.done {
+  flex-shrink: 0;
+  color: var(--devlog-green-strong);
+}
+
+/* 미완료는 빈 원이다. 아이콘을 쓰면 완료와 같은 무게로 보인다 */
+.todo {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--color-border-emphasized);
+  border-radius: 50%;
+}
+
+.empty {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,6 @@
+{
+  "items": [
+    { "kind": "project", "slug": "devlog" },
+    { "kind": "project", "slug": "audemodo" }
+  ]
+}

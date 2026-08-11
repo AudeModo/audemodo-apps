@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 
 import { Dashboard } from '@/_pages/dashboard';
 
+import { getIdeas, getLinks, getNow, getReading, getTodos } from '@/entities/dashboard/server';
 import { getPostSummaries } from '@/entities/post/server';
+import { getProjectSummaries } from '@/entities/project/server';
 
 export const metadata: Metadata = {
   title: '대시보드',
@@ -11,7 +13,26 @@ export const metadata: Metadata = {
 
 /** 대시보드 페이지 */
 export default async function Page() {
-  const posts = await getPostSummaries();
+  const [posts, projects, now, todos, reading, ideas, links] = await Promise.all([
+    getPostSummaries(),
+    getProjectSummaries(),
+    getNow(),
+    getTodos(),
+    getReading(),
+    getIdeas(),
+    getLinks(),
+  ]);
 
-  return <Dashboard builtAt={new Date()} posts={posts} />;
+  return (
+    <Dashboard
+      builtAt={new Date()}
+      ideas={ideas}
+      links={links}
+      now={now}
+      posts={posts}
+      projects={projects}
+      reading={reading}
+      todos={todos}
+    />
+  );
 }
