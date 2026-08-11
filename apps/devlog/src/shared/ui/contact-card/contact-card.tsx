@@ -1,5 +1,6 @@
 import type { ReactElement, ReactNode } from 'react';
 
+import { Card } from '@audemodo/design-system';
 import { IconExternalLink } from '@tabler/icons-react';
 
 import styles from './contact-card.module.css';
@@ -28,7 +29,7 @@ export const ContactCard = ({
   const external = isExternal ? { rel: 'noopener noreferrer', target: '_blank' } : {};
 
   return (
-    <a className={styles.card} href={href} {...external}>
+    <Card as="a" className={styles.card} hover="exchange" href={href} padding={20} {...external}>
       <span className={styles.label}>
         {icon}
         {label}
@@ -38,6 +39,6 @@ export const ContactCard = ({
       <div className={styles.address}>{address}</div>
 
       <p className={styles.context}>{context}</p>
-    </a>
+    </Card>
   );
 };

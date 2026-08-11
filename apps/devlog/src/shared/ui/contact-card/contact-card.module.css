@@ -6,25 +6,12 @@
  */
 
 .card {
+  /* 면 · 여백 · 호버 교환은 래퍼 `Card`가 든다. 여기는 링크의 성질만 남는다 */
   display: block;
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-container);
-  background: var(--color-background-card);
   text-decoration: none;
-  transition:
-    border-color var(--duration-fast-max) var(--devlog-ease),
-    box-shadow var(--duration-fast-max) var(--devlog-ease),
-    transform var(--duration-fast-max) var(--devlog-ease);
 }
 
 /* 공용 규칙 — 선이 사라지고 공간이 생기는 교환 */
-.card:hover {
-  border-color: transparent;
-  box-shadow: var(--shadow-med);
-  transform: translateY(-2px);
-}
-
 .card:focus-visible {
   outline: none;
   box-shadow:
