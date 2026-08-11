@@ -1,8 +1,8 @@
 /*
- * 글감.
+ * 초안 · 글감.
  *
- * 라벨이 중립색인 이유 — 이 자리는 원래 초안과 글감을 함께 놓는다. 초안이 옅은 파랑을
- * 가져가므로 글감은 색을 쓰지 않아야 둘이 갈린다.
+ * 초안이 옅은 파랑을 가져가고 글감은 색을 쓰지 않는다. 둘이 한 목록에 있는데 출처가
+ * 다르므로(글 frontmatter · 정적 JSON) 라벨이 그 차이를 말한다.
  */
 
 .list {
@@ -39,6 +39,7 @@
 .title {
   font-size: var(--font-size-xs);
   color: var(--color-text-primary);
+  text-decoration: none;
 }
 
 .note {
@@ -49,4 +50,14 @@
 .empty {
   font-size: var(--font-size-3xs);
   color: var(--color-text-secondary);
+}
+
+/* 초안은 글이 될 가능성이 더 가깝다. 색이 그 차이를 말한다 */
+.draftLabel {
+  background: var(--devlog-blue-pale);
+  color: var(--devlog-blue-strong);
+}
+
+.title:hover {
+  text-decoration: underline;
 }

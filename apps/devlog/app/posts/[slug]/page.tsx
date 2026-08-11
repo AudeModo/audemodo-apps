@@ -36,6 +36,11 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.summary,
+    /*
+     * 초안은 검색에 잡히지 않는다. URL로는 보이는데 색인되면 목록에서 뺀 뜻이 없다 —
+     * 검색으로 들어온 사람에게는 그냥 공개된 글이다.
+     */
+    ...(post.draft === true ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: 'article',
       title: post.title,

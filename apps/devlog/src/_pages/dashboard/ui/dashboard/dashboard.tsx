@@ -35,6 +35,8 @@ interface DashboardProps {
   todos: TodoItem[];
   reading: ReadingLink[];
   ideas: IdeaItem[];
+  /** 초안. 「초안 · 글감」의 앞쪽 절반이다 */
+  drafts: PostSummary[];
   links: ShortcutLink[];
   /** 못 받아왔고 받아둔 것도 없으면 null이다 — 그때는 잔디를 그리지 않는다 */
   github: GithubSnapshot | null;
@@ -58,6 +60,7 @@ export const Dashboard = ({
   todos,
   reading,
   ideas,
+  drafts,
   links,
   github,
   builtAt,
@@ -140,11 +143,11 @@ export const Dashboard = ({
 
           <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>
-              <h2 className={styles.widgetTitle}>글감</h2>
-              <span className={styles.widgetCount}>{ideas.length}개</span>
+              <h2 className={styles.widgetTitle}>초안 · 글감</h2>
+              <span className={styles.widgetCount}>{drafts.length + ideas.length}개</span>
             </div>
 
-            <IdeaList items={ideas} />
+            <IdeaList drafts={drafts} items={ideas} />
           </Card>
 
           <Card as="section" className={styles.widget}>

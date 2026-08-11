@@ -44,6 +44,19 @@ export interface PostFrontmatter {
   needsUpdate?: ReviewCycle;
   /** 마지막으로 검토한 시각 (ISO 8601). 여기에 주기를 더해 기한을 낸다 */
   lastReviewed?: string;
+  /**
+   * 아직 쓰는 중인가.
+   *
+   * 「빠진다」가 아니라 **「누가 보는가」**다. 화면마다 뜻이 다르다:
+   *
+   *   목록 · 캐러셀 · 세는 곳 · RSS   안 나온다
+   *   URL 직접                        보인다
+   *   대시보드 「초안 · 글감」         나온다
+   *
+   * 빌드에서 통째로 빼지 않는 이유는 실용이다 — 코드블록이 어떻게 나오는지 목차가
+   * 맞는지는 배포된 환경에서 봐야 알고, dev에서만 보이면 그것을 못 본다.
+   */
+  draft?: boolean;
 }
 
 /** 게시글 요약 ─ frontmatter에 slug를 더한 것. */

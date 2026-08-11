@@ -5,6 +5,7 @@ import {
   asRecord,
   count,
   fail,
+  flag,
   instant,
   maybe,
   oneOf,
@@ -57,6 +58,7 @@ export const parsePostFrontmatter = (value: unknown, where: string): PostFrontma
   const seriesOrder =
     record.seriesOrder === undefined ? undefined : count(record, 'seriesOrder', where);
   const needsUpdate = optionalOneOf(record, 'needsUpdate', where, REVIEW_CYCLES);
+  const draft = record.draft === undefined ? undefined : flag(record, 'draft', where);
   const lastReviewed = optionalInstant(record, 'lastReviewed', where);
 
   // 고친 날이 쓴 날보다 앞이면 「수정됨」이 거짓말이 된다
@@ -100,5 +102,6 @@ export const parsePostFrontmatter = (value: unknown, where: string): PostFrontma
     ...maybe('seriesOrder', seriesOrder),
     ...maybe('needsUpdate', needsUpdate),
     ...maybe('lastReviewed', lastReviewed),
+    ...maybe('draft', draft),
   };
 };
