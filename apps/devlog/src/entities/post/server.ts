@@ -6,4 +6,9 @@
  * 것과 없는 것이 있고, 그 구분은 타입으로 표현되지 않아 배럴로 표현한다.
  */
 
-export { getPostDetail, getPostSlugs, getPostSummaries } from './api/post-repository';
+export {
+  getDraftSummaries,
+  getPostDetail,
+  getPostSlugs,
+  getPostSummaries,
+} from './api/post-repository';

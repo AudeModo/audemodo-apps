@@ -10,7 +10,7 @@ import type { PostDetail as PostDetailModel, PostSummary } from '@/entities/post
 import { findAdjacentPosts, formatPostDate } from '@/entities/post';
 
 import { extractHeadings, readingTime } from '@/shared/lib';
-import { ScrollProgress } from '@/shared/ui';
+import { Callout, ScrollProgress } from '@/shared/ui';
 
 import styles from './post-detail.module.css';
 
@@ -105,6 +105,14 @@ export const PostDetail = ({ post, posts }: PostDetailProps): ReactElement => {
           <div className={styles.grid}>
             <article className={styles.body}>
               <VStack gap={5}>
+                {/*
+                  없으면 공유했을 때 상대가 완성글로 읽는다. URL로 열리는 것과
+                  「다 쓴 글이다」는 다른 말이다.
+                */}
+                {post.draft === true && (
+                  <Callout kind="warn">아직 쓰는 중인 글이다. 목록에 나오지 않는다.</Callout>
+                )}
+
                 {/* 좁은 화면에서만 보인다. 본문 위에 접힌 채로 앉는다 */}
                 <Toc headings={headings} placement="inline" />
 
