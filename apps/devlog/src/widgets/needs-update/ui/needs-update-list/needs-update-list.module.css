@@ -55,17 +55,17 @@
 }
 
 .badge[data-level='overdue'] {
-  background: var(--devlog-coral-pale);
+  --ads-badge-surface: var(--devlog-coral-pale);
   color: var(--devlog-coral-strong);
 }
 
 .badge[data-level='soon'] {
-  background: var(--devlog-yellow-pale);
+  --ads-badge-surface: var(--devlog-yellow-pale);
   color: var(--devlog-yellow-strong);
 }
 
 .badge[data-level='ok'] {
-  background: var(--devlog-blue-pale);
+  --ads-badge-surface: var(--devlog-blue-pale);
   color: var(--devlog-blue-strong);
 }
 
