@@ -1,0 +1,58 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: var(--font-size-3xs);
+}
+
+/*
+ * 글리프에 텍스트 단계 색을 쓴다. 흰 면에서 기본 초록은 2.99, 노랑은 1.9라
+ * 비텍스트 3:1에 미달한다 — 손봐야 할 글의 글리프와 같은 판단이다.
+ */
+.glyph {
+  flex: none;
+  align-self: center;
+}
+
+.row[data-kind='pr'] .glyph {
+  color: var(--devlog-green-strong);
+}
+
+.row[data-kind='issue'] .glyph {
+  color: var(--devlog-yellow-strong);
+}
+
+.title {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-primary);
+}
+
+.elapsed {
+  flex: none;
+  font-family: var(--font-family-code);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 오래 열려 있는 것만 색이 붙는다 */
+.row[data-aged='true'] .elapsed {
+  color: var(--devlog-coral-strong);
+}
+
+.empty {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}

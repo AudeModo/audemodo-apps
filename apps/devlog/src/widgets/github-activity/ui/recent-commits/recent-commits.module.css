@@ -1,0 +1,38 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: var(--font-size-3xs);
+}
+
+/* sha와 날짜는 값이라 코드 서체다. 자릿수가 같아 목록이 세로로 선다*/
+.sha {
+  flex: none;
+  font-family: var(--font-family-code);
+  color: var(--color-text-secondary);
+}
+
+.message {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-primary);
+}
+
+.day {
+  flex: none;
+  font-family: var(--font-family-code);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}

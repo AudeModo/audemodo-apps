@@ -1,4 +1,4 @@
-import type { ContributionCell } from '../../model/to-cells';
+import type { ContributionCell } from '../../model/to-activity';
 import type { ReactElement } from 'react';
 
 import styles from './contribution-grid.module.css';
