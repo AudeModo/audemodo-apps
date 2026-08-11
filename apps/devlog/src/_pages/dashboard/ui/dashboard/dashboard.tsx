@@ -2,8 +2,15 @@ import type { ReactElement } from 'react';
 
 import { Card, Heading } from '@audemodo/design-system';
 
-import { ContributionGrid, toContributionCells } from '@/widgets/contribution-grid';
 import { DoingNow, toNowRows } from '@/widgets/doing-now';
+import {
+  ContributionGrid,
+  OpenItems,
+  RecentCommits,
+  toCommitRows,
+  toContributionCells,
+  toOpenRows,
+} from '@/widgets/github-activity';
 import { IdeaList } from '@/widgets/idea-list';
 import { NeedsUpdateList, selectNeedsUpdate } from '@/widgets/needs-update';
 import { ReadingList } from '@/widgets/reading-list';
@@ -78,6 +85,8 @@ export const Dashboard = ({
           cells: toContributionCells(github.commitDays, github.fetchedAt),
           repo: github.repo,
           fetchedAtLabel: formatBuildTime(new Date(github.fetchedAt)),
+          commits: toCommitRows(github.recentCommits),
+          open: toOpenRows(github.openItems, github.fetchedAt),
         };
 
   return (
@@ -158,6 +167,19 @@ export const Dashboard = ({
                 fetchedAtLabel={grid.fetchedAtLabel}
                 repo={grid.repo}
               />
+
+              <RecentCommits rows={grid.commits} />
+            </Card>
+          )}
+
+          {grid !== null && (
+            <Card as="section" className={styles.widget}>
+              <div className={styles.widgetHead}>
+                <h2 className={styles.widgetTitle}>열린 PR · 이슈</h2>
+                <span className={styles.widgetCount}>{grid.open.length}개</span>
+              </div>
+
+              <OpenItems rows={grid.open} />
             </Card>
           )}
 

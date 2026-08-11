@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { toContributionCells, WINDOW_DAYS } from './to-cells';
+import { toContributionCells, WINDOW_DAYS } from './to-activity';
 
 const FETCHED = '2026-08-11T00:00:00Z';
 

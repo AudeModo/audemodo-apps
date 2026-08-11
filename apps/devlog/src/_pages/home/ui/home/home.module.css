@@ -247,3 +247,21 @@
     transform: none;
   }
 }
+
+/*
+ * 잔디 카드.
+ *
+ * 시안이 검정으로 정했다 — 프로젝트 카드 둘 사이에서 첫 자리를 잡아야 하고,
+ * 흰 카드 셋이면 무엇이 먼저인지 형태가 말하지 못한다.
+ *
+ * 빈 칸 색을 여기서 바꾼다. 밝은 면용 트랙 색은 검정 위에서 보이지 않는다.
+ */
+.gridCard {
+  --ads-grid-empty: rgba(255, 255, 255, 0.14);
+
+  display: flex;
+  align-items: center;
+  border-color: transparent;
+  background: var(--devlog-solid);
+  color: var(--devlog-on-solid);
+}

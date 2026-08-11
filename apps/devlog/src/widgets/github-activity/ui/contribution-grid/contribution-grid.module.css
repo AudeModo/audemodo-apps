@@ -18,11 +18,16 @@
   gap: 3px;
 }
 
+/*
+ * 빈 칸의 색을 바깥에서 바꿀 수 있게 둔다. 홈의 잔디는 검정 카드 위에 올라가는데
+ * 밝은 면용 트랙 색은 거기서 보이지 않는다 — 값이 아니라 놓이는 자리에 달린 것이라
+ * 프롭이 아니라 커스텀 속성이다.
+ */
 .cell {
   width: 10px;
   height: 10px;
   border-radius: 2px;
-  background: var(--devlog-track);
+  background: var(--ads-grid-empty, var(--devlog-track));
 }
 
 .cell[data-level='1'] {
