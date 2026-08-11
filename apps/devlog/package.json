@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "snapshot:github": "tsx scripts/refresh-github-snapshot.mts"
   },
   "dependencies": {
     "@audemodo/design-system": "workspace:*",
@@ -32,6 +33,7 @@
     "@types/react-dom": "^19.2.0",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^10.1.8",
+    "tsx": "^4.23.12",
     "typescript": "^5.7.2",
     "vitest": "^4.1.10"
   }

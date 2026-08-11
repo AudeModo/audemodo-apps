@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Dashboard } from '@/_pages/dashboard';
 
 import { getIdeas, getLinks, getNow, getReading, getTodos } from '@/entities/dashboard/server';
+import { getGithubSnapshot } from '@/entities/github/server';
 import { getPostSummaries } from '@/entities/post/server';
 import { getProjectSummaries } from '@/entities/project/server';
 
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
 
 /** 대시보드 페이지 */
 export default async function Page() {
-  const [posts, projects, now, todos, reading, ideas, links] = await Promise.all([
+  const builtAt = new Date();
+
+  const [posts, projects, now, todos, reading, ideas, links, github] = await Promise.all([
     getPostSummaries(),
     getProjectSummaries(),
     getNow(),
@@ -21,11 +24,13 @@ export default async function Page() {
     getReading(),
     getIdeas(),
     getLinks(),
+    getGithubSnapshot(builtAt),
   ]);
 
   return (
     <Dashboard
-      builtAt={new Date()}
+      builtAt={builtAt}
+      github={github}
       ideas={ideas}
       links={links}
       now={now}

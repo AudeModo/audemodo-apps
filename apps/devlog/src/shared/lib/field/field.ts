@@ -113,7 +113,7 @@ export const optionalTextList = (
 ): string[] | undefined => (record[key] === undefined ? undefined : textList(record, key, where));
 
 /** 배열 안의 객체들. 항목마다 위치 이름을 붙여 돌려준다 */
-const recordList = (
+export const recordList = (
   record: Record<string, unknown>,
   key: string,
   where: string,

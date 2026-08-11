@@ -19,7 +19,12 @@
     },
 
     "apps/devlog": {
-      // 라우트가 진입점이다. 여기서 닿지 않는 것은 죽은 코드다.
+      /*
+       * 라우트가 진입점이다. 여기서 닿지 않는 것은 죽은 코드다.
+       *
+       * 스냅샷 갱신 스크립트는 적지 않는다 — knip이 package.json의 scripts에서 이미
+       * 찾는다. 적었더니 「중복」이라고 짚어줬다.
+       */
       "entry": ["app/**/{page,layout,loading,error,not-found,route,template,default}.{ts,tsx}"],
       "project": ["{app,src}/**/*.{ts,tsx}"],
     },
