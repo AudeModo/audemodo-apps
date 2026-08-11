@@ -1,6 +1,7 @@
 import type { NeedsUpdateRow } from '../../model/select-needs-update';
 import type { ReactElement } from 'react';
 
+import { Badge } from '@audemodo/design-system';
 import Link from 'next/link';
 
 import type { ReviewStatus } from '@/shared/lib';
@@ -37,9 +38,12 @@ export const NeedsUpdateList = ({ rows }: NeedsUpdateListProps): ReactElement =>
 
           <span className={styles.due}>{status.dueAt}</span>
 
-          <span className={styles.badge} data-level={status.level}>
-            {badgeText(status)}
-          </span>
+          <Badge
+            className={styles.badge}
+            data-level={status.level}
+            label={badgeText(status)}
+            tone="pale"
+          />
         </div>
       ))}
     </div>
