@@ -1,0 +1,49 @@
+/*
+ * 벤더 컴포넌트에 우리 사양을 얹는 자리.
+ *
+ * 여기 있는 것은 전부 「프롭으로 표현할 수 없는 모양」이다. 값 하나면 프롭이 맞고,
+ * 상태·관계·자손이면 스타일시트가 맞다.
+ *
+ * ── 왜 특이도 싸움이 없나
+ *
+ * 벤더 스타일은 `@layer astryx-base` 안에 있고 이 파일은 레이어 밖이다. 레이어 밖
+ * 선언이 레이어 안을 이기므로 `!important`도 `:not(#\#)` 흉내도 필요 없다.
+ * `styles.css`의 import 순서가 그 성질을 만든다 — 순서를 바꾸면 여기가 무력해진다.
+ *
+ * ── 왜 벤더 클래스를 직접 겨냥하지 않나
+ *
+ * 벤더가 `astryx-badge` 같은 안정적인 클래스를 노출하지만, 우리가 붙인 클래스를
+ * 겨냥하면 「우리가 얹은 것」과 「벤더가 준 것」이 파일에서 구별된다.
+ */
+
+/* ── 배지 — 옅은 무게 ─────────────────────────────────
+ *
+ * 색은 벤더의 `variant`가 정한 글자색을 그대로 쓰고, 면만 그 색의 옅은 판으로 깐다.
+ * `color-mix`로 만들면 변종이 늘어도 여기 손댈 일이 없다.
+ */
+.ads-badge-pale {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  color: currentColor;
+}
+
+/* ── 칩 — 읽기 전용 ──────────────────────────────────
+ *
+ * 테두리가 이 저장소에서 「누를 수 있다」의 신호다. 누를 수 없는 칩에 테두리가 남으면
+ * 눌러보고 아무 일도 안 일어난다.
+ */
+.ads-chip-plain {
+  border-color: transparent;
+  background: transparent;
+  padding-inline: 0;
+}
+
+/* ── 칩 — 선택됨 ─────────────────────────────────────
+ *
+ * 채움이 반전된다. 활성 필터에는 색을 쓰지 않기로 했으므로 브랜드 색이 아니라
+ * 먹/흰 대비로 뒤집는다.
+ */
+.ads-chip-selected {
+  border-color: var(--devlog-solid);
+  background: var(--devlog-solid);
+  color: var(--devlog-on-solid);
+}

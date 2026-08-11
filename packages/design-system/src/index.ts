@@ -1,6 +1,18 @@
+export { Badge } from './component/badge/badge';
+
+export type { BadgeProps, BadgeTone } from './component/badge/badge';
+
+export { Button } from './component/button/button';
+
+export type { ButtonProps, ButtonVariant } from './component/button/button';
+
 export { Card } from './component/card/card';
 
 export type { CardProps, CardVariant } from './component/card/card';
+
+export { Chip } from './component/chip/chip';
+
+export type { ChipProps } from './component/chip/chip';
 
 export { Link } from './component/link/link';
 
