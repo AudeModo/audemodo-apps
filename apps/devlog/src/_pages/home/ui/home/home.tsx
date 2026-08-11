@@ -1,21 +1,29 @@
 import type { ReactElement } from 'react';
 
-import { Heading, Text } from '@audemodo/design-system';
+import { Card, Heading, Text } from '@audemodo/design-system';
 import { IconArrowRight, IconBooks, IconStack, IconUser } from '@tabler/icons-react';
 import Link from 'next/link';
 
 import { ArchiveChart } from '@/widgets/archive-chart';
+import { ContributionGrid, toContributionCells } from '@/widgets/github-activity';
 import type { KindShare } from '@/widgets/kind-distribution';
 import { KindDistribution } from '@/widgets/kind-distribution';
 import { PostCarousel } from '@/widgets/post-carousel';
 import { TagCloud } from '@/widgets/tag-cloud';
 
+import type { GithubSnapshot } from '@/entities/github';
 import type { PostSummary } from '@/entities/post';
 import type { ProjectSummary } from '@/entities/project';
 import { ProjectCard } from '@/entities/project';
 
 import { AXIS_VALUES, KIND_VALUES, TRACK_VALUES } from '@/shared/config';
-import { toFrequency, toKoreanCount, toMonthlyBuckets, toShares } from '@/shared/lib';
+import {
+  formatBuildTime,
+  toFrequency,
+  toKoreanCount,
+  toMonthlyBuckets,
+  toShares,
+} from '@/shared/lib';
 
 import styles from './home.module.css';
 
@@ -25,6 +33,8 @@ const CAROUSEL_SIZE = 6;
 interface HomeProps {
   posts: PostSummary[];
   projects: ProjectSummary[];
+  /** 못 받아왔고 받아둔 것도 없으면 null이다 */
+  github: GithubSnapshot | null;
 }
 
 interface Category {
@@ -42,7 +52,19 @@ interface Category {
  * 지표 4카드는 두지 않는다. 히어로 문장이 이미 같은 수를 말하고 있어 중복이고,
  * 되풀이하면 「양 자랑」에 가까워진다.
  */
-export const Home = ({ posts, projects }: HomeProps): ReactElement => {
+export const Home = ({ posts, projects, github }: HomeProps): ReactElement => {
+  /*
+   * 잔디는 못 받아왔고 받아둔 것도 없으면 그리지 않는다. 그때는 프로젝트 카드가
+   * 셋으로 늘어 자리가 비지 않는다 — 빈 칸을 두면 무엇이 빠졌는지 화면이 말하지 못한다.
+   */
+  const grid =
+    github === null
+      ? null
+      : {
+          cells: toContributionCells(github.commitDays, github.fetchedAt),
+          repo: github.repo,
+          fetchedAtLabel: formatBuildTime(new Date(github.fetchedAt)),
+        };
   const troubleCount = posts.filter((post) => post.kind === '트러블슈팅').length;
 
   const kindCounts = KIND_VALUES.map((kind) => posts.filter((post) => post.kind === kind).length);
@@ -128,7 +150,17 @@ export const Home = ({ posts, projects }: HomeProps): ReactElement => {
           </div>
 
           <div className={styles.projects}>
-            {projects.slice(0, 3).map((project) => (
+            {grid !== null && (
+              <Card className={styles.gridCard} padding={18}>
+                <ContributionGrid
+                  cells={grid.cells}
+                  fetchedAtLabel={grid.fetchedAtLabel}
+                  repo={grid.repo}
+                />
+              </Card>
+            )}
+
+            {projects.slice(0, grid === null ? 3 : 2).map((project) => (
               <ProjectCard
                 key={project.slug}
                 postCount={posts.filter((post) => post.project === project.name).length}

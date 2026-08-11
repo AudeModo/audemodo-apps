@@ -21,21 +21,29 @@ export const ContributionGrid = ({
   cells,
   repo,
   fetchedAtLabel,
-}: ContributionGridProps): ReactElement => (
-  <div className={styles.frame}>
-    <div className={styles.grid}>
-      {cells.map((cell) => (
-        <span
-          className={styles.cell}
-          data-level={cell.level}
-          key={cell.day}
-          title={`${cell.day} · 커밋 ${String(cell.count)}`}
-        />
-      ))}
-    </div>
+}: ContributionGridProps): ReactElement => {
+  /*
+   * 그린 칸에서 센다. `commitDays`에서 따로 세면 창을 어디서 끊었는지에 따라 숫자와
+   * 그림이 어긋날 수 있다 — 같은 배열에서 나와야 둘이 같은 창을 말한다.
+   */
+  const total = cells.reduce((sum, cell) => sum + cell.count, 0);
 
-    <span className={styles.caption}>
-      {repo} · 최근 12주 · {fetchedAtLabel} 기준
-    </span>
-  </div>
-);
+  return (
+    <div className={styles.frame}>
+      <div className={styles.grid}>
+        {cells.map((cell) => (
+          <span
+            className={styles.cell}
+            data-level={cell.level}
+            key={cell.day}
+            title={`${cell.day} · 커밋 ${String(cell.count)}`}
+          />
+        ))}
+      </div>
+
+      <span className={styles.caption}>
+        {repo} · 최근 12주 커밋 {total} · {fetchedAtLabel} 기준
+      </span>
+    </div>
+  );
+};
