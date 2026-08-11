@@ -1,6 +1,7 @@
 import type { ProjectSummary } from '../../model/types';
 import type { ReactElement } from 'react';
 
+import { Card } from '@audemodo/design-system';
 import { IconExternalLink } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -21,7 +22,7 @@ interface ProjectCardProps {
  */
 export const ProjectCard = ({ project, postCount }: ProjectCardProps): ReactElement => {
   return (
-    <div className={styles.card}>
+    <Card className={styles.card} hover="exchange" padding={18}>
       <div className={styles.head}>
         <div className={styles.nameColumn}>
           <Link className={styles.name} href={`/projects/${project.slug}`}>
@@ -74,6 +75,6 @@ export const ProjectCard = ({ project, postCount }: ProjectCardProps): ReactElem
           </a>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
