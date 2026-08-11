@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 
 import { Card, Heading } from '@audemodo/design-system';
 
+import { ContributionGrid, toContributionCells } from '@/widgets/contribution-grid';
 import { DoingNow, toNowRows } from '@/widgets/doing-now';
 import { IdeaList } from '@/widgets/idea-list';
 import { NeedsUpdateList, selectNeedsUpdate } from '@/widgets/needs-update';
@@ -11,6 +12,7 @@ import { ShortcutLinks } from '@/widgets/shortcut-links';
 import { TodoList } from '@/widgets/todo-list';
 
 import type { IdeaItem, NowItem, ReadingLink, ShortcutLink, TodoItem } from '@/entities/dashboard';
+import type { GithubSnapshot } from '@/entities/github';
 import type { PostSummary } from '@/entities/post';
 import type { ProjectSummary } from '@/entities/project';
 
@@ -27,6 +29,8 @@ interface DashboardProps {
   reading: ReadingLink[];
   ideas: IdeaItem[];
   links: ShortcutLink[];
+  /** 못 받아왔고 받아둔 것도 없으면 null이다 — 그때는 잔디를 그리지 않는다 */
+  github: GithubSnapshot | null;
   /** 빌드가 돌아간 시각 */
   builtAt: Date;
 }
@@ -48,6 +52,7 @@ export const Dashboard = ({
   reading,
   ideas,
   links,
+  github,
   builtAt,
 }: DashboardProps): ReactElement => {
   // 머리의 개수와 목록이 어긋나지 않도록 한 번만 센다
@@ -61,6 +66,19 @@ export const Dashboard = ({
   );
 
   const remaining = todos.filter((todo) => !todo.done).length;
+
+  /*
+   * 없으면 그리지 않는다. 0으로 그리면 「활동이 없었다」로 읽히는데 그것은 사실이
+   * 아니라 받아오지 못했다는 뜻이다.
+   */
+  const grid =
+    github === null
+      ? null
+      : {
+          cells: toContributionCells(github.commitDays, github.fetchedAt),
+          repo: github.repo,
+          fetchedAtLabel: formatBuildTime(new Date(github.fetchedAt)),
+        };
 
   return (
     <main className={styles.page}>
@@ -128,6 +146,20 @@ export const Dashboard = ({
 
             <ReadingList items={reading} />
           </Card>
+
+          {grid !== null && (
+            <Card as="section" className={`${styles.widget} ${styles.wide}`}>
+              <div className={styles.widgetHead}>
+                <h2 className={styles.widgetTitle}>최근 커밋</h2>
+              </div>
+
+              <ContributionGrid
+                cells={grid.cells}
+                fetchedAtLabel={grid.fetchedAtLabel}
+                repo={grid.repo}
+              />
+            </Card>
+          )}
 
           <Card as="section" className={styles.widget}>
             <div className={styles.widgetHead}>

@@ -28,6 +28,7 @@ export {
   optionalText,
   optionalTextList,
   optionalYearMonth,
+  recordList,
   text,
   textList,
   yearMonth,
