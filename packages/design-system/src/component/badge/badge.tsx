@@ -14,7 +14,13 @@ import { Badge as VendorBadge } from '@astryxdesign/core';
  */
 export type BadgeTone = 'filled' | 'pale';
 
-export interface BadgeProps extends VendorBadgeProps {
+export interface BadgeProps extends Omit<VendorBadgeProps, 'className'> {
+  /**
+   * CSS 모듈의 클래스는 `string | undefined`로 나온다. 그것을 못 받으면 이 저장소가
+   * 스타일을 쓰는 방식과 래퍼가 어긋난다.
+   */
+  className?: string | undefined;
+
   /**
    * 기본은 채운 것. 옅은 것은 곁가지로 읽혀야 하는 자리에 쓴다.
    * @default 'filled'

@@ -47,3 +47,40 @@
   background: var(--devlog-solid);
   color: var(--devlog-on-solid);
 }
+
+/* ── 카드 — 스케일 밖 여백 ───────────────────────────
+ *
+ * 벤더 스텝에 18이 없다(4는 16, 5는 20). 값을 커스텀 속성으로 받아 여기서 편다 —
+ * 벤더의 패딩은 stylex 원자 클래스라 레이어 안이고, 이 선언이 레이어 밖이라 이긴다.
+ */
+.ads-card-padding {
+  padding: var(--ads-card-padding);
+}
+
+/* ── 카드 — 호버 교환 ────────────────────────────────
+ *
+ * 선이 사라지고 공간이 생긴다. 값 하나가 아니라 상태에 걸린 셋이라 프롭으로는
+ * 이름만 받고 뜻은 여기가 든다.
+ */
+.ads-card-hover-exchange {
+  transition:
+    border-color var(--duration-fast-max) var(--devlog-ease),
+    box-shadow var(--duration-fast-max) var(--devlog-ease),
+    transform var(--duration-fast-max) var(--devlog-ease);
+}
+
+.ads-card-hover-exchange:hover {
+  border-color: transparent;
+  box-shadow: var(--shadow-med);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ads-card-hover-exchange {
+    transition-duration: 0s;
+  }
+
+  .ads-card-hover-exchange:hover {
+    transform: none;
+  }
+}

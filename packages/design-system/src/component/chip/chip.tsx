@@ -21,7 +21,13 @@ import { Token } from '@astryxdesign/core';
  * 둘 다 프롭이 아니라 **모양**이라 클래스로 얹는다. 벤더 스타일은
  * `@layer astryx-base` 안에 있어 레이어 밖인 우리 선언이 이긴다.
  */
-export interface ChipProps extends TokenProps {
+export interface ChipProps extends Omit<TokenProps, 'className'> {
+  /**
+   * CSS 모듈의 클래스는 `string | undefined`로 나온다. 그것을 못 받으면 이 저장소가
+   * 스타일을 쓰는 방식과 래퍼가 어긋난다.
+   */
+  className?: string | undefined;
+
   /**
    * 테두리를 지운다. 읽기 전용 칩 — 누를 수 없는 것이 눌릴 것처럼 보이면 안 된다.
    * @default false
