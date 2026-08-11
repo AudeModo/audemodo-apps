@@ -1,0 +1,11 @@
+{
+  "items": [
+    { "label": "저장소", "url": "https://github.com/AudeModo/audemodo-apps" },
+    {
+      "label": "meta 문서",
+      "url": "https://github.com/AudeModo/audemodo-meta",
+      "note": "비공개"
+    },
+    { "label": "Vercel", "url": "https://vercel.com/audemodo/audemodo-apps-devlog" }
+  ]
+}

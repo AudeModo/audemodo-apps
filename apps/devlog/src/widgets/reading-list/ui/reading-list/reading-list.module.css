@@ -1,0 +1,44 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* 호스트는 코드 서체다. 주소는 글이 아니라 값이다 */
+.meta {
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}
+
+.empty {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}

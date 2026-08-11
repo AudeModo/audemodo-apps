@@ -1,0 +1,118 @@
+/*
+ * 지금 하는 것.
+ *
+ * 종류가 넷이라 라벨 색으로 가른다. 라벨은 텍스트 단계 색을 쓴다 — 옅은 색은
+ * 흰 면에서 3:1을 넘지 못한다.
+ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.kind {
+  flex-shrink: 0;
+  font-size: var(--font-size-4xs);
+  font-weight: 500;
+  letter-spacing: var(--devlog-tracking-label);
+  color: var(--kind-color);
+}
+
+.row[data-kind='project'] {
+  --kind-color: var(--devlog-blue-strong);
+}
+
+.row[data-kind='series'] {
+  --kind-color: var(--devlog-green-strong);
+}
+
+.row[data-kind='learning'] {
+  --kind-color: var(--devlog-yellow-strong);
+}
+
+.row[data-kind='reading'] {
+  --kind-color: var(--devlog-coral-strong);
+}
+
+.title {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+}
+
+.note {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}
+
+/*
+ * 진행.
+ *
+ * 칸이냐 이어진 막대냐는 종류가 정한다(`barStyleOf`). 단계와 편은 하나씩 끝나는
+ * 것이라 칸이 뜻을 가지고, 장은 어디까지 왔는가만 말하므로 이어 그린다.
+ */
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.cells {
+  display: flex;
+  gap: 3px;
+}
+
+.cell {
+  width: 14px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--devlog-track);
+}
+
+.cell[data-filled='true'] {
+  background: var(--devlog-blue);
+}
+
+.track {
+  position: relative;
+  width: 92px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--devlog-track);
+  overflow: hidden;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--devlog-blue);
+}
+
+/* 숫자는 코드 서체다. 자릿수가 바뀌어도 옆의 글이 밀리지 않는다 */
+.progress {
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}
+
+.empty {
+  font-size: var(--font-size-3xs);
+  color: var(--color-text-secondary);
+}

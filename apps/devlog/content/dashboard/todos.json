@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "text": "NEXT_PUBLIC_SITE_URL 배포 환경에 넣기", "done": false },
+    { "text": "모바일·다크 여덟 화면 실물 확인", "done": false },
+    { "text": "GitHub Actions 오류 해결", "done": false },
+    { "text": "프론트매터에 검증 붙이기", "done": false },
+    { "text": "초안 필드 정하기", "done": false },
+    { "text": "ESLint import 경계 규칙", "done": false },
+    { "text": "래퍼 컴포넌트 확장", "done": false },
+    { "text": "GitHub API 붙이기", "done": false },
+    { "text": "신택스 하이라이팅과 코드 서체", "done": true },
+    { "text": "화면 여덟과 전역 크롬", "done": true }
+  ]
+}
