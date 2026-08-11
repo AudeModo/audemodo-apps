@@ -1,5 +1,7 @@
 import type { IdeaItem, NowItem, ReadingLink, ShortcutLink, TodoItem } from '../model/types';
 
+import { asRecord, count, fail, flag, maybe, optionalText, text } from '@/shared/lib';
+
 /**
  * 정적 JSON을 읽어 들이는 관문.
  *
@@ -17,15 +19,6 @@ import type { IdeaItem, NowItem, ReadingLink, ShortcutLink, TodoItem } from '../
  * 항목인지를 함께 싣는다.
  */
 
-const fail = (where: string, message: string): never => {
-  throw new Error(`${where} — ${message}`);
-};
-
-const asRecord = (value: unknown, where: string): Record<string, unknown> =>
-  typeof value === 'object' && value !== null && !Array.isArray(value)
-    ? (value as Record<string, unknown>)
-    : fail(where, '객체가 아니다');
-
 /** 최상위 `{ items: [...] }`를 열어 항목마다 위치 이름을 붙인다 */
 const itemsOf = (raw: unknown, file: string): { value: unknown; where: string }[] => {
   const { items } = asRecord(raw, file);
@@ -37,55 +30,7 @@ const itemsOf = (raw: unknown, file: string): { value: unknown; where: string }[
   return items.map((value, index) => ({ value, where: `${file} ${String(index + 1)}번째` }));
 };
 
-const text = (record: Record<string, unknown>, key: string, where: string): string => {
-  const value = record[key];
-
-  return typeof value === 'string' && value.trim() !== ''
-    ? value
-    : fail(where, `${key}가 없거나 빈 문자열이다`);
-};
-
-/** 빈 문자열을 통과시키지 않는다 — 없는 것과 비어 있는 것이 화면에서 다르게 나온다 */
-const optionalText = (
-  record: Record<string, unknown>,
-  key: string,
-  where: string,
-): string | undefined => {
-  const value = record[key];
-
-  if (value === undefined) {
-    return undefined;
-  }
-
-  return typeof value === 'string' && value.trim() !== ''
-    ? value
-    : fail(where, `${key}가 비어 있다. 쓰지 않을 것이면 키째 지운다`);
-};
-
-const flag = (record: Record<string, unknown>, key: string, where: string): boolean => {
-  const value = record[key];
-
-  return typeof value === 'boolean' ? value : fail(where, `${key}가 true 또는 false가 아니다`);
-};
-
-const count = (record: Record<string, unknown>, key: string, where: string): number => {
-  const value = record[key];
-
-  return typeof value === 'number' && Number.isInteger(value) && value >= 0
-    ? value
-    : fail(where, `${key}가 0 이상 정수가 아니다`);
-};
-
 const isHttp = (value: string): boolean => /^https?:\/\//.test(value);
-
-/**
- * 값이 없으면 **키째** 없앤다.
- *
- * `{ note: undefined }`와 `{}`는 다르다 — 앞쪽은 「비어 있다고 적었다」이고 뒤쪽은
- * 「적지 않았다」다. JSON에 키가 없었으면 결과에도 없어야 원본과 같은 모양이 된다.
- */
-const maybe = <K extends string>(key: K, value: string | undefined): Record<K, string> | object =>
-  value === undefined ? {} : { [key]: value };
 
 /**
  * 진행.

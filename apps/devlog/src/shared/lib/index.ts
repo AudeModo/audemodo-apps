@@ -14,6 +14,25 @@ export type { FacetOption } from './facet/facet';
 
 export { buildRssFeed } from './feed/feed';
 
+export {
+  asRecord,
+  count,
+  fail,
+  flag,
+  instant,
+  maybe,
+  oneOf,
+  optionalInstant,
+  optionalOneOf,
+  optionalRecordList,
+  optionalText,
+  optionalTextList,
+  optionalYearMonth,
+  text,
+  textList,
+  yearMonth,
+} from './field/field';
+
 export { extractHeadings } from './headings/headings';
 
 export type { Heading } from './headings/headings';
@@ -22,7 +41,7 @@ export { toKoreanCount } from './korean-number/korean-number';
 
 export { readingTime } from './reading/reading';
 
-export { reviewStatus } from './review-cycle/review-cycle';
+export { REVIEW_CYCLES, reviewStatus } from './review-cycle/review-cycle';
 
 export type { ReviewCycle, ReviewLevel, ReviewStatus } from './review-cycle/review-cycle';
 
