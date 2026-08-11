@@ -8,8 +8,15 @@
  * 밖에서 넣어야 같은 입력에 같은 값이 나오는지 확인할 수 있다.
  */
 
-/** 다시 볼 주기 */
-export type ReviewCycle = '6mo' | '1y';
+/**
+ * 다시 볼 주기.
+ *
+ * 목록에서 타입을 뽑는다. 둘을 따로 적으면 값을 늘릴 때 한쪽만 고치고 지나간다 —
+ * 그러면 frontmatter 검증이 새 값을 모르는 채로 통과시킨다.
+ */
+export const REVIEW_CYCLES = ['6mo', '1y'] as const;
+
+export type ReviewCycle = (typeof REVIEW_CYCLES)[number];
 
 /** 기한까지 얼마나 남았나 */
 export type ReviewLevel = 'overdue' | 'soon' | 'ok';

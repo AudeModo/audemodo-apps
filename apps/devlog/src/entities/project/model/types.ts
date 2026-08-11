@@ -4,7 +4,12 @@
  * 화면에 적히는 말(`status`)과 따로 두는 이유: 「공개 · v1.2.0」처럼 말은 프로젝트마다
  * 다르지만 색은 몇 갈래뿐이다. 말에서 색을 유추하면 표기가 바뀔 때 색이 조용히 어긋난다.
  */
-export type ProjectStatusTone = 'active' | 'released' | 'paused';
+export const PROJECT_STATUS_TONES = ['active', 'released', 'paused'] as const;
+
+export type ProjectStatusTone = (typeof PROJECT_STATUS_TONES)[number];
+
+/** 마일스톤의 상태 */
+export const MILESTONE_STATES = ['done', 'active', 'planned'] as const;
 
 /** 프로젝트 .mdx 파일의 frontmatter */
 export interface ProjectFrontmatter {
@@ -78,7 +83,7 @@ export interface ProjectDecision {
 
 export interface ProjectMilestone {
   title: string;
-  state: 'done' | 'active' | 'planned';
+  state: (typeof MILESTONE_STATES)[number];
   /** `YYYY.MM`. 끝난 것에만 적는다 */
   at?: string;
   /** 진행 중인 것의 안쪽 단계. 전체 진행과 지금 단계를 함께 본다 */

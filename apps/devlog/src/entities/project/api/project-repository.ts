@@ -1,10 +1,12 @@
-import type { ProjectFrontmatter, ProjectSummary } from '../model/types';
+import type { ProjectSummary } from '../model/types';
 
 import { readdir, readFile } from 'fs/promises';
 import { getFrontmatter } from 'next-mdx-remote-client/utils';
 import path from 'path';
 
 import { PROJECTS_DIR } from '@/shared/config';
+
+import { parseProjectFrontmatter } from '../lib/parse-project-frontmatter';
 
 /**
  * 모든 프로젝트를 **중요도 순으로** 반환한다.
@@ -34,9 +36,9 @@ export const getProjectSummaries = async (): Promise<ProjectSummary[]> => {
   const projects = await Promise.all(
     slugs.map(async (slug) => {
       const raw = await readFile(path.join(PROJECTS_DIR, `${slug}.mdx`), 'utf-8');
-      const { frontmatter } = getFrontmatter<ProjectFrontmatter & Record<string, unknown>>(raw);
+      const { frontmatter } = getFrontmatter<Record<string, unknown>>(raw);
 
-      return { slug, ...frontmatter };
+      return { slug, ...parseProjectFrontmatter(frontmatter, `content/projects/${slug}.mdx`) };
     }),
   );
 
