@@ -17,6 +17,8 @@
   "dependencies": {
     "@astryxdesign/core": "^0.2.0",
     "@astryxdesign/theme-neutral": "^0.2.0",
+    "@fontsource/iosevka": "^5.3.0",
+    "@fontsource/nanum-gothic-coding": "^5.3.0",
     "@stylexjs/stylex": "^0.19.0"
   },
   "devDependencies": {

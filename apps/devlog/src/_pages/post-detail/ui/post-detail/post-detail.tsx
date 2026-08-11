@@ -3,13 +3,14 @@ import type { ReactElement, ReactNode } from 'react';
 import { Divider, Heading, Text, VStack } from '@audemodo/design-system';
 import Link from 'next/link';
 
+import { MdxContent } from '@/widgets/post-body';
 import { Toc } from '@/widgets/post-toc';
 
 import type { PostDetail as PostDetailModel, PostSummary } from '@/entities/post';
 import { findAdjacentPosts, formatPostDate } from '@/entities/post';
 
 import { extractHeadings, readingTime } from '@/shared/lib';
-import { MdxContent, ScrollProgress } from '@/shared/ui';
+import { ScrollProgress } from '@/shared/ui';
 
 import styles from './post-detail.module.css';
 

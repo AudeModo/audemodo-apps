@@ -11,7 +11,8 @@
     },
     "packages/design-system": {
       "entry": ["src/index.ts"],
-      "project": ["src/**/*.{ts,tsx}"]
+      "project": ["src/**/*.{ts,tsx}"],
+      "ignoreDependencies": ["@fontsource/iosevka", "@fontsource/nanum-gothic-coding"]
     }
   },
   "ignoreExportsUsedInFile": {

@@ -1,14 +1,12 @@
-import type { Heading as HeadingEntry } from '../../lib';
 import type { ReactElement, ReactNode } from 'react';
 
 import { Heading, Link, Text } from '@audemodo/design-system';
 
-import { parseCodeMeta } from '../../lib';
-import { Callout } from '../callout/callout';
-import { CodeBlock } from '../code-block/code-block';
-import { Details } from '../details/details';
-import { Highlight } from '../highlight/highlight';
-import { Quote } from '../quote/quote';
+import type { Heading as HeadingEntry } from '@/shared/lib';
+import { parseCodeMeta } from '@/shared/lib';
+import { Callout, CodeBlock, Details, Highlight, Quote } from '@/shared/ui';
+
+import { highlightCode } from '../../lib/code-highlight';
 import styles from './prose.module.css';
 
 /** 번호 배지의 색은 셋을 돌린다. 의미가 아니라 리듬이다 */
@@ -97,9 +95,15 @@ export const createMdxComponents = (headings: HeadingEntry[]) => {
       }
 
       const meta = parseCodeMeta(rest['data-meta']);
+      const code = String(children);
 
       return (
-        <CodeBlock code={String(children)} highlighted={meta.highlighted} title={meta.title} />
+        <CodeBlock
+          code={code}
+          highlighted={meta.highlighted}
+          lines={highlightCode(code, language.slice('language-'.length))}
+          title={meta.title}
+        />
       );
     },
 
